@@ -1,0 +1,83 @@
+<view class='agent'>
+
+  <view class='wrap'>
+    <view style='display:flex'>
+      <image></image>
+      <view>
+        <view class='name'>{{agent.name}}</view>
+        <view class='money'>{{agent.job}}</view>
+        <view class='money'>{{agent.address}}</view>
+      </view>
+    </view>
+    <view class='phone'>{{agent.phone}}</view>
+  </view>
+
+  <view>
+    <view class='business'>
+      <view class='yellow'></view>
+      <view class='good-bus'>擅长业务</view>
+    </view>
+    <view class='scope-updown'>
+      <view wx:for="{{scopes}}" wx:key="{{index}}" class='scope-item'>
+        {{item.scope}}
+      </view>
+    </view>
+  </view>
+
+  <view class='detail-job'>
+    <view class='job1'>
+      <view class='number'>3</view>
+      <view class='num-tetx'>工作年限（年）</view>
+    </view>
+    <view class='job1 line-two'>
+      <view class='number'>3</view>
+      <view class='num-tetx'>服务客户（位）</view>
+    </view>
+    <view class='job1'>
+      <view class='number'>3</view>
+      <view class='num-tetx'>批贷总额（万）</view>
+    </view>
+
+  </view>
+
+
+  <view class='business'>
+    <view class='yellow'></view>
+    <view class='good-bus'>个人简介</view>
+  </view>
+
+  <view class='desc'>
+    专业办理银行贷款、个人企业、房车抵押贷款、大额贷款、抵押物足值额度无封顶：垫还、转贷、当日放贷：利息最低。
+  </view>
+
+  <view class='business'>
+    <view class='yellow'></view>
+    <view class='good-bus'>成功案例</view>
+  </view>
+
+  <view class='vic-bottom'>
+    <view wx:for="{{victory}}" wx:key="{{index}}" class='vic-item'>
+      <view class='name'>{{item.name}}</view>
+      <view class='rate-wrap'>
+        <view class='rate'>{{item.rate}}</view>
+        <view class='money'>{{item.money}}</view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <view class='bottom-detail'>
+    <view class='look'>
+      <view class='iconfont icon-xingxing1 phone-tu'></view>
+      <view class='lphone'>收藏</view>
+    </view>
+    <view class='look'>
+      <view class='iconfont icon-chakanshouji phone-tu'></view>
+      <view class='lphone'>申请</view>
+    </view>
+    <button>立即沟通</button>
+
+  </view>
+
+</view>

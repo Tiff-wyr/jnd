@@ -1,0 +1,43 @@
+<import src="/components/tabBar/index.wxml" />
+
+<view class='mine-main'>
+  <view class='mine'>
+    <view>
+      <view class='mine-login'>未登录/注册</view>
+      <view class='mine-register'>点击头像可登录/注册</view>
+    </view>
+    <view bindtap='handleLogin'>头像</view>
+  </view>
+
+  <view class='add'></view>
+  <view class='main'>
+    <view class='person' bindtap='handlerClickPer'>
+      <view class='per-wrap'>
+        <view class='iconfont icon-fenzucopy size'></view>
+        <view class='text1'>个人消息</view>
+      </view>
+      <view class='arrow-right'></view>
+    </view>
+    <view class='person' bindtap='handlerClickApply'>
+      <view class='per-wrap'>
+        <view class='iconfont icon-shenqing size'></view>
+        <view class='text1'>申请记录</view>
+      </view>
+      <view class='arrow-right'></view>
+    </view>
+
+    <view class='person' bindtap='handlerClickCollect'>
+      <view class='per-wrap'>
+        <view class='iconfont icon-xingxing1 size'></view>
+        <view class='text1'>我的收藏</view>
+      </view>
+
+      <view class='arrow-right'></view>
+    </view>
+
+  </view>
+
+
+  <template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+
+</view>

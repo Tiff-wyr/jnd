@@ -1,0 +1,189 @@
+.agent{
+  padding: 30rpx 36rpx;
+  box-sizing: border-box;
+width: 100%;
+height: 100%;
+background: #fff;
+}
+.wrap{
+  display: flex;
+  justify-content: space-between
+}
+.wrap image{
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+}
+.wrap .name{
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:32rpx;
+margin-top: 6rpx;
+}
+.wrap .money{
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:32rpx;
+margin-top: 14rpx;
+}
+.wrap .phone{
+font-size:44rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:120rpx;
+}
+.business{
+  display: flex;
+  margin-top: 46rpx;
+}
+.business .yellow{
+  line-height:32rpx;
+  width:6rpx;
+height:32rpx;
+background:rgba(205,69,69,1);
+border-radius:3rpx;
+}
+.business .good-bus{
+margin-left: 20rpx;
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(31,31,31,1);
+line-height:32rpx;
+}
+.scope-updown{
+height:24rpx;
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(170,170,170,1);
+line-height:24rpx;
+padding: 30rpx 0 46rpx 0;
+border-bottom: 1rpx solid #f0f0f0;
+}
+.detail-job{
+  width: 100%;
+  display: flex;
+height: 204rpx;
+padding: 46rpx 0;
+box-sizing: border-box;
+border-bottom: 1rpx solid #f0f0f0;
+
+}
+.detail-job .job1{
+  flex: 1;
+  text-align: center;
+  line-height: 102rpx;
+}
+.job1 .number{
+height:50rpx;
+font-size:50rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:50rpx;
+}
+.job1 .num-tetx{
+height:32rpx;
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:32rpx;
+margin-top: 25rpx;
+}
+.line-two{
+border-right: 1rpx solid #D8D8D8;
+border-left: 1rpx solid #D8D8D8;
+}
+.desc{
+  padding: 30rpx 0  46rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:33rpx;
+}
+.vic-bottom{
+  padding-bottom: 96rpx;
+  box-sizing: border-box;
+}
+
+.vic-item{
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.vic-item .name{
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:24rpx;
+}
+.rate-wrap{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+.rate-wrap .rate{
+  font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:24rpx;
+}
+
+.rate-wrap .money{
+  font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:24rpx;
+}
+
+
+.bottom-detail{
+height:96rpx;
+position: fixed;
+left: 0;
+right: 0;
+bottom: 0;
+display: flex;
+background: #fff;
+}
+.bottom-detail .look{
+  text-align: center;
+  width:150rpx;
+  box-sizing: border-box;
+  line-height: 96rpx;
+  display: flex;
+padding: 0 30rpx;
+justify-content: space-around;
+
+}
+
+.look .lphone{
+font-size:22rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+}
+
+.bottom-detail button{
+  text-align: center;
+  flex: 1;
+height:96rpx;
+background:rgba(205,69,69,1);
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(255,255,255,1);
+line-height:96rpx;
+}

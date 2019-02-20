@@ -1,0 +1,90 @@
+<!--borrower/pages/productDetail/productDetail.wxml-->
+<view class='detail'>
+  <view class='detail-top'>
+    <image src='{{product.image}}'></image>
+    <view>
+      <view class='name'>{{product.name}}</view>
+      <view class='type'>{{product.type}}</view>
+      <view class='organ'>{{product.organ}}</view>
+
+    </view>
+  </view>
+
+  <view class='pro-msg'>
+    <view class='msg-title'>
+      <view class='line'></view>
+      <view class='title'>产品信息</view>
+    </view>
+    <view>
+      <view class='top1'>
+        <view class='text'>额度：10万～50万</view>
+        <view class='text'>期限：12～60个月</view>
+      </view>
+      <view class='top1 top2'>
+        <view class='text'>额度：10万～50万</view>
+        <view class='text'>期限：12～60个月</view>
+      </view>
+      <view class='text'>归还方式：等额本息</view>
+    </view>
+  </view>
+
+  <view class='lining'></view>
+
+  <view class='apply'>
+    <view class='msg-title'>
+      <view class='line'></view>
+      <view class='title'>申请条件</view>
+    </view>
+    <view>
+      <view class='top1'>
+        <view class='text'>年龄要求：22～55岁</view>
+        <view class='text'>职业要求：无要求</view>
+      </view>
+
+      <view class='text loan'>贷款条件：无要求</view>
+      <view class='text identify'>身份要求：中国大陆公民</view>
+
+
+      <view class='wrap-text'>其他要求：</view>
+      <view class='text other'> 3、借款人符合个人住房()</view>
+    </view>
+
+  </view>
+
+  <view class='line-wrap'></view>
+
+  <view class='pro-te'>
+    <view class='msg-title'>
+      <view class='line'></view>
+      <view class='title'>产品特点</view>
+    </view>
+    <view class='te'>xddddddd</view>
+  </view>
+
+<view class='h12'></view>
+<view class='vic-bottom'>
+    <view class='finally'>
+     <image></image>
+     <view>
+          <view class='organName'>淘钱宝</view>
+           <view class='organAddress'>北京</view>
+     </view>
+</view>
+</view>
+
+
+
+  <view class='bottom-detail'>
+    <view class='look'>
+      <view class='iconfont icon-xingxing1 phone-tu'></view>
+      <view class='lphone'>收藏</view>
+    </view>
+        <view class='look'>
+      <view class='iconfont icon-chakanshouji phone-tu'></view>
+      <view class='lphone'>申请</view>
+    </view>
+    <button>立即沟通</button>
+
+  </view>
+
+</view>

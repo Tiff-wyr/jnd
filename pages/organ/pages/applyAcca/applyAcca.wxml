@@ -1,0 +1,17 @@
+
+<view class='accord'>
+  <view class='accord-item' wx:for="{{tableData}}" wx:key="{{index}}">
+    <view class='wrap'>
+      <view style='display:flex'>
+        <image></image>
+        <view>
+          <view class='name'>{{item.name}}</view>
+          <view class='money'>申请金额：{{item.money}}</view>
+        </view>
+      </view>
+
+      <view class='phone'>{{item.phone}}</view>
+    </view>
+  </view>
+
+</view>
