@@ -1,6 +1,11 @@
 // borrower/pages/agentDetail/agentDetail.js
 const app = getApp()
 import { fetch } from "../../../utils/axios.js"
+
+let WebIM = require("../../../utils/WebIM")["default"];
+let disp = require("../../../utils/broadcast");
+let systemReady = false;
+
 Page({
 
   /**
@@ -21,6 +26,9 @@ Page({
     isShow:false,
     isMask:false,
     id:'',
+
+    myPhone: "",
+    unReadSpot: false,
   },
 
 
@@ -74,11 +82,31 @@ Page({
   },
 
 //立即沟通
-  chat(){
+  chat(event){
     if (app.globalData.userInfo){
-     
+      var nameList = {
+        myPhone: this.data.myPhone,
+        your: event.target.dataset.phone
+      };
+      wx.navigateTo({
+        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+      });
+
+
     }else{
-      
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+           wx.navigateTo({
+             url: '/pages/login/passLogin/passLogin',
+           })
+          } else if (res.cancel) {
+          
+          }
+        }
+      })
     }
   },
   getLoan(){
@@ -94,6 +122,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+  if(app.globalData.userInfo){
+this.setData({
+  myPhone:app.globalData.userInfo.phone
+})
+  }
+
+
     this.setData({
       id : options.id
     })
@@ -101,6 +137,12 @@ Page({
      this.getDetail(options.id)
 
      let that = this
+
+    disp.on("em.xmpp.unreadspot", function (count) {
+      that.setData({
+        unReadSpot: count > 0
+      });
+    });
 
     wx.getSystemInfo({
       success(res) {
@@ -130,8 +172,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      unReadSpot: getApp().globalData.unReadSpot
+    });
+    // this.getRoster();
   },
+
+
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -64,7 +64,7 @@
           </view>
         </view>
 
-        <button class='btn'>立即沟通</button>
+        <button class='btn'>立即查看</button>
 
       </view>
       <view class='add'></view>

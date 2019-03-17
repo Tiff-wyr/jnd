@@ -4,7 +4,7 @@
 <template name="emoji">
 	<image
 		class="avatar"
-		src="{{ '../../../images/faces/' + item.data }}"
+		src="{{ '/static/images/faces/' + item.data }}"
 		style="width:25px; height:25px; margin:0 0 2px 0; float:left;" />
 </template>
 <template name="img">
@@ -38,7 +38,7 @@
 				<!-- yourname：就是消息的 from -->
 				<text class="user-text">{{ item.yourname }}</text>
 			</view>
-			<image class="avatar" src="../../../images/number.png"/>
+			<image class="avatar" src="/static/images/number.png"/>
 			<view class="msg">
 				<view wx:if="{{ item.msg.type == 'img' || item.msg.type == 'video' }}">
 					<template is="{{ item.msg.type }}" data="{{ item }}"/>
