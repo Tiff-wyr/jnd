@@ -1,0 +1,17 @@
+<!--borrower/pages/applyAccord/applyAccord.wxml-->
+<view class='accord'>
+  <view class='accord-item' wx:for="{{tableData}}" wx:key="{{index}}" bindtap='jumpDetail'>
+    <view class='wrap'>
+      <view style='display:flex'>
+        <image src='{{item.logo}}'></image>
+        <view>
+          <view class='name'>{{item.name}}</view>
+          <view class='money'>申请金额：{{item.amount}}</view>
+        </view>
+      </view>
+
+      <view class='phone'>{{item.phone}}</view>
+    </view>
+  </view>
+
+</view>

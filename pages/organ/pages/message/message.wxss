@@ -1,1 +1,61 @@
-/* pages/agent/message/message.wxss */
+.mess {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 42rpx 36rpx 0;
+  box-sizing: border-box;
+}
+
+
+ .agent-item{
+  width: 100%;
+  height: 154rpx;
+  padding: 28rpx 0 28rpx 0;
+  box-sizing: border-box;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+}
+ .agent-item image{
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+ .agent-item .tab-top{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+.tab-bottom{
+    display: flex;
+  justify-content: space-between;
+}
+.tab-top .name{
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:32rpx;
+}
+.tab-top .time{
+font-size:24rpx;
+font-family:PingFangSC-Light;
+font-weight:300;
+color:rgba(192,192,192,1);
+line-height:32rpx;
+}
+.content{
+  width: 400rpx;
+  box-sizing: border-box;
+font-size:28rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:28rpx;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space:nowrap; 
+}
+
+
+

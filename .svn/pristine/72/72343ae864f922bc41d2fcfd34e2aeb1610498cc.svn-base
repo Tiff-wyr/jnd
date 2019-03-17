@@ -1,0 +1,55 @@
+<!--pages/register/register.wxml-->
+
+<view class='pass'>
+  <image src='/static/icon/tu.png'></image>
+
+  <view class='top-re'>
+  <view class='name-left'>
+        <image class='img1' src='/static/icon/phone.png'></image>
+           <input class='name-input' placeholder-class='input_placeholder' placeholder='姓名' bindblur='handleName'></input>
+  </view>
+  <view class='sex'>
+      <radio-group class="radio-group" bindchange="radioChange">
+  <label class="radio" wx:for="{{sex}}" wx:key="{{index}}">
+    <radio value="{{item.value}}" checked="{{item.checked}}" />
+    {{item.name}}
+  </label>
+</radio-group>
+  </view>
+     
+  </view>
+
+  <view class='city'>
+     <view class='city-left'>
+          <image class='img1' src='/static/icon/phone.png'></image>
+                <picker bindchange="bindPickerChange" value="{{index}}" range-key="provincial" range="{{provinceData}}">
+        <view class="picker">
+          <text>{{provincial[index].provincial}}</text>
+        
+        </view>
+      </picker>
+     </view>
+       <view class='city-right'>
+       
+       </view>
+  </view>
+
+  <view class='wrap'>
+    <image class='img1' src='/static/icon/phone.png'></image>
+    <input class='input' placeholder-class='input_placeholder' placeholder='输入手机号' bindblur='handlePhone'></input>
+  </view>
+  
+  <view class='wrapper'>
+    <view class='code'>
+      <image class='img2' src='/static/icon/pass.png'></image>
+      <input class='input' placeholder-class='input_placeholder' password='true'  placeholder='短信验证码' bindblur='handleCode'></input>
+    </view>
+    <view class='sendCode' bindtap='sendCode'>{{textCode}}</view>
+  </view>
+
+
+  <button bindtap='login'>注 册</button>
+
+    <view class='register' bindtap='msgLogin'>已有账号？<text>去登陆</text></view>
+
+</view>

@@ -1,0 +1,42 @@
+{
+  "pages": [
+     
+        "pages/borrower/pages/borrowerMine/borrowerMine",
+      "pages/borrower/pages/borrowerPerson/borrowerPerson",
+    "pages/organ/pages/mine/mine",
+"pages/detail/borrowerDetail/borrowerDetail",
+    "pages/agent/pages/borrower/borrower",
+    "pages/borrower/pages/loans/loans",
+    "pages/organ/pages/applyAcca/applyAcca",
+    "pages/organ/pages/borrower/borrower",
+    "pages/borrower/pages/loanApply/loanApply",
+    "pages/login/passLogin/passLogin",
+    "pages/agent/pages/mine/mine",
+
+  
+    "pages/login/msgLogin/msgLogin",
+    "pages/borrower/pages/borrowerMessage/borrowerMessage",
+    "pages/organ/pages/productCenter/productCenter",
+    "pages/organ/pages/personMessageOrgan/personMessageOrgan",
+    "pages/organ/pages/message/message",
+    "pages/organ/pages/member/member",
+    "pages/agent/pages/personMessage/personMessage",
+    "pages/agent/pages/message/message",
+    "pages/agent/pages/member/member",
+    "pages/borrower/pages/myCollect/myCollect",
+    "pages/borrower/pages/applyAccord/applyAccord",
+    "pages/register/register",
+    "pages/agent/pages/applyAcc/applyAcc",
+
+
+    "pages/detail/agentDetail/agentDetail",
+    "pages/detail/organDetail/organDetail",
+    "pages/detail/productDetail/productDetail"
+  
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  }
+}

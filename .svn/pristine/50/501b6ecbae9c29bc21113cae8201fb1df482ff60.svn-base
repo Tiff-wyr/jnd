@@ -1,0 +1,48 @@
+<!--pages/agent/personMessage/personMessage.wxml-->
+
+<view class='person'>
+  <view class='person-item'>
+    <view class='name'>姓名</view>
+    <view class='data'>{{personData.borrowerName}}</view>
+  </view>
+  <view class='person-item'>
+    <view class='name'>性别</view>
+    <view class='data'>{{personData.borrowerSex === 0 ? '女' : '男'}}</view>
+  </view>
+  <view class='person-item'>
+    <view class='name'>年龄</view>
+    <view class='data'>{{personData.borrowerAge}}</view>
+  </view>
+  <view class='person-item'>
+    <view class='name'>职业</view>
+    <view class='data'>{{personData.borrowerJob}}</view>
+  </view>
+
+
+  <view class='person-item'>
+    <view class='name'>月收入</view>
+    <view class='data'>{{personData.income}}</view>
+  </view>
+
+
+
+
+  <view class='person-item'>
+    <view class='name'>所在地区</view>
+    <view class='data'>{{personData.address}}</view>
+  </view>
+  <view class='person-item'>
+    <view class='name'>手机号</view>
+    <view class='data'>{{personData.phone}}</view>
+  </view>
+  <view class='person-item'>
+    <view class='name'>邮箱</view>
+    <view class='data'>{{personData.email}}</view>
+  </view>
+
+ <view class='bottom'>
+      <button>登陆PC端修改个人信息</button>
+ </view>  
+
+</view>
+

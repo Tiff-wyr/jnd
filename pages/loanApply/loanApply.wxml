@@ -1,0 +1,129 @@
+ 
+
+<view>
+  <view class='apply'>
+
+    <image src='/static/icon/apply/Bitmap.png'></image>
+    <view class='loan'>
+    <view style='display: flex;   justify-content: space-between'>
+
+      <view class='name-wrap'>
+  <view class='iconfont icon-tianxiexingming duanPic'></view>
+          <input class='input' placeholder-class='input_placeholder' bindblur='handleName' placeholder='填写姓名'></input>
+        </view>
+        
+        <view class='sex-radio'>
+        <radio-group class="sex-radio-group" bindchange="sexRadioChange">
+            <label class="sex-radio-item" wx:for="{{sex}}" wx:key="{{index}}">
+              <radio style="display:none" value="{{item.value}}" checked="{{item.checked}}" />
+              <view class="wai">
+                  <view wx:if="{{item.checked}}" class='nei'></view>
+              </view>
+              {{item.name}}
+            </label>
+          </radio-group>
+        </view>
+    </view>
+      
+      <view class='wrap'>
+       <view class='iconfont icon-daikuanjine duanPic'></view>
+        <input class='input' placeholder-class='input_placeholder' bindblur='handleMoney' placeholder='贷款金融（单位：万元）'></input>
+      </view>
+
+        <view class='city'>
+     <view class='city-left'>
+          <view class='iconfont icon-weizhi duanPic'></view>
+                <picker bindchange="bindPickerChange" value="{{pindex}}" range-key="provincial" range="{{provinceData}}">
+                    <view class="pickCity">
+                      <text>{{provinceData[pindex].provincial}}</text>
+                    </view>
+                  </picker>
+     </view>
+       <view class='city-right'>
+               <picker bindchange="bindPickerRight" value="{{rindex}}" range-key="city" range="{{cityData}}">
+        <view class="pickCity">
+          <text>{{cityData[rindex].city}}</text>
+
+        </view>
+      </picker>
+       </view>
+  </view>
+
+    <!-- 单选框组 -->
+    <view>
+    <radio-group class="radio-group" bindchange="typesChange">
+        <label class="{{item.checked? 'radio red-border' : 'radio'}}" wx:for="{{types}}">
+          <radio style="display:none" value="{{item.value}}" checked="{{item.checked}}" />
+              <label class='{{item.icon}}' style='margin-left:30rpx'></label>
+          {{item.name}}
+          <icon wx:if="{{item.checked}}" type="success" size="15" color="red" />
+        </label>
+      </radio-group>
+    </view>
+
+
+    <!-- 单选框组 -->
+    <view>
+    <radio-group class="radio-group" bindchange="pawnsChange">
+        <label class="{{item.checked? 'radio red-border' : 'radio'}}" wx:for="{{pawns}}">
+          <radio style="display:none" value="{{item.value}}" checked="{{item.checked}}" />
+          <label class='{{item.icon}}' style='margin-left:30rpx'></label>
+          {{item.name}}
+          <icon wx:if="{{item.checked}}" type="success" size="15" color="red" />
+        </label>
+      </radio-group>
+    </view>
+    <!-- 无抵押下面的选择框 -->
+    <view class='pawns' wx:if="{{!hasPawn}}">
+       <view class='pawn-left'>
+              <picker bindchange="bindAgeChange" value="{{ageIndex}}" range-key="ageArea" range="{{ages}}">
+                    <view class='ageText'>
+                      <text>{{ages[ageIndex].ageArea}}</text>
+                    </view>
+                  </picker>
+       </view>
+          <view class='pawn-middle'>
+                <picker bindchange="bindJobChange" value="{{jobIndex}}" range-key="jobName" range="{{jobs}}">
+                    <view class="ageText">
+                      <text>{{jobs[jobIndex].jobName}}</text>
+                    </view>
+                  </picker>
+          </view>
+             <view class='pawn-right'>
+                   <picker bindchange="bindIncomeChange" value="{{incomeIndex}}" range-key="incomeName" range="{{incomes}}">
+                    <view class="ageText">
+                      <text>{{incomes[incomeIndex].incomeName}}</text>
+                    </view>
+                  </picker>
+             </view>
+    </view>
+    <!-- 多选框 -->
+    <view wx:else>
+      <checkbox-group class="checkbox-group" bindchange="checkboxChange">
+        <label class="{{item.checked? 'checkbox red-border' : 'checkbox'}}"  wx:for="{{checkboxs}}">
+          <checkbox style="display:none" value="{{item.value}}" checked="{{item.checked}}" />
+          {{item.name}}
+           <icon class="checkbox-icon"  wx:if="{{item.checked}}" type="success" size="15" color="red" />
+        </label>
+      </checkbox-group>
+    </view>
+  
+    <view class='wrap' style='margin-top:20rpx'>
+      <view class='iconfont icon-shoujihao-copy duanPic'></view>
+      <input class='input' placeholder-class='input_placeholder' bindblur='handlePhone' placeholder='手机号'></input>
+    </view>
+
+    <view class='wrapper'>
+      <view class='code'>
+         <view class='iconfont icon-duanxin-copy duanPic'></view>
+        <input class='input' placeholder-class='input_placeholder' password='true' placeholder='短信验证码' bindblur='handleCode'></input>
+      </view>
+      <view class='sendCode' bindtap='sendCode'>{{textCode}}</view>
+    </view>
+    <button bindtap='applySubmit'>申请提交</button>
+
+  </view>
+
+  </view>
+ 
+</view>

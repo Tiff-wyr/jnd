@@ -1,1 +1,87 @@
-/* pages/borrower/pages/borrowerMessage/borrowerMessage.wxss */
+.mess {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 42rpx 36rpx 0;
+  box-sizing: border-box;
+}
+
+.mess .mess-top {
+  margin: 0 auto;
+margin-bottom: 24rpx;
+  box-sizing: border-box;
+  width: 280rpx;
+  height: 62rpx;
+  border-radius: 31rpx;
+  border: 1rpx solid rgba(240, 240, 240, 1);
+  display: flex;
+}
+.mess-top .selected{
+  text-align: center;
+  width:140rpx;
+height:62rpx;
+background:rgba(205,69,69,1);
+border-radius:31rpx;
+font-size:28rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(255,255,255,1);
+line-height:62rpx;
+}
+.mess-top .select{
+    text-align: center;
+  width:140rpx;
+font-size:28rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:62rpx;
+}
+.mess-con .agent-item{
+  width: 100%;
+  height: 154rpx;
+  padding: 28rpx 0 28rpx 0;
+  box-sizing: border-box;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+}
+.mess-con .agent-item image{
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+.mess-con .agent-item .tab-top{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+.tab-top .name{
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:32rpx;
+}
+.tab-top .time{
+font-size:24rpx;
+font-family:PingFangSC-Light;
+font-weight:300;
+color:rgba(192,192,192,1);
+line-height:32rpx;
+}
+.content{
+  width: 400rpx;
+  box-sizing: border-box;
+font-size:28rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:28rpx;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space:nowrap; 
+}
+
+
+

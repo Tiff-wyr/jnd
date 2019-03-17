@@ -1,0 +1,93 @@
+<view class='agent'>
+
+  <view class='wrap'>
+    <view style='display:flex'>
+      <image src='{{organ.agencyLogo}}'></image>
+      <view>
+        <view class='name'>{{organ.agencyName}}</view>
+        <view class='money'>{{organ.agencyProperty}}</view>
+        <view class='money'>{{organ.address}}</view>
+      </view>
+    </view>
+    <view class='phone'>{{organ.phone}}</view>
+  </view>
+
+  <view>
+    <view class='business'>
+      <view class='yellow'></view>
+      <view class='good-bus'>机构网址</view>
+    </view>
+    <view class='scope-updown'>
+{{organ.agencyURL}}
+    </view>
+  </view>
+
+  <view class='detail-job'>
+    <view class='job1'>
+      <view class='number'>{{organ.agencyAgeLimit}}</view>
+      <view class='num-tetx'>工作年限（年）</view>
+    </view>
+    <view class='job1 line-two'>
+      <view class='number'>{{organ.agencyTotalService}}</view>
+      <view class='num-tetx'>服务客户（位）</view>
+    </view>
+    <view class='job1'>
+      <view class='number'>{{organ.agencyLoansAmount}}</view>
+      <view class='num-tetx'>批贷总额（万）</view>
+    </view>
+
+  </view>
+
+
+  <view class='business'>
+    <view class='yellow'></view>
+    <view class='good-bus'>机构简介</view>
+  </view>
+
+  <view class='desc'>
+{{organ.agencyIntroduction}}
+  </view>
+
+  <view class='business'>
+    <view class='yellow'></view>
+    <view class='good-bus'>成功案例</view>
+  </view>
+
+  <view class='vic-bottom'>
+    <view wx:for="{{victory}}" wx:key="{{index}}" class='vic-item'>
+      <view class='name'>{{item.borName}}{{item.proName}}</view>
+      <view class='rate-wrap'>
+        <view class='rate'>月利率：{{item.proInterest}}%</view>
+        <view class='money'>贷款金额：{{item.proAmount}}万</view>
+      </view>
+    </view>
+  </view>
+
+    <view class='business'>
+       <view class='yellow'></view>
+       <view class='good-bus'>代理产品</view>
+  </view>
+
+  <view class='pro-list'>
+      <view wx:for='{{proData}}' wx:key="{{index}}" class='pro-item'>
+           
+      </view>
+  </view>
+
+  <view class='bottom-detail'>
+    <view class='look'>
+       <view class='iconfont icon-xingxing1 phone-tu' bindtap='restoreClick' wx:if='{{!isCollect}}'></view>
+            <view class='iconfont icon-xingxing phone-tu' bindtap='cancelColl' wx:if='{{isCollect}}'></view>
+      <view class='lphone'  wx:if='{{!isCollect}}'>收藏</view>
+          <view class='lphone' wx:if='{{isCollect}}'>取消</view>
+    </view>
+        <view class='look'>
+      <view class='iconfont icon-chakanshouji phone-tu'></view>
+      <view class='lphone'>申请</view>
+    </view>
+    <button>立即沟通</button>
+
+  </view>
+
+</view>
+

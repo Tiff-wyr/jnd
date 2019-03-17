@@ -1,0 +1,142 @@
+.detail{
+  padding: 40rpx 36rpx;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.detail-top{
+  display: flex;
+}
+.detail-top image{
+  width:120rpx;
+height:120rpx;
+margin-right: 25rpx;
+}
+.detail-top .name{
+
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+margin-bottom: 20rpx
+}
+.detail-top .type,.detail-top .organ{
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(170,170,170,1);
+}
+
+.pro-msg{
+  margin-top: 46rpx;
+}
+.msg-title{
+  display: flex;
+  margin-bottom: 30rpx;
+}
+.msg-title .line{
+  width:6rpx;
+height:32rpx;
+background:rgba(205,69,69,1);
+border-radius:3rpx;
+}
+.msg-title .title{
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(31,31,31,1);
+margin-left: 20rpx;
+line-height: 32rpx;
+}
+.top1{
+  display: flex;
+  justify-content: space-between;
+
+}
+.top2{
+  margin: 20rpx 0 20rpx 0;
+}
+ .text{
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:24rpx; 
+}
+.lining{
+  width:100%;
+height:1rpx;
+background:rgba(240,240,240,1);
+margin: 46rpx 0 46rpx 0;
+}
+.loan{
+  margin: 20rpx 0 20rpx 0;
+}
+.identify{
+  margin-bottom: 20rpx;
+}
+.other{
+  line-height:33rpx;
+}
+
+ .wrap-text{
+  font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:24rpx; 
+}
+.line-wrap{
+    width:100%;
+height:1rpx;
+background:rgba(240,240,240,1);
+margin: 46rpx 0 46rpx 0;
+}
+.te{
+  padding: 0 0 46rpx 0;
+  background: #fff;
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:33rpx;
+}
+
+.h12{
+  width: 100%;
+  height: 12rpx;
+  background: #FAFAFB
+}
+.finally{
+  width:100%;
+height:150rpx;
+background:rgba(255,255,255,1);
+display: flex;
+padding: 30rpx 0 30rpx 0;
+box-sizing: border-box;
+border-bottom: 1rpx solid #f0f0f0;
+}
+.finally image{
+  width: 84rpx;
+  height: 84rpx;
+  margin-right: 20rpx;
+}
+.finally .organName{
+
+font-size:32rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(69,69,69,1);
+line-height:32rpx;
+}
+.finally .organAddress{
+font-size:24rpx;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(123,123,123,1);
+line-height:24rpx;
+margin-top: 25rpx;
+}
+
+

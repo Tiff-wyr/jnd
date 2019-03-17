@@ -1,0 +1,21 @@
+<view class='pass'>
+  <image src='/static/icon/tu.png'></image>
+  <view class='wrap'>
+    <image class='img1' src='/static/icon/phone.png'></image>
+    <input class='input' placeholder-class='input_placeholder' placeholder='输入手机号' bindblur='handlePhone'></input>
+  </view>
+  <view class='wrapper'>
+    <view class='code'>
+      <image class='img2' src='/static/icon/pass.png'></image>
+      <input class='input' placeholder-class='input_placeholder' password='true'  placeholder='短信验证码' bindblur='handleCode'></input>
+    </view>
+    <view class='sendCode' bindtap='sendCode'>{{textCode}}</view>
+  </view>
+
+
+  <button bindtap='login'>登 陆</button>
+  <view class='bottom-pass'>
+    <view class='register' bindtap='freeRe'>免费注册</view>
+    <view class='register' bindtap='msgLogin'>密码登陆</view>
+  </view>
+</view>

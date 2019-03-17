@@ -1,0 +1,78 @@
+<view class='detail'>
+  <view class='detail-top'>
+    <image src='{{product.productLogo}}'></image>
+    <view>
+      <view class='name'>{{product.productName}}</view>
+      <view class='type'>{{product.productType}}</view>
+    
+
+    </view>
+  </view>
+
+  <view class='pro-msg'>
+    <view class='msg-title'>
+      <view class='line'></view>
+      <view class='title'>产品信息</view>
+    </view>
+    <view>
+      <view class='top1'>
+        <view class='text'>额度：{{product.productStartAmount}}~{{product.productEndAmount}}万</view>
+        <view class='text'>期限：{{product.productLife}}</view>
+      </view>
+      <view class='top1 top2'>
+        <view class='text'>利息：{{product.productInterest}}%</view>
+        <view class='text'>放款时间：{{product.producLoanLength}}</view>
+      </view>
+      <view class='text'>归还方式：{{product.productRepaymentMethod}}</view>
+    </view>
+  </view>
+
+  <view class='lining'></view>
+
+  <view class='apply'>
+    <view class='msg-title'>
+      <view class='line'></view>
+      <view class='title'>申请条件</view>
+    </view>
+    <view>
+      <view class='top1'>
+        <view class='text'>年龄要求：{{product.productAge}}</view>
+        <view class='text'>职业要求：{{product.productOccupation}}</view>
+      </view>
+
+      <view class='text loan'>资产要求：{{product.productProperty}}</view>
+      <view class='text identify'>身份要求：{{product.productIdentity}}</view>
+
+
+      <view class='wrap-text'>其他要求：</view>
+      <view class='text other'> {{product.productCondition}}</view>
+    </view>
+
+  </view>
+
+  <view class='line-wrap'></view>
+
+  <view class='pro-te'>
+    <view class='msg-title'>
+      <view class='line'></view>
+      <view class='title'>产品特点</view>
+    </view>
+    <view class='te'>{{product.productCharacteristic}}</view>
+  </view>
+
+
+
+  <view class='bottom-detail'>
+    <view class='look'>
+      <view class='iconfont icon-xingxing1 phone-tu'></view>
+      <view class='lphone'>收藏</view>
+    </view>
+        <view class='look'>
+      <view class='iconfont icon-chakanshouji phone-tu'></view>
+      <view class='lphone'>申请</view>
+    </view>
+    <button>立即沟通</button>
+
+  </view>
+
+</view>
