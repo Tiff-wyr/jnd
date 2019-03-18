@@ -70,7 +70,16 @@
 
   <view class='pro-list'>
       <view wx:for='{{proData}}' wx:key="{{index}}" class='pro-item'>
-           
+           <image src='{{item.productLogo}}'></image>
+           <view>
+               <view class='name'>{{item.productName}}</view>
+                <view class='name'>额度：{{item.productStartAmount}}~{{item.productEndAmount}}</view>
+           </view>
+ <view>
+               <view class='name'>月利率：{{item.productInterest}}</view>
+                <view class='name'>期限：{{item.productLife}}</view>
+           </view>
+
       </view>
   </view>
 
@@ -81,11 +90,11 @@
       <view class='lphone'  wx:if='{{!isCollect}}'>收藏</view>
           <view class='lphone' wx:if='{{isCollect}}'>取消</view>
     </view>
-        <view class='look'>
+        <view class='look'  bindtap='apply'>
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
-    <button>立即沟通</button>
+    <button bindtap='chat' data-phone='{{organ.phone}}'>立即沟通</button>
 
   </view>
 

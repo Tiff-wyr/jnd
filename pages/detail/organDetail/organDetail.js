@@ -1,17 +1,25 @@
 // borrower/pages/agentDetail/agentDetail.js
 const app = getApp()
 import { fetch } from "../../../utils/axios.js"
+
+let WebIM = require("../../../utils/WebIM")["default"];
+let disp = require("../../../utils/broadcast");
+let systemReady = false;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+  
     organ: {},
-
+    myName: '',
+    unReadSpot: false,
+    member: [],
     victory: [
       {      
-         borName   : '',
+         borName: '',
          proAmount     :     '',
          proInterest  :    '',
          proName  :  '',
@@ -19,8 +27,32 @@ Page({
     ],
     userId: '',
     optionId: '',
-    isCollect: false
+    isCollect: false,
+    proData:[]
 
+  },
+
+  //借款人向此机构申请
+  apply() {
+    if (this.data.userId) {
+      wx.navigateTo({
+        url: `/pages/loanApply/loanApply?id=${this.data.optionId}&roleId=3`,
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
   },
 
   getDetail(id){
@@ -34,12 +66,52 @@ Page({
   },
   getVictory(id){
     fetch.get(`/orderAgency/getAgencySuccessOrder/${id}`).then(res=>{
+      console.log('v',res)
       this.setData({
         victory : res.data
       })
 
       console.log('机构成功案例', res.data)
     })
+  },
+
+  //代理产品
+  getPro(id){
+    fetch.get(`/product/selectProductByAgency/${id}/1/4`).then(res=>{
+      console.log('cc',res.data.list)
+      this.setData({
+        proData: res.data.list
+      })
+    })
+  },
+
+  //立即沟通
+  chat(event) {
+    if (app.globalData.userInfo) {
+      var nameList = {
+        myName: this.data.myName,
+        your: event.target.dataset.phone
+      };
+      wx.navigateTo({
+        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+      });
+
+
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
   },
 
 
@@ -137,6 +209,7 @@ Page({
     console.log(options.id)
     //获得 机构成功案例
     this.getVictory(options.id)
+    this.getPro(options.id)
     this.setData({
       optionId: options.id
     })
@@ -148,6 +221,21 @@ Page({
     //收藏判断
       this.collectPan(options.id)
     }
+
+    if (app.globalData.userInfo) {
+      this.setData({
+        myName: app.globalData.userInfo.phone
+      })
+    }
+
+    let that = this
+    disp.on("em.xmpp.unreadspot", function (count) {
+      that.setData({
+        unReadSpot: count > 0
+      });
+    });
+
+
   },
 
   /**
@@ -161,7 +249,40 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      unReadSpot: getApp().globalData.unReadSpot
+    });
+    this.getRoster();
+  },
 
+  getRoster() {
+    let me = this;
+    let rosters = {
+      success(roster) {
+        var member = [];
+        for (let i = 0; i < roster.length; i++) {
+          if (roster[i].subscription == "both") {
+            member.push(roster[i]);
+          }
+        }
+        me.setData({
+          member: member
+        });
+        wx.setStorage({
+          key: "member",
+          data: me.data.member
+        });
+        if (!systemReady) {
+          disp.fire("em.main.ready");
+          systemReady = true;
+        }
+      },
+      error(err) {
+        console.log("[main:getRoster]", err);
+      }
+    };
+    // WebIM.conn.setPresence()
+    WebIM.conn.getRoster(rosters);
   },
 
   /**

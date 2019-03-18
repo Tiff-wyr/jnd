@@ -1,4 +1,6 @@
 let msgStorage = require("../msgstorage");
+const app = getApp()
+
 let LIST_STATUS = {
 	SHORT: "scroll_view_change",
 	NORMAL: "scroll_view"
@@ -16,6 +18,7 @@ Component({
 		toView: "",
 		chatMsg: [],
 		__visibility__: false,
+   
 	},
 	methods: {
 		normalScroll(){
@@ -66,6 +69,7 @@ Component({
 	},
 	ready(){
 		let me = this;
+
 		let username = this.data.username;
 		let myUsername = wx.getStorageSync("myUsername");
 		let sessionKey = username.groupId

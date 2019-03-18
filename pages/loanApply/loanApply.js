@@ -66,9 +66,9 @@ Page({
     //提交的参数
     pid:1,   //省的id
     rcid:1,  //市 id
-    ageid:'',  //年龄id
-    jobId:'',   //职业id
-    incomeId:'',   //月收入 id
+    ageid:1,  //年龄id
+    jobId:0,   //职业id
+    incomeId:1,   //月收入 id
     phone:'',   //手机号
     code:''   ,//验证码
     value:1,  //性别
@@ -213,7 +213,8 @@ Page({
   // checkbox 改变事件
   checkboxChange(e) {
     let value = e.detail.value
-    console.log(value)
+    console.log('多选框',value)
+    // let check=value.
     let checkboxs = this.data.checkboxs.map((item) => {
       let val = item.value + ""
       if (value.indexOf(val) > -1) {

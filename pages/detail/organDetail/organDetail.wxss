@@ -4,6 +4,7 @@
 width: 100%;
 height: 100%;
 background: #fff;
+margin-bottom: 100rpx;
 }
 .wrap{
   display: flex;
@@ -111,7 +112,7 @@ color:rgba(123,123,123,1);
 line-height:33rpx;
 }
 .vic-bottom{
-  padding-bottom: 96rpx;
+  
   box-sizing: border-box;
 }
 

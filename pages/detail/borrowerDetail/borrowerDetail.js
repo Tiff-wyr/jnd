@@ -22,12 +22,12 @@ Page({
       income:'',
     },
     loanData:{},
-
+    member: [],
     isShow:false,
     isMask:false,
     id:'',
 
-    myPhone: "",
+    myName: "",
     unReadSpot: false,
   },
 
@@ -85,7 +85,7 @@ Page({
   chat(event){
     if (app.globalData.userInfo){
       var nameList = {
-        myPhone: this.data.myPhone,
+        myName: this.data.myName,
         your: event.target.dataset.phone
       };
       wx.navigateTo({
@@ -125,7 +125,7 @@ Page({
 
   if(app.globalData.userInfo){
 this.setData({
-  myPhone:app.globalData.userInfo.phone
+  myName:app.globalData.userInfo.phone
 })
   }
 
@@ -175,8 +175,40 @@ this.setData({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
-    // this.getRoster();
+     this.getRoster();
   },
+
+  getRoster() {
+    let me = this;
+    let rosters = {
+      success(roster) {
+        var member = [];
+        for (let i = 0; i < roster.length; i++) {
+          if (roster[i].subscription == "both") {
+            member.push(roster[i]);
+          }
+        }
+        me.setData({
+          member: member
+        });
+        wx.setStorage({
+          key: "member",
+          data: me.data.member
+        });
+        if (!systemReady) {
+          disp.fire("em.main.ready");
+          systemReady = true;
+        }
+      },
+      error(err) {
+        console.log("[main:getRoster]", err);
+      }
+    };
+    // WebIM.conn.setPresence()
+    WebIM.conn.getRoster(rosters);
+  },
+
+
 
 
 

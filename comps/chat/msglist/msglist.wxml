@@ -35,10 +35,10 @@
 		</view>
 		<view class="main" class="{{ item.style }}">
 			<view class="user">
-				<!-- yourname：就是消息的 from -->
-				<text class="user-text">{{ item.yourname }}</text>
+				<!-- yourname：就是消息的 from --> -->
+			 <text class="user-text">{{ item.yourname }}</text>
 			</view>
-			<image class="avatar" src="/static/images/number.png"/>
+			<image class="avatar"  src="/static/images/number.png"/>
 			<view class="msg">
 				<view wx:if="{{ item.msg.type == 'img' || item.msg.type == 'video' }}">
 					<template is="{{ item.msg.type }}" data="{{ item }}"/>

@@ -9,14 +9,50 @@ Page({
   data: {
     product:{},
     isMask:false,
-id:'',
+     id:'',
+    productBelong:'',
+    organMess:{},
+    userId:'',
+  },
+
+  //借款人向此产品申请
+  apply() {
+    if (this.data.userId) {
+      wx.navigateTo({
+        url: `/pages/loanApply/loanApply?id=${this.data.organMess.agencyId}&roleId=3`,
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
   },
   getDetail(id){
     fetch.get(`/product/selectProductById/${id}`).then(res=>{
        this.setData({
-         product :res.data
+         product :res.data,
+         productBelong: res.data.productBelong
        })
-       console.log('ddd',res.data)
+      this.getOrganDetail()
+    })
+  },
+  getOrganDetail(){
+    fetch.get(`/userAgency/selectUserAgencyById/${this.data.productBelong}`).then(res=>{
+      console.log('aaa',res.data)
+      this.setData({
+        organMess:res.data
+      })
+     
     })
   },
   look(){
@@ -37,8 +73,13 @@ id:'',
     this.setData({
       id:options.id
     })
-    console.log('qqqq',options)
+    
     this.getDetail(options.id)
+    if (app.globalData.userInfo) {
+      this.setData({
+        userId: app.globalData.userInfo.id,
+      })
+    }
   },
 
   /**

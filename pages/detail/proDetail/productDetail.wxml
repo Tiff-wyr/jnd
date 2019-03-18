@@ -60,6 +60,11 @@
     <view class='te'>{{product.productCharacteristic}}</view>
   </view>
 
+  <view class='belong'>
+      <image src='{{organMess.agencyLogo}}'></image>
+      <view class='organName'>{{organMess.agencyName}}</view>
+  </view>
+
 
 
   <view class='bottom-detail'>
@@ -67,7 +72,7 @@
       <view class='iconfont icon-xingxing1 phone-tu'></view>
       <view class='lphone'>收藏</view>
     </view>
-        <view class='look'>
+        <view class='look'  bindtap='apply'>
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>

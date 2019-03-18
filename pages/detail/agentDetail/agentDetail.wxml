@@ -76,7 +76,7 @@
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
-    <button>立即沟通</button>
+    <button bindtap='chat' data-phone='{{agent.userBroker.phone}}'>立即沟通</button>
 
   </view>
 

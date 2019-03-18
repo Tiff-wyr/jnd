@@ -1,6 +1,11 @@
 // borrower/pages/agentDetail/agentDetail.js
 const app = getApp()
 import { fetch } from "../../../utils/axios.js"
+
+let WebIM = require("../../../utils/WebIM")["default"];
+let disp = require("../../../utils/broadcast");
+let systemReady = false;
+
 Page({
 
   /**
@@ -8,11 +13,13 @@ Page({
    */
   data: {
     agent: {},
-
+    member: [],
     victory: [],
     userId:'',
     optionId:'',
-    isCollect:false
+    isCollect:false,
+    myName: '',
+    unReadSpot: false,
   },
 
   getDetail(id){
@@ -97,6 +104,35 @@ Page({
     })
   },
 
+  //立即沟通
+  chat(event) {
+    if (app.globalData.userInfo) {
+      var nameList = {
+        myName: this.data.myName,
+        your: event.target.dataset.phone
+      };
+      wx.navigateTo({
+        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+      });
+
+
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+  },
+
   //借款人向此经纪人申请
   apply(){
      if(this.data.userId){
@@ -141,6 +177,19 @@ wx.navigateTo({
       this.collectPan(options.id)
     }
 
+    if (app.globalData.userInfo) {
+      this.setData({
+        myName: app.globalData.userInfo.phone
+      })
+    }
+
+    let that = this
+    disp.on("em.xmpp.unreadspot", function (count) {
+      that.setData({
+        unReadSpot: count > 0
+      });
+    });
+
 
 
   },
@@ -156,7 +205,40 @@ wx.navigateTo({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      unReadSpot: getApp().globalData.unReadSpot
+    });
+    this.getRoster();
+  },
 
+  getRoster() {
+    let me = this;
+    let rosters = {
+      success(roster) {
+        var member = [];
+        for (let i = 0; i < roster.length; i++) {
+          if (roster[i].subscription == "both") {
+            member.push(roster[i]);
+          }
+        }
+        me.setData({
+          member: member
+        });
+        wx.setStorage({
+          key: "member",
+          data: me.data.member
+        });
+        if (!systemReady) {
+          disp.fire("em.main.ready");
+          systemReady = true;
+        }
+      },
+      error(err) {
+        console.log("[main:getRoster]", err);
+      }
+    };
+    // WebIM.conn.setPresence()
+    WebIM.conn.getRoster(rosters);
   },
 
   /**
