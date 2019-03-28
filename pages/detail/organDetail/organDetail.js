@@ -84,10 +84,14 @@ Page({
       })
     })
   },
-
+  proDetail(e){
+    wx.navigateTo({
+      url: `/pages/detail/proDetail/productDetail?id=${e.currentTarget.dataset.id}`,
+    })
+  },
   //立即沟通
   chat(event) {
-    if (app.globalData.userInfo) {
+    if (this.data.userId) {
       var nameList = {
         myName: this.data.myName,
         your: event.target.dataset.phone
@@ -118,88 +122,141 @@ Page({
   //收藏
   restoreClick() {
     let that = this
-    wx.request({
-      url: 'https://www.rjkf001.com/borAgency/addBorAgency',
-      data: {
-        borId: this.data.userId,
-        agencyId: this.data.optionId
-      },
-      method: 'post',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success(res) {
-        console.log('收藏', res.data)
-        if (res.data.status === 200) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'success',
-            duration: 2000
-          })
-          that.setData({
-            isCollect: true
-          })
-          that.collectPan(that.data.optionId)
+    if(this.data.userId){
+      wx.request({
+        url: 'https://www.rjkf001.com/borAgency/addBorAgency',
+        data: {
+          borId: this.data.userId,
+          agencyId: this.data.optionId
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data.status === 200) {
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success',
+              duration: 2000
+            })
+            that.setData({
+              isCollect: true
+            })
+            that.collectPan(that.data.optionId)
+          }
         }
-      }
-    })
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+
   },
   //取消收藏
   cancelColl() {
     let that = this
-    wx.request({
-      url: 'https://www.rjkf001.com/borAgency/deleteBorAgency',
-      data: {
-        borId: this.data.userId,
-        agencyId: this.data.optionId
-      },
-      method: 'post',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success(res) {
-        console.log('收藏', res.data)
-        if (res.data.status === 200) {
-          wx.showToast({
-            title: '取消成功',
-            icon: 'success',
-            duration: 2000
-          })
-          that.setData({
-            isCollect: false
-          })
-          that.collectPan(that.data.optionId)
+    if(this.data.userId){
+      wx.request({
+        url: 'https://www.rjkf001.com/borAgency/deleteBorAgency',
+        data: {
+          borId: this.data.userId,
+          agencyId: this.data.optionId
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data.status === 200) {
+            wx.showToast({
+              title: '取消成功',
+              icon: 'success',
+              duration: 2000
+            })
+            that.setData({
+              isCollect: false
+            })
+            that.collectPan(that.data.optionId)
+          }
         }
-      }
-    })
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+ 
   },
   //收藏判断
   collectPan() {
     let that = this
-    wx.request({
-      url: 'https://www.rjkf001.com/borAgency/selectBorAgency',
-      data: {
-        borId: this.data.userId,
-        agencyId: this.data.optionId
-      },
-      method: 'post',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success(res) {
-        console.log('收藏', res.data)
-        if (res.data === 0) {
-          that.setData({
-            isCollect: false
-          })
-        }else{
-          that.setData({
-            isCollect: true
-          })
+    if (this.data.userId){
+      wx.request({
+        url: 'https://www.rjkf001.com/borAgency/selectBorAgency',
+        data: {
+          borId: this.data.userId,
+          agencyId: this.data.optionId
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data === 0) {
+            that.setData({
+              isCollect: false
+            })
+          } else {
+            that.setData({
+              isCollect: true
+            })
+          }
         }
-      }
-    })
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+ 
   },
+
+
   /**
    * 生命周期函数--监听页面加载
    */

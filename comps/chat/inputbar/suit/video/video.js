@@ -45,11 +45,11 @@ Component({
 							var data = res.data;
 							var dataObj = JSON.parse(data);
 							var id = WebIM.conn.getUniqueId();		// 生成本地消息id
-							var msg = new WebIM.message("video", id);
+							var msg = new WebIM.message("img", id);
 							msg.set({
 								apiUrl: WebIM.config.apiURL,
 								body: {
-									type: "video",
+									type: "img",
 									url: dataObj.uri + "/" + dataObj.entities[0].uuid,
 									filetype: "mp4",
 									filename: tempFilePaths

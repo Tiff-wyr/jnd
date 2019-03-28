@@ -1,21 +1,10 @@
-<view class="room_bar">
+<view class="room_bar {{isIpx ? 'bIpx' : ''}}">
 
 	<chat-suit-emoji id="chat-suit-emoji" bind:newEmojiStr="emojiAction"></chat-suit-emoji>
 	<chat-suit-main id="chat-suit-main" username="{{ username }}" chatType="{{ chatType }}" bind:inputFocused="cancelEmoji"></chat-suit-main>
-	<chat-suit-image id="chat-suit-image" username="{{ username }}" chatType="{{ chatType }}"></chat-suit-image>
-	<!-- <chat-suit-location id="chat-suit-location" username="{{ username }}"></chat-suit-location> -->
-	<!-- <chat-suit-video id="chat-suit-video" username="{{ username }}"></chat-suit-video> -->
-
-	<view class="other_func">
-		<view class="open_emoji" bind:tap="openEmoji">
-			<image src="/static/images/Emoji.png"/>
-		</view>
-
-		<view class="send_image" bind:tap="sendImage">
-			<image src="/static/images/iconImage@2x.png" style="height:18px;"/>
-		</view>
 	
 
-	</view>
-
 </view>
+
+<view wx:if="{{isIpx}}" class="isIpx"></view>
+

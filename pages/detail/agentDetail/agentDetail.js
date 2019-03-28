@@ -42,71 +42,120 @@ Page({
 //收藏
   restoreClick(){
     let that=this
-    wx.request({
-      url: 'https://www.rjkf001.com/borrowerKeep/saveBorrowerKeep', 
-      data: {
-        borrowerId: this.data.userId,
-        brokerId: this.data.optionId
-      },
-      method:'post',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success(res) {
-        console.log('收藏',res.data)
-        if (res.data.status === 200){
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'success',
-            duration: 2000
-          })
-          that.setData({
-            isCollect:true
-          })
-          that.collectPan(that.data.optionId)
+    if (this.data.userId){
+      wx.request({
+        url: 'https://www.rjkf001.com/borrowerKeep/saveBorrowerKeep',
+        data: {
+          borrowerId: this.data.userId,
+          brokerId: this.data.optionId
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data.status === 200) {
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success',
+              duration: 2000
+            })
+            that.setData({
+              isCollect: true
+            })
+            that.collectPan(that.data.optionId)
+          }
         }
-      }
-    })
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+
   },
   //取消收藏
   cancelColl(){
     let that=this
-    fetch.get(`/borrowerKeep/removeBorrowerKeepById/${this.data.userId}/${this.data.optionId}`).then(res=>{
-      console.log('cancel',res.data)
-      if (res.data.status === 200) {
-        wx.showToast({
-          title: '取消成功',
-          icon: 'success',
-          duration: 2000
-        })
-        that.setData({
-          isCollect: false
-        })
-        that.collectPan(that.data.optionId)
-      }
-    })
+    if (this.data.userId){
+      fetch.get(`/borrowerKeep/removeBorrowerKeepById/${this.data.userId}/${this.data.optionId}`).then(res => {
+        console.log('cancel', res.data)
+        if (res.data.status === 200) {
+          wx.showToast({
+            title: '取消成功',
+            icon: 'success',
+            duration: 2000
+          })
+          that.setData({
+            isCollect: false
+          })
+          that.collectPan(that.data.optionId)
+        }
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+   
   },
        //收藏判断
   collectPan(id){
-
     let that = this
-    fetch.get(`/borrowerKeep/checkBorrowerKeepBroker/${this.data.userId}/${id}`).then(res=>{
-        console.log('collect',res.data)
-      if (res.data === 0){
-        that.setData({
-           isCollect:false
-         })
-        }else{
-        that.setData({
-          isCollect: true
-        })
+    if (this.data.userId){
+      fetch.get(`/borrowerKeep/checkBorrowerKeepBroker/${this.data.userId}/${id}`).then(res => {
+        console.log('collect', res.data)
+        if (res.data === 0) {
+          that.setData({
+            isCollect: false
+          })
+        } else {
+          that.setData({
+            isCollect: true
+          })
         }
-    })
+      })
+  }else{
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+  }
   },
 
   //立即沟通
   chat(event) {
-    if (app.globalData.userInfo) {
+    if (this.data.userId) {
       var nameList = {
         myName: this.data.myName,
         your: event.target.dataset.phone

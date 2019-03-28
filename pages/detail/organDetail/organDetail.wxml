@@ -18,7 +18,7 @@
       <view class='good-bus'>机构网址</view>
     </view>
     <view class='scope-updown'>
-{{organ.agencyURL}}
+      {{organ.agencyURL}}
     </view>
   </view>
 
@@ -45,7 +45,7 @@
   </view>
 
   <view class='desc'>
-{{organ.agencyIntroduction}}
+    {{organ.agencyIntroduction}}
   </view>
 
   <view class='business'>
@@ -63,34 +63,34 @@
     </view>
   </view>
 
-    <view class='business'>
-       <view class='yellow'></view>
-       <view class='good-bus'>代理产品</view>
+  <view class='business'>
+    <view class='yellow'></view>
+    <view class='good-bus'>代理产品</view>
   </view>
 
   <view class='pro-list'>
-      <view wx:for='{{proData}}' wx:key="{{index}}" class='pro-item'>
-           <image src='{{item.productLogo}}'></image>
-           <view>
-               <view class='name'>{{item.productName}}</view>
-                <view class='name'>额度：{{item.productStartAmount}}~{{item.productEndAmount}}</view>
-           </view>
- <view>
-               <view class='name'>月利率：{{item.productInterest}}</view>
-                <view class='name'>期限：{{item.productLife}}</view>
-           </view>
-
+    <view wx:for='{{proData}}' wx:key="{{index}}" class='pro-item' bindtap='proDetail' data-id='{{item.productId}}'>
+      <image src='{{item.productLogo}}'></image>
+      <view>
+        <view class='name'>{{item.productName}}</view>
+        <view class='name'>额度：{{item.productStartAmount}}~{{item.productEndAmount}}万</view>
       </view>
+      <view>
+        <view class='name'>月利率：{{item.productInterest}}%</view>
+        <view class='name'>期限：{{item.productLife}}</view>
+      </view>
+
+    </view>
   </view>
 
   <view class='bottom-detail'>
     <view class='look'>
-       <view class='iconfont icon-xingxing1 phone-tu' bindtap='restoreClick' wx:if='{{!isCollect}}'></view>
-            <view class='iconfont icon-xingxing phone-tu' bindtap='cancelColl' wx:if='{{isCollect}}'></view>
-      <view class='lphone'  wx:if='{{!isCollect}}'>收藏</view>
-          <view class='lphone' wx:if='{{isCollect}}'>取消</view>
+      <view class='iconfont icon-xingxing1 phone-tu' bindtap='restoreClick' wx:if='{{!isCollect}}'></view>
+      <view class='iconfont icon-xingxing phone-tu' bindtap='cancelColl' wx:if='{{isCollect}}'></view>
+      <view class='lphone' wx:if='{{!isCollect}}' bindtap='restoreClick'>收藏</view>
+      <view class='lphone' wx:if='{{isCollect}}' bindtap='cancelColl' >取消</view>
     </view>
-        <view class='look'  bindtap='apply'>
+    <view class='look' bindtap='apply'>
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
@@ -99,4 +99,3 @@
   </view>
 
 </view>
-

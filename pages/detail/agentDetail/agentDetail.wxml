@@ -2,14 +2,14 @@
 
   <view class='wrap'>
     <view style='display:flex'>
-      <image src='{{agent.userBroker.image}}'></image>
+      <image src='{{agent.image}}'></image>
       <view>
-        <view class='name'>{{agent.userBroker.brokerName}}</view>
-        <view class='money'>{{agent.userBroker.job}}</view>
+        <view class='name'>{{agent.brokerName}}</view>
+        <view class='money'>{{agent.job}}</view>
         <view class='money'>{{agent.address}}</view>
       </view>
     </view>
-    <view class='phone'>{{agent.userBroker.phone}}</view>
+    <view class='phone'>{{agent.phone}}</view>
   </view>
 
   <view>
@@ -24,15 +24,15 @@
 
   <view class='detail-job'>
     <view class='job1'>
-      <view class='number'>{{agent.userBroker.workingYears}}</view>
+      <view class='number'>{{agent.workingYears}}</view>
       <view class='num-tetx'>工作年限（年）</view>
     </view>
     <view class='job1 line-two'>
-      <view class='number'>{{agent.userBroker.serveClientTotal}}</view>
+      <view class='number'>{{agent.serveClientTotal}}</view>
       <view class='num-tetx'>服务客户（位）</view>
     </view>
     <view class='job1'>
-      <view class='number'>{{agent.userBroker.batchLoanTotal}}</view>
+      <view class='number'>{{agent.batchLoanTotal}}</view>
       <view class='num-tetx'>批贷总额（万）</view>
     </view>
 
@@ -45,7 +45,7 @@
   </view>
 
   <view class='desc'>
-{{agent.userBroker.businessIntroduction}}
+{{agent.businessIntroduction}}
   </view>
 
   <view class='business'>
@@ -69,14 +69,14 @@
     <view class='look'>
       <view class='iconfont icon-xingxing1 phone-tu' bindtap='restoreClick' wx:if='{{!isCollect}}'></view>
             <view class='iconfont icon-xingxing phone-tu' bindtap='cancelColl' wx:if='{{isCollect}}'></view>
-      <view class='lphone'  wx:if='{{!isCollect}}'>收藏</view>
-          <view class='lphone' wx:if='{{isCollect}}'>取消</view>
+      <view class='lphone'  wx:if='{{!isCollect}}' bindtap='restoreClick'>收藏</view>
+          <view class='lphone' wx:if='{{isCollect}}' bindtap='cancelColl'>取消</view>
     </view>
     <view class='look' bindtap='apply'>
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
-    <button bindtap='chat' data-phone='{{agent.userBroker.phone}}'>立即沟通</button>
+    <button bindtap='chat' data-phone='{{agent.phone}}'>立即沟通</button>
 
   </view>
 

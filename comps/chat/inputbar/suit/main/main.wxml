@@ -10,6 +10,7 @@
 			bind:tap="focus"
 			bind:focus="focus"
 			bind:blur="blur" />
+      
 		<button class="send_btn" bind:tap="sendMessage">发送</button>
 	</view>
 </form>

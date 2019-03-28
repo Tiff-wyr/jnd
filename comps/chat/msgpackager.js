@@ -1,8 +1,35 @@
 let WebIM = require("../../utils/WebIM")["default"];
 let msgType = require("msgtype");
-
+function timeDiff(faultDate, completeTime) {
+    var stime = Date.parse(new Date(faultDate));
+    var etime = Date.parse(new Date(completeTime));
+    var usedTime = etime - stime;  //两个时间戳相差的毫秒数
+    var time = usedTime/1000
+    return time;
+}
 module.exports = function(sendableMsg, type, myName){
+    //计算最后一条消息时间
+
+   
+    var historyChatMsgs = wx.getStorageSync(wx.getStorageSync("currentChat")) || [];
+    var lastMsm
+    var showTime = false
+    if (historyChatMsgs.length==0){
+        lastMsm = WebIM.time()
+        showTime = true
+    }
+    else
+    {
+        lastMsm = historyChatMsgs[historyChatMsgs.length - 1].time
+    }
+   
+   
 	var time = WebIM.time();
+   
+    //超过半个小时不重新显示时间
+    if (timeDiff(lastMsm, time)>30*60){
+        showTime=true
+    }
 	var renderableMsg = {
 		info: {
 			from: sendableMsg.body.from,
@@ -17,7 +44,10 @@ module.exports = function(sendableMsg, type, myName){
 		},
 		style: sendableMsg.body.from == myName ? "self" : "",
 		time: time,
-		mid: sendableMsg.type + sendableMsg.id
+		mid: sendableMsg.type + sendableMsg.id,
+        msgState:0,
+        notice:0,
+        showTime: showTime
 	};
 	if(type == msgType.IMAGE){
 		renderableMsg.msg.size = {

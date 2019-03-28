@@ -1,10 +1,26 @@
+
+<view class='show_details' bind:tap='enter' wx:if="{{userRole==1}}" >
+     <view class='info lw_dflex'>
+        <image src="{{otherAvatar}}" class='img'  ></image>
+         <view class='content lw_flex'>
+            <view class='name'>{{otherNickName}}</view>
+            <view class='jobs ellipsis'>
+               关注岗位：{{followJobName}}
+            </view>
+         </view>
+         <view>
+            <image src='../../../images/arrow.png' class='arrow'  ></image>
+         </view>
+     </view>
+</view>
 <template name="txt">
-	<text class="msg-text" style="float:left; margin-top:2px;">{{ item.data }}</text>
+
+     <rich-text class="msg-text" nodes="{{ item.data }}" style="float:left; margin-top:2px;"></rich-text>
 </template>
 <template name="emoji">
 	<image
 		class="avatar"
-		src="{{ '/static/images/faces/' + item.data }}"
+		src="{{ '../../../images/faces/' + item.data }}"
 		style="width:25px; height:25px; margin:0 0 2px 0; float:left;" />
 </template>
 <template name="img">
@@ -22,23 +38,20 @@
 <template name="audio">
 	<audio src="{{ item.msg.url }}" controls autoplay />
 </template>
-
-
 <scroll-view
 	scroll-y="true"
-	class="{{ view }}"
+    style='height:{{scrollHeight}}px'
+   scroll-top="{{scrollTop}}"
+	class="{{ view }} {{ chatClass }}"
 	bind:tap="onTap"
 	scroll-into-view="{{ toView }}">
-	<view class="message" wx:for="{{ chatMsg }}" wx:key="" id="{{ item.mid }}">
-		<view class="time">
+	<view class="message" wx:for="{{ chatMsg }}" wx:key="" id="{{ item.mid }}" >
+		<view class="time" wx:if="{{item.showTime}}" >
 			<text class="time-text">{{ item.time }}</text>
 		</view>
-		<view class="main" class="{{ item.style }}">
-			<view class="user">
-				<!-- yourname：就是消息的 from --> -->
-			 <text class="user-text">{{ item.yourname }}</text>
-			</view>
-			<image class="avatar"  src="/static/images/number.png"/>
+		<view class="main" class="{{ item.style }}" >
+			<image class="avatar" wx:if="{{app.globalData.userInfo.image}}" src="app.globalData.userInfo.image"/>
+      			<image class="avatar" wx:else src="/static/images/number.png"/>
 			<view class="msg">
 				<view wx:if="{{ item.msg.type == 'img' || item.msg.type == 'video' }}">
 					<template is="{{ item.msg.type }}" data="{{ item }}"/>
@@ -52,6 +65,16 @@
 					</view>
 				</view>
 			</view>
+
+        <view  wx:if="{{item.yourname != item.username && userRole==1}}" class='text_state' >
+        <view wx:if="{{item.msgState ==1 && item.notice==0}}" bindtap="pushImmediately" id="{{index}}" class="push_btn">立即推送</view>
+             <view wx:elif="{{item.msgState==2 && item.notice==0}}">已查看</view>
+             <view wx:elif="{{item.msgState< 2 && item.notice==1}}">已推送，未查看</view>
+             <view wx:elif="{{item.msgState== 2 && item.notice==1}}">已查看</view>
+             <view wx:elif="{{item.msgState== 0 && item.notice==0}}"></view>
+              <view wx:elif="{{item.msgState== 4 && item.notice==0}}">发送失败</view>
+        </view>
 		</view>
+
 	</view>
 </scroll-view>

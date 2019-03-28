@@ -1,34 +1,24 @@
 <!--pages/agent/message/message.wxml-->
 <import src="/components/tabBar/index.wxml" />
 <view class='mess'>
-  <view class='mess-top'>
-    <view class='{{tab === "1" ? "selected" : "select" }}' data-id='1' bindtap='handlerTabClick'>
-      <text>聊天</text>
-    </view>
 
-    <view class='{{tab === "2" ? "selected" : "select" }}' data-id='2' bindtap='handlerTabClick'>
-      <text>互动</text>
-    </view>
-  </view>
-
-
-  <view class='mess-con'>
-    <view wx-if='{{tab === "1"}}'>
-      <view wx:for='{{messData}}' wx:key='{{index}}' class='agent-item' bindtap='handleAgent'>
-          <image></image>
+    <view>
+      <view wx:for='{{arr}}' wx:key='{{index}}'>
+      <view 
+       class='agent-item' bindtap="into_chatRoom" data-phone="{{ item.username }}">
+        <image></image>
           <view style='flex:1'>
               <view class='tab-top'>
-                   <view class='name'>{{item.name}}</view>
+                   <view class='name'>{{item.username}}</view>
                      <view class='time'>{{item.time}}</view>
               </view>
-              <view class='content'>{{item.content}}</view>
+              <view class='tab-bottom'>
+                <view class='content'>{{item.content}}</view>
+                <view  wx:if="{{ item.unReadCount > 0 || item.unReadCount == '...' }}" class='em-msgNum'>{{item.unReadCount}}                     </view>
+              </view>  
           </view>
-
-
       </view>
-    </view>
-
-
+     </view>
   </view>
 
 

@@ -64,6 +64,7 @@ Component({
 		},
 
 		sendMessage(){
+            
 			if(!this.data.userMessage.trim()){
 				return;
 			}
@@ -76,9 +77,10 @@ Component({
 				roomType: false,
 				chatType: this.data.chatType,
 				success(id, serverMsgId){
-
+                   
 				}
 			});
+            wx.setStorageSync("cMsg", "")
 			if(this.data.chatType == msgType.chatType.CHAT_ROOM){
 				msg.setGroup("groupchat");
 			}
@@ -107,5 +109,17 @@ Component({
 	attached(){},
 	moved(){},
 	detached(){},
-	ready(){},
+	ready(){
+        let _this=this
+        if (wx.getStorageSync("cMsg") != "" ){
+            _this.setData({
+                userMessage: wx.getStorageSync("cMsg")
+            });
+            setTimeout(function () {
+                _this.sendMessage()
+            }, 1000)
+        }
+       
+    console.log("异步获取用户身份")
+  },
 });

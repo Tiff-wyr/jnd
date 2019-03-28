@@ -1,5 +1,7 @@
 <view class='detail'>
-  <view class='detail-top'>
+
+<view class='per-it'>
+    <view class='detail-top'>
     <image src='{{product.productLogo}}'></image>
     <view>
       <view class='name'>{{product.productName}}</view>
@@ -60,6 +62,8 @@
     <view class='te'>{{product.productCharacteristic}}</view>
   </view>
 
+</view>
+  
  <view class='bottom'>
       <button bindtap='look'>登陆PC端修改产品信息</button>
  </view>  

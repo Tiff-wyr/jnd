@@ -13,6 +13,35 @@ Page({
     productBelong:'',
     organMess:{},
     userId:'',
+    isCollect: false,
+  },
+  //立即沟通
+  chat(event) {
+    if (this.data.userId) {
+      var nameList = {
+        myName: this.data.myName,
+        your: event.target.dataset.phone
+      };
+      wx.navigateTo({
+        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+      });
+
+
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
   },
 
   //借款人向此产品申请
@@ -36,6 +65,12 @@ Page({
         }
       })
     }
+  },
+  //进入机构详情
+  organDetail(e){
+    wx.navigateTo({
+      url: `/pages/detail/organDetail/organDetail?id=${e.currentTarget.dataset.id}`,
+    })
   },
   getDetail(id){
     fetch.get(`/product/selectProductById/${id}`).then(res=>{
@@ -66,6 +101,143 @@ Page({
     })
     this.getDetail(this.data.id)
   },
+
+  //收藏
+  restoreClick() {
+    let that = this
+    if (this.data.userId) {
+      wx.request({
+        url: 'https://www.rjkf001.com/borpro/addBorPro',
+        data: {
+          borId: this.data.userId,
+          productId: this.data.id
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data.status === 200) {
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'success',
+              duration: 2000
+            })
+            that.setData({
+              isCollect: true
+            })
+            that.collectPan(that.data.optionId)
+          }
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+
+  },
+  //取消收藏
+  cancelColl() {
+    let that = this
+    if (that.data.userId) {
+      wx.request({
+        url: 'https://www.rjkf001.com/borpro/deleteBorPro',
+        data: {
+          borId: that.data.userId,
+          productId: that.data.id
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data.status === 200) {
+            wx.showToast({
+              title: '取消成功',
+              icon: 'success',
+              duration: 2000
+            })
+            that.setData({
+              isCollect: false
+            })
+            that.collectPan(that.data.optionId)
+          }
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+
+  },
+  //收藏判断
+  collectPan() {
+    let that = this
+    if (that.data.userId) {
+      wx.request({
+        url: 'https://www.rjkf001.com/borpro/selectBorPro',
+        data: {
+          borId: that.data.userId,
+          productId: that.data.id
+        },
+        method: 'post',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success(res) {
+          console.log('收藏', res.data)
+          if (res.data === 0) {
+            that.setData({
+              isCollect: false
+            })
+          } else {
+            that.setData({
+              isCollect: true
+            })
+          }
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -74,12 +246,13 @@ Page({
       id:options.id
     })
     
-    this.getDetail(options.id)
     if (app.globalData.userInfo) {
       this.setData({
         userId: app.globalData.userInfo.id,
       })
     }
+    this.getDetail(options.id)
+    this.collectPan()
   },
 
   /**

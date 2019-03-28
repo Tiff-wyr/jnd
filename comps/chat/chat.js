@@ -7,6 +7,10 @@ Component({
 			type: Object,
 			value: {},
 		},
+        userType: {
+            type: Object,
+            value: {},
+        },
 		chatType: {
 			type: String,
 			value: msgType.chatType.SINGLE_CHAT,

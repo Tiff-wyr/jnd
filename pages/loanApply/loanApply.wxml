@@ -27,7 +27,7 @@
       
       <view class='wrap'>
        <view class='iconfont icon-daikuanjine duanPic'></view>
-        <input class='input' placeholder-class='input_placeholder' bindblur='handleMoney' placeholder='贷款金融（单位：万元）'></input>
+        <input class='input' placeholder-class='input_placeholder' type='number' bindblur='handleMoney' placeholder='贷款金额（单位：万元）'></input>
       </view>
 
         <view class='city'>
@@ -110,13 +110,13 @@
   
     <view class='wrap' style='margin-top:20rpx'>
       <view class='iconfont icon-shoujihao-copy duanPic'></view>
-      <input class='input' placeholder-class='input_placeholder' bindblur='handlePhone' placeholder='手机号'></input>
+      <input class='input' placeholder-class='input_placeholder' type='number' bindblur='handlePhone' placeholder='手机号'></input>
     </view>
 
     <view class='wrapper'>
       <view class='code'>
          <view class='iconfont icon-duanxin-copy duanPic'></view>
-        <input class='input' placeholder-class='input_placeholder' password='true' placeholder='短信验证码' bindblur='handleCode'></input>
+        <input class='input' placeholder-class='input_placeholder' type='number' password='true' placeholder='短信验证码' bindblur='handleCode'></input>
       </view>
       <view class='sendCode' bindtap='sendCode'>{{textCode}}</view>
     </view>

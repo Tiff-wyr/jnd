@@ -29,14 +29,17 @@ Page({
 
     myName: "",
     unReadSpot: false,
+    phone:''
   },
 
 
   getDetail(id){
     fetch.get(`/userBorrower/selectUserBorrowerById/${id}`).then(res=>{
+
       this.setData({
         user : res.data
       })
+
       console.log('借款人详情',res.data)
     })
   },
@@ -52,22 +55,27 @@ Page({
         console.log(res)
         if(res.data === 1){
            console.log("查看手机号")
+       this.setData({
+         phone:this.data.user.phone
+       })
+
         }else{
-          console.log("不是会员，跳转到会员中心")
           wx.showToast({
             title: '您不是会员',
-            // icon: 'success',
             duration: 2000
           })
-          // if (app.globalData.userType === 'organ'){
-          //   wx.switchTab({
-          //     url: '/pages/organ/pages/member/member'
-          //   })
-          // }else{
-          //   wx.switchTab({
-          //     url: '/pages/agent/pages/member/member'
-          //   })
-          // }     
+          if (app.globalData.userType == 'organ'){
+            wx.navigateTo({
+              url: '/pages/organ/pages/member/member',
+            })
+    
+          }else{
+
+            wx.navigateTo({
+              url: '/pages/agent/pages/member/member',
+            })
+
+          }     
         }
 
       })
@@ -83,7 +91,7 @@ Page({
 
 //立即沟通
   chat(event){
-    if (app.globalData.userInfo){
+    if (app.globalData.userInfo.name){
       var nameList = {
         myName: this.data.myName,
         your: event.target.dataset.phone
@@ -123,21 +131,72 @@ Page({
    */
   onLoad: function (options) {
 
-  if(app.globalData.userInfo){
-this.setData({
-  myName:app.globalData.userInfo.phone
-})
-  }
-
-
+  if(app.globalData.userInfo.name){
+  this.setData({
+     myName:app.globalData.userInfo.phone
+   })
+   }
     this.setData({
       id : options.id
     })
-    this.getLoan()
+     this.getLoan()
      this.getDetail(options.id)
+     if(app.globalData.userInfo.name){
+       let that =this
+       if (app.globalData.userInfo.roleId === 2){
+         //经纪人
+         fetch.get(`/brokerResource/getBrokerResource/${app.globalData.userInfo.id}/${options.id}`).then(res=>{
+       
+           if(res.data === 1){
+              //看过，该手机号展现
+             that.setData({
+                phone: that.data.user.phone
+              })
+           }else{
+             //没看过  手机号隐藏
+          that.setData({
+            phone:'******'
+          })
+           }
+         })
+       }else{
+        //机构
+         fetch.post(`/agencyResource/seleteStateById`,{
+           agencyId:app.globalData.userInfo.id,
+           borId: options.id
+         }).then(res=>{
+           console.log('ss', res)
+           if(res.data.status === 200){
+  
+             //看过，该手机号展现
+             that.setData({
+               phone: that.data.user.phone
+             })
+           }else{
+             //没看过  手机号隐藏
+             that.setData({
+               phone: '******'
+             })
+           }
+         })
 
+       }
+     }else{
+       wx.showModal({
+         title: '提示',
+         content: '请先登录',
+         success(res) {
+           if (res.confirm) {
+             wx.navigateTo({
+               url: '/pages/login/passLogin/passLogin',
+             })
+           } else if (res.cancel) {
+
+           }
+         }
+       })
+     }
      let that = this
-
     disp.on("em.xmpp.unreadspot", function (count) {
       that.setData({
         unReadSpot: count > 0
@@ -175,7 +234,7 @@ this.setData({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
-     this.getRoster();
+    //  this.getRoster();
   },
 
   getRoster() {

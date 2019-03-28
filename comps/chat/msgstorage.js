@@ -2,7 +2,7 @@ let Disp = require("../../utils/Dispatcher");
 let msgPackager = require("msgpackager");
 let msgType = require("msgtype");
 let msgStorage = new Disp();
-let disp = require("../../utils/broadcast");
+let broadcast = require("../../utils/broadcast");
 msgStorage.saveReceiveMsg = function(receiveMsg, type){
 	let sendableMsg;
 	if(type == msgType.IMAGE){
@@ -77,9 +77,17 @@ msgStorage.saveReceiveMsg = function(receiveMsg, type){
 	this.saveMsg(sendableMsg, type, receiveMsg);
 };
 msgStorage.saveMsg = function(sendableMsg, type, receiveMsg){
+    console.log(sendableMsg)
+    //console.log(receiveMsg)
 	let me = this;
 	let myName = wx.getStorageSync("myUsername");
 	let sessionKey;
+    let targetName;
+    let nickName;
+    //保存最后一条消息
+    if (sendableMsg){
+        wx.setStorageSync("chatSend", sendableMsg.value)
+    }
 	// 仅用作群聊收消息，发消息没有 receiveMsg
 	if(receiveMsg && receiveMsg.type == "groupchat"){
 		sessionKey = receiveMsg.to + myName;
@@ -89,6 +97,33 @@ msgStorage.saveMsg = function(sendableMsg, type, receiveMsg){
 		sessionKey = sendableMsg.body.from == myName
 			? sendableMsg.body.to + myName
 			: sendableMsg.body.from + myName;
+        if (myName != sendableMsg.body.to){
+            targetName = sendableMsg.body.to
+        }
+        else
+        {
+            targetName = sendableMsg.body.from
+        }
+        console.log(receiveMsg)
+        if (receiveMsg){
+            if (receiveMsg.nickname !="undefined"){
+                nickName = receiveMsg.nickname
+            }
+            else
+            {
+                if (receiveMsg.ext.nickName){
+                    nickName = receiveMsg.ext.nickName
+                }
+            }
+        }
+        else
+        {
+            nickName = wx.getStorageSync("nickName") || ""
+        }
+        
+        
+        
+
 	}
 	let curChatMsg = wx.getStorageSync(sessionKey) || [];
 	let renderableMsg = msgPackager(sendableMsg, type, myName);
@@ -118,14 +153,38 @@ msgStorage.saveMsg = function(sendableMsg, type, receiveMsg){
 		save();
 	}
 	function save(){
-		wx.setStorage({
-			key: sessionKey,
-			data: curChatMsg,
-			success(){
-				disp.fire('em.chat.audio.fileLoaded');
-				me.fire("newChatMsg", renderableMsg, type, curChatMsg);
-			}
-		});
+        wx.setStorage({
+            key: sessionKey,
+            data: curChatMsg,
+            success() {
+                me.fire("newChatMsg", renderableMsg, type, curChatMsg);
+            }
+        });
+        // 如果之前没有聊过，自动加为联系人
+        let member = wx.getStorageSync("member");
+        // 一个都没有，需要初始化联系人列表
+        if (!member) {
+            member = [];
+        }
+        let hasMatch = false;
+        for (let i = 0; i < member.length; i++) {
+            if (member[i].name == targetName) {
+                hasMatch = true;
+                break;
+            }
+        }
+        if (!hasMatch) {
+            member.push({
+                name: targetName,
+                nickname: nickName,
+                subscription: "both"
+            });
+            // 保存到联系人记录
+            wx.setStorageSync("member", member);
+            // 发送新增联系人事件
+            //broadcast.fire("em.newContact", targetName);
+        }
+       
 	}
 };
 

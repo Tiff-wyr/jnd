@@ -1,4 +1,6 @@
+
 <view class="main">
+   
 	<chat-suit-audio
 		id="chat-suit-audio"
 		username="{{ username }}"
@@ -8,11 +10,13 @@
 	<chat-msglist
 		id="chat-msglist"
 		username="{{ username }}"
+        userType="wwww"
 		bind:msglistTap="normalScroll"></chat-msglist>
 
 	<chat-inputbar
 		id="chat-inputbar"
 		username="{{ username }}"
+        userType="{{ userType }}"
 		chatType="{{ chatType }}"
 
 		bind:newTextMsg="saveSendMsg"

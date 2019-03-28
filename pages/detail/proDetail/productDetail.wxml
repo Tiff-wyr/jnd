@@ -60,7 +60,7 @@
     <view class='te'>{{product.productCharacteristic}}</view>
   </view>
 
-  <view class='belong'>
+  <view class='belong' bindtap='organDetail' data-id='{{organMess.agencyId}}'>
       <image src='{{organMess.agencyLogo}}'></image>
       <view class='organName'>{{organMess.agencyName}}</view>
   </view>
@@ -69,14 +69,16 @@
 
   <view class='bottom-detail'>
     <view class='look'>
-      <view class='iconfont icon-xingxing1 phone-tu'></view>
-      <view class='lphone'>收藏</view>
+         <view class='iconfont icon-xingxing1 phone-tu' bindtap='restoreClick' wx:if='{{!isCollect}}'></view>
+      <view class='iconfont icon-xingxing phone-tu' bindtap='cancelColl' wx:if='{{isCollect}}'></view>
+      <view class='lphone' wx:if='{{!isCollect}}' bindtap='restoreClick'>收藏</view>
+      <view class='lphone' wx:if='{{isCollect}}' bindtap='cancelColl' >取消</view>
     </view>
         <view class='look'  bindtap='apply'>
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
-    <button>立即沟通</button>
+    <button bindtap='chat' data-phone='{{organMess.phone}}'>立即沟通</button>
 
   </view>
 

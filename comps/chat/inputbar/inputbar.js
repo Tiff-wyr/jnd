@@ -1,5 +1,6 @@
-// let RecordStatus = require("suit/audio/record_status").RecordStatus;
+let RecordStatus = require("suit/audio/record_status").RecordStatus;
 let msgType = require("../msgtype");
+const app = getApp()
 
 Component({
 	properties: {
@@ -13,14 +14,15 @@ Component({
 		},
 	},
 	data: {
-		// recordStatus: RecordStatus.HIDE,
-		// RecordStatus,
+		isIpx: app.globalData.isIpx,
+		recordStatus: RecordStatus.HIDE,
+		RecordStatus,
 		__comps__: {
 			main: null,
 			emoji: null,
 			image: null,
 			location: null,
-			video: null,
+			// video: null,
 		},
 	},
 	methods: {
@@ -34,10 +36,6 @@ Component({
 					composed: true
 				}
 			);
-		},
-
-		sendVideo(){
-			this.data.__comps__.video.sendVideo();
 		},
 
 		openCamera(){
@@ -76,6 +74,6 @@ Component({
 		comps.emoji = this.selectComponent("#chat-suit-emoji");
 		comps.image = this.selectComponent("#chat-suit-image");
 		// comps.location = this.selectComponent("#chat-suit-location");
-		comps.video = this.selectComponent("#chat-suit-video");
+		// comps.video = this.selectComponent("chat-suit-video");
 	},
 });

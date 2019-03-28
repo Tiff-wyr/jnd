@@ -19,8 +19,9 @@ Page({
     textCode: '发送验证码',
 
     sex: [
-      { value: 0, name: '女' },
-      { value: 1, name: '男', checked: true }
+      { value: 1, name: '男', checked: true },
+      { value: 0, name: '女' }
+   
     ],
     provinceData: [],
     cityData:
@@ -195,6 +196,24 @@ Page({
   pawnsChange(e) {
     let value = e.detail.value
     let hasPawn = value == 0 ? false : true
+    if (hasPawn) {
+      this.setData({
+        ageid: '',  //年龄id
+        jobId: '',   //职业id
+        incomeId: ''
+      })
+    } else {
+      this.setData({
+        pawnKey: '',
+        checkboxs: [
+          { value: 2, name: '车子' },
+          { value: 3, name: '有价证券' },
+          { value: 4, name: '古董珠宝' },
+          { value: 5, name: '房子' },
+          { value: 6, name: '其他' }
+        ]
+      })
+    }
     console.log(hasPawn)
     let pawns = this.data.pawns.map((item) => {
       if (item.value == value) {
@@ -213,10 +232,13 @@ Page({
   // checkbox 改变事件
   checkboxChange(e) {
     let value = e.detail.value
+    value = value.map(item => {
+      return parseInt(item)
+    })
     console.log('多选框',value)
-    // let check=value.
+    
     let checkboxs = this.data.checkboxs.map((item) => {
-      let val = item.value + ""
+      let val = item.value
       if (value.indexOf(val) > -1) {
         item.checked = true
       } else {
@@ -224,8 +246,10 @@ Page({
       }
       return item
     })
+ 
     this.setData({
-      checkboxs
+      checkboxs,
+      pawnKey: value
     })
   },
   //发送验证码
@@ -233,7 +257,7 @@ Page({
     if (this.data.phone) {
  
           //发送验证码
-      fetch.get(`/base/getUpdatePhoneCode/${this.data.phone}`).then(res            => {
+      fetch.get(`/base/getUpdatePhoneCode/${this.data.phone}`).then(res  => {
             console.log('fs', res.data)
             if (res.data.status === 200) {
               this.setData({
@@ -249,7 +273,7 @@ Page({
     
     } else {
       wx.showToast({
-        title: '不能为空',
+        title: '手机号不能为空',
         icon: 'none'
       })
     }
@@ -352,7 +376,7 @@ Page({
       address2: this.data.rcid,
       loanType: this.data.loanType,
       isPawn: this.data.pawn,
-      pawnKey:this.data.pawnKey,
+      pawnKey:this.data.pawnKey.toString(),
       age: this.data.ageid,
       borrowerJob: this.data.jobId,
       borrowerMonthlyIncome: this.data.incomeId,
@@ -397,7 +421,6 @@ Page({
   },
 
   applySubmit(){
-  
   if(this.data.name){
     if(this.data.money){
       if(this.data.phone){

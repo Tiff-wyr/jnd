@@ -13,7 +13,7 @@
                         <view class='address'>{{user.address}}</view>
                   </view>
               </view> 
-              <view class='phone'>{{user.phone}}</view>
+              <view class='phone'>{{phone}}</view>
           </view>
 
          <view class='middle'>
