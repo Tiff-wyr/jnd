@@ -139,6 +139,9 @@ color:rgba(123,123,123,1);
 line-height:24rpx;
 margin-top: 25rpx;
 }
+.per-ite{
+  padding-bottom: 100rpx;
+}
 
 .bottom-detail{
 height:96rpx;

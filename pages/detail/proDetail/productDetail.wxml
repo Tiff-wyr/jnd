@@ -1,5 +1,7 @@
 <view class='detail'>
-  <view class='detail-top'>
+
+<view class='per-ite'>
+<view class='detail-top'>
     <image src='{{product.productLogo}}'></image>
     <view>
       <view class='name'>{{product.productName}}</view>
@@ -64,6 +66,10 @@
       <image src='{{organMess.agencyLogo}}'></image>
       <view class='organName'>{{organMess.agencyName}}</view>
   </view>
+
+</view>
+  
+
 
 
 

@@ -15,7 +15,7 @@ Page({
       borrowerAddress: 1,
       borrower2: 2,
       password: '',
-    
+      money:'',
 
 
     textCode: '发送验证码',
@@ -119,6 +119,11 @@ Page({
   
 
   },
+  handleMoney(e) {
+    this.setData({
+      money: e.detail.value,
+    })
+  },
   handleCode(e) {
     this.setData({
         password: e.detail.value
@@ -192,6 +197,7 @@ Page({
       borrowerSex: this.data.borrowerSex,
       borrowerAddress: this.data.borrowerAddress,
       borrower2: this.data.borrower2,
+      loanAmount:this.data.money
     }).then(res=>{
        console.log('注册',res.data)
    

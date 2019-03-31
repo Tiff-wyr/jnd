@@ -255,10 +255,11 @@ Page({
   //发送验证码
   sendCode() {
     if (this.data.phone) {
- 
+      fetch.get(`/user/selectIsRegister/${this.data.phone}`).then(res => {
+        if (res.data.status === 200) {
           //发送验证码
-      fetch.get(`/base/getUpdatePhoneCode/${this.data.phone}`).then(res  => {
-            console.log('fs', res.data)
+          fetch.get(`/base/getUpdatePhoneCode/${this.data.phone}`).then(res => {
+            console.log('mmmm', res.data)
             if (res.data.status === 200) {
               this.setData({
                 textCode: '已发送'
@@ -268,18 +269,25 @@ Page({
                 textCode: '重新发送'
               })
             }
-
           })
-    
+        } else {
+          wx.showToast({
+            title: '该号已被他人注册',
+            icon: 'none'
+          })
+        }
+      })
+
+
     } else {
       wx.showToast({
         title: '手机号不能为空',
         icon: 'none'
       })
     }
-
-
   },
+
+
   //获取 省
   getProvince() {
     fetch.get(`/city/getAllProvincial`).then(res => {
@@ -392,31 +400,51 @@ Page({
           icon: 'success',
           duration: 2000
         })
+      }else{
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none',
+          duration: 2000
+        })
       }
     })
   },
 
   organApply(){
-    fetch.post(`/order/saveLoginOrder`, {
+    fetch.post(`/orderAgency/createOrderAgency`, {
 
-      brokerId: this.data.agentId,
+      agencyId: this.data.organId,
       borrowerName: this.data.name,
-      sex: this.data.value,
+      borrowerSex: this.data.value,
       loanAmount: this.data.money,
-      address1: this.data.pic,
-      address2: this.data.rcid,
+      borrowerAddress: this.data.pid,
+      borrower2: this.data.rcid,
       loanType: this.data.loanType,
-      isPawn: this.data.pawn,
-      pawnKey: this.data.pawnKey,
+      mortgage: this.data.pawn,
+      collateral: this.data.pawnKey.toString(),
       age: this.data.ageid,
-      borrowerJob: this.data.jobId,
-      borrowerMonthlyIncome: this.data.incomeId,
-      borrowerId: this.data.userId,
+      job: this.data.jobId,
+      income: this.data.incomeId,
+      borId: this.data.userId,
       phone: this.data.phone,
-      code: this.data.code
+      password: this.data.code
 
     }).then(res => {
       console.log('机构申请', res.data)
+
+      if (res.data.status === 200) {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success',
+          duration: 2000
+        })
+      }else{
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
     })
   },
 

@@ -47,7 +47,7 @@ Page({
     if (event.currentTarget.dataset.roleid === 4) {
       // 产品详情
       wx.navigateTo({
-        url: `/pages/detail/productDetail/productDetail?id=${event.currentTarget.dataset.id}`,
+        url: `/pages/detail/proDetail/productDetail?id=${event.currentTarget.dataset.id}`,
       })
     }
   },

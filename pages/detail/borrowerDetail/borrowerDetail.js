@@ -1,6 +1,8 @@
 // borrower/pages/agentDetail/agentDetail.js
 const app = getApp()
-import { fetch } from "../../../utils/axios.js"
+import {
+  fetch
+} from "../../../utils/axios.js"
 
 let WebIM = require("../../../utils/WebIM")["default"];
 let disp = require("../../../utils/broadcast");
@@ -13,85 +15,97 @@ Page({
    */
   data: {
     user: {
-      borLogo:'',
+      borLogo: '',
       borrowerName: '',
       phone: '',
       address: '',
-      borrowerAge:'',
-      borrowerJob:'',
-      income:'',
+      borrowerAge: '',
+      borrowerJob: '',
+      income: '',
     },
-    loanData:{},
+    loanData: {},
     member: [],
-    isShow:false,
-    isMask:false,
-    id:'',
+    isShow: false,
+    isMask: false,
+    id: '',
 
     myName: "",
     unReadSpot: false,
-    phone:''
+    phone: ''
   },
 
 
-  getDetail(id){
-    fetch.get(`/userBorrower/selectUserBorrowerById/${id}`).then(res=>{
+  getDetail(id) {
+    fetch.get(`/userBorrower/selectUserBorrowerById/${id}`).then(res => {
 
       this.setData({
-        user : res.data
+        user: res.data
       })
 
-      console.log('借款人详情',res.data)
+      console.log('借款人详情', res.data)
     })
   },
 
-  lookPhone(){
-    if(this.data.isShow){
-        this.setData({
-          isMask : true
-        })
-    }else{
-      //判断是否为会员
-      fetch.get(`/userBroker/checkIsVipOrCount/${app.globalData.userInfo.phone}`).then(res=>{
+  lookPhone() {
+    if (this.data.isShow) {
+      this.setData({
+        isMask: true
+      })
+    } else {
+
+        if(app.globalData.userInfo.roleId === 2){
+      //经纪人
+          fetch.get(`/userBroker/checkIsVipOrCount/${app.globalData.userInfo.phone}`).then(res=>{
         console.log(res)
         if(res.data === 1){
-           console.log("查看手机号")
-       this.setData({
-         phone:this.data.user.phone
-       })
-
+          console.log("查看手机号")
+          this.setData({
+            phone: this.data.user.phone
+          })
+          //经纪人  减少次数
+          fetch.get(`/vipClick/deleteVipClickCount/${app.globalData.userInfo.phone}`).then(res => {
+            console.log('减少次数', res)
+          })
         }else{
           wx.showToast({
             title: '您不是会员',
             duration: 2000
           })
-          if (app.globalData.userType == 'organ'){
-            wx.navigateTo({
-              url: '/pages/organ/pages/member/member',
-            })
-    
-          }else{
+          wx.navigateTo({
+            url: '/pages/agent/pages/member/member',
+          })
 
-            wx.navigateTo({
-              url: '/pages/agent/pages/member/member',
-            })
+        }
+          })
+        }else{
+        //机构
 
-          }     
+
         }
 
-      })
+
+  
+        if (app.globalData.userType == 'organ') {
+          wx.navigateTo({
+            url: '/pages/organ/pages/member/member',
+          })
+
+        }
+
+
     }
   },
 
-  cancel(){
+  cancel() {
     this.setData({
-      isMask : false
+      isMask: false
     })
     this.getDetail(this.data.id)
   },
 
-//立即沟通
-  chat(event){
-    if (app.globalData.userInfo.name){
+  //立即沟通
+  chat(event) {
+    if (app.globalData.userInfo.name) {
       var nameList = {
         myName: this.data.myName,
         your: event.target.dataset.phone
@@ -101,27 +115,27 @@ Page({
       });
 
 
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         content: '请先登录',
         success(res) {
           if (res.confirm) {
-           wx.navigateTo({
-             url: '/pages/login/passLogin/passLogin',
-           })
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
           } else if (res.cancel) {
-          
+
           }
         }
       })
     }
   },
-  getLoan(){
-    fetch.get(`/orderPublic/getByBorId/${this.data.id}`).then(res=>{
-      console.log('ssss',res.data)
+  getLoan() {
+    fetch.get(`/orderPublic/getByBorId/${this.data.id}`).then(res => {
+      console.log('ssss', res.data)
       this.setData({
-        loanData:res.data.data
+        loanData: res.data.data
       })
     })
   },
@@ -129,75 +143,25 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
-  if(app.globalData.userInfo.name){
-  this.setData({
-     myName:app.globalData.userInfo.phone
-   })
-   }
+    if (app.globalData.userInfo.name) {
+      this.setData({
+        myName: app.globalData.userInfo.phone
+      })
+    }
     this.setData({
-      id : options.id
+      id: options.id
     })
-     this.getLoan()
-     this.getDetail(options.id)
-     if(app.globalData.userInfo.name){
-       let that =this
-       if (app.globalData.userInfo.roleId === 2){
-         //经纪人
-         fetch.get(`/brokerResource/getBrokerResource/${app.globalData.userInfo.id}/${options.id}`).then(res=>{
-       
-           if(res.data === 1){
-              //看过，该手机号展现
-             that.setData({
-                phone: that.data.user.phone
-              })
-           }else{
-             //没看过  手机号隐藏
-          that.setData({
-            phone:'******'
-          })
-           }
-         })
-       }else{
-        //机构
-         fetch.post(`/agencyResource/seleteStateById`,{
-           agencyId:app.globalData.userInfo.id,
-           borId: options.id
-         }).then(res=>{
-           console.log('ss', res)
-           if(res.data.status === 200){
-  
-             //看过，该手机号展现
-             that.setData({
-               phone: that.data.user.phone
-             })
-           }else{
-             //没看过  手机号隐藏
-             that.setData({
-               phone: '******'
-             })
-           }
-         })
+    this.getLoan()
+    this.getDetail(options.id)
 
-       }
-     }else{
-       wx.showModal({
-         title: '提示',
-         content: '请先登录',
-         success(res) {
-           if (res.confirm) {
-             wx.navigateTo({
-               url: '/pages/login/passLogin/passLogin',
-             })
-           } else if (res.cancel) {
 
-           }
-         }
-       })
-     }
-     let that = this
-    disp.on("em.xmpp.unreadspot", function (count) {
+
+
+
+    let that = this
+    disp.on("em.xmpp.unreadspot", function(count) {
       that.setData({
         unReadSpot: count > 0
       });
@@ -223,18 +187,73 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
     //  this.getRoster();
+    if (app.globalData.userInfo.name) {
+      let that = this
+      if (app.globalData.userInfo.roleId === 2) {
+        //经纪人
+        fetch.get(`/brokerResource/getBrokerResource/${app.globalData.userInfo.id}/${that.data.id}`).then(res => {
+
+          if (res.data === 1) {
+            //看过，该手机号展现
+            that.setData({
+              phone: that.data.user.phone
+            })
+          } else {
+            //没看过  手机号隐藏
+            that.setData({
+              phone: '******'
+            })
+          }
+        })
+      } else {
+        //机构
+        fetch.post(`/agencyResource/seleteStateById`, {
+          agencyId: app.globalData.userInfo.id,
+          borId: that.data.id
+        }).then(res => {
+          console.log('ss', res)
+          if (res.data.status === 200) {
+
+            //看过，该手机号展现
+            that.setData({
+              phone: that.data.user.phone
+            })
+          } else {
+            //没看过  手机号隐藏
+            that.setData({
+              phone: '******'
+            })
+          }
+        })
+
+      }
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/passLogin/passLogin',
+            })
+          } else if (res.cancel) {
+
+          }
+        }
+      })
+    }
   },
 
   getRoster() {
@@ -274,35 +293,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     wx.showShareMenu({
       withShareTicket: true
     })

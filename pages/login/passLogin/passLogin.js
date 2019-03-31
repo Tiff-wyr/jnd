@@ -53,9 +53,14 @@ Page({
             duration: 2000
           })
           if(res.data.data.roleId === 1){
+      
+            app.globalData.userInfo = res.data.data
+            app.globalData.userType='user'
+            console.log(app.globalData.userInfo)
+
             wx.setStorage({
               key: 'myUsername',
-              data: this.data.phone
+              data: res.data.data.name
             });
             getApp().conn.open({
               apiUrl: WebIM.config.apiURL,
@@ -64,18 +69,21 @@ Page({
               grant_type: this.data.grant_type,
               appKey: WebIM.config.appkey
             });
-            app.globalData.userInfo = res.data.data
-            app.globalData.userType='user'
-            console.log(app.globalData.userInfo)
             wx.reLaunch({
               url: '/pages/borrower/pages/borrowerMine/borrowerMine'
             })
          
           }
           if (res.data.data.roleId === 2){
+           
+
+            app.globalData.userInfo = res.data.data
+            app.globalData.userType = 'agent'
+            console.log('aaa', res.data.data)
+
             wx.setStorage({
               key: 'myUsername',
-              data: this.data.phone
+              data: res.data.data.name
             });
             getApp().conn.open({
               apiUrl: WebIM.config.apiURL,
@@ -84,10 +92,6 @@ Page({
               grant_type: this.data.grant_type,
               appKey: WebIM.config.appkey
             });
-
-            app.globalData.userInfo = res.data.data
-            app.globalData.userType = 'agent'
-            console.log('aaa', res.data.data)
             wx.reLaunch({
               url: '/pages/agent/pages/mine/mine'
             })
@@ -95,9 +99,14 @@ Page({
 
           if (res.data.data.roleId === 3) {
 
+         
+            app.globalData.userInfo = res.data.data
+            app.globalData.userType = 'organ'
+            console.log(res.data.data)
+
             wx.setStorage({
               key: 'myUsername',
-              data: this.data.phone
+              data: res.data.data.name
             });
             getApp().conn.open({
               apiUrl: WebIM.config.apiURL,
@@ -106,17 +115,13 @@ Page({
               grant_type: this.data.grant_type,
               appKey: WebIM.config.appkey
             });
-
-            app.globalData.userInfo = res.data.data
-            app.globalData.userType = 'organ'
-            console.log(res.data.data)
             wx.reLaunch({
               url: '/pages/organ/pages/mine/mine'
             })
           }
         }else{
           wx.showToast({
-            title: '登录失败',
+            title: "账号或密码错误",
             icon: 'none'
           })
         }

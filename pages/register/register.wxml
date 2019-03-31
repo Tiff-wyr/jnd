@@ -23,6 +23,11 @@
 
   </view>
 
+    <view class='wrap'>
+       <view class='iconfont icon-daikuanjine duanPic'></view>
+    <input class='input' placeholder-class='input_placeholder' type='number' placeholder='贷款金额（万元）' bindblur='handleMoney'></input>
+  </view>
+
   <view class='city'>
     <view class='city-left'>
         <view class='iconfont icon-weizhi duanPic'></view>

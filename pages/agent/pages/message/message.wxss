@@ -1,4 +1,4 @@
-.mess {
+/* .mess {
   width: 100%;
   height: 100%;
   background: #fff;
@@ -55,6 +55,199 @@ line-height:28rpx;
 overflow: hidden;
 text-overflow:ellipsis;
 white-space:nowrap; 
+} */
+
+
+/* page{
+    background: #fff
+} */
+.list_left{
+  height: 144prx
+}
+.list_left .line{
+    padding-top: 10rpx;
+    /* padding-bottom: 10rpx; */
+    position: relative;
+}
+.no_data{
+    text-align: center
+}
+.search {
+	justify-content:space-around;
+}
+.search_input {
+	justify-content:space-around;	
+}
+.search view, .search_input view {
+	height: 28px;
+	line-height: 40rpx;
+	background-color: #ffffff;
+	border-radius: 5rpx;
+	text-align: center;
+	display: flex;
+	align-items: center;
+}
+.search view {
+	width: 96%;
+	justify-content:center;
+}
+.search image {
+	display: block;
+	width: 5%;
+	height: 50%;
+}
+.search_input view {
+	padding-left: 10rpx;
+}
+.search icon,.search_input icon {
+	display: inline-block;
+	margin: 13px 4px 0 0;
+	height: 26rpx;
+	line-height: 26rpx;
+}
+.search text {
+	font-size: 12px;
+	color: #CFCFCF;
+}
+.search_input view {
+	width: 79%;
+	text-align: left;
+}
+.search_input text {
+	display: inline-block;
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	color:#7B68EE;
+}
+.search_input input {
+	font-size: 14px;
+	width: 90%;
+}
+.mask {
+	background-color: black;
+	opacity: 0.4;
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.chat_list {
+	width: 100%;
+	height: 144rpx;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  background-color: #fff; 
+}
+.list_user{
+    font-size: 30rpx;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 6rpx;
+    color: #333333;
+    line-height: 42rpx;
+}
+
+.list_text {
+	
+	/* margin-top: 16rpx; */
+	font-size: 14rpx;
+    border-bottom: 1px solid #ececec;
+    height: 144rpx;
+    /* padding-bottom: 8rpx; */
+}
+.list_pic {
+	position: relative;
+	float: left;
+	margin-top: 28rpx;
+	margin-right: 28rpx;
+}
+.list_pic image {
+	display: block;
+	width: 88rpx;
+	height: 88rpx;
+  border-radius: 50%;
+	box-sizing: border-box;
+	/* border: 1px solid rgb(0,186,110); */
+}
+.em-msgNum {
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background: #f04134;
+	color: #fff;
+	line-height: 20px;
+	font-size: 14px;
+	text-align: center;
+}
+.list_word {
+	height: 40rpx;
+	display: block;
+	color: #666666;
+	margin-top: 0;
+	overflow:hidden;
+  text-overflow: ellipsis;white-space: nowrap;
+  width: 550rpx;
+  font-size: 24rpx;
+  line-height: 33rpx;
+}
+.list_word .state{
+    border: 1px solid #FF6952;
+    color: #FF6952;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 10px;
+    padding: 0 5px;
+}
+.list_word .state.read{
+    border: 1px solid #B8B8B8;
+    color: #B8B8B8;
+    
+}
+
+.lw_dflex {display: -webkit-box;/* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;/* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;/* TWEENER - IE 10 */
+    display: -webkit-flex;/* NEW - Chrome */
+    display: flex;/* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.lw_flex {-webkit-box-flex: 1;-moz-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;}
+.ellipsis{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.list_right{
+
+    text-align: right;
+    /* padding-right: 30rpx; */
+    font-size: 12px;
+    padding-top: 18rpx;
+    color: #999;
+    position: absolute;
+    right: 30rpx;
+}
+.left_text{
+   height: 70rpx;
+}
+
+
+.adc{
+  display: flex;
+  flex-flow: column nowrap
+}
+
+.line_item{
+  height: 144rpx;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  padding-top: 18rpx;
+  box-sizing: border-box;
 }
 
 

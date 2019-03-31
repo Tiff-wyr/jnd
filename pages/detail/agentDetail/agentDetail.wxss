@@ -146,7 +146,9 @@ font-weight:400;
 color:rgba(123,123,123,1);
 line-height:24rpx;
 }
-
+.per-ite{
+  padding-bottom: 100rpx
+}
 
 .bottom-detail{
 height:96rpx;

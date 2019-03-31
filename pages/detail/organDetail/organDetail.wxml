@@ -1,6 +1,6 @@
 <view class='agent'>
-
-  <view class='wrap'>
+<view class='per-ite'>
+   <view class='wrap'>
     <view style='display:flex'>
       <image src='{{organ.agencyLogo}}'></image>
       <view>
@@ -83,6 +83,11 @@
     </view>
   </view>
 
+
+</view>
+  
+
+
   <view class='bottom-detail'>
     <view class='look'>
       <view class='iconfont icon-xingxing1 phone-tu' bindtap='restoreClick' wx:if='{{!isCollect}}'></view>
@@ -94,7 +99,7 @@
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
-    <button bindtap='chat' data-phone='{{organ.phone}}'>立即沟通</button>
+    <button bindtap='chat' data-phone='{{organ.agencyName}}'>立即沟通</button>
 
   </view>
 

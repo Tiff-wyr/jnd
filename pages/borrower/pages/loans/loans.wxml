@@ -49,7 +49,7 @@
   <view class='tab-content'>
     <view wx-if='{{tab === "1"}}'>
 
-      <view wx:for='{{agentData}}' wx:if="{{agentData}}" wx:key='{{index}}' class='agent-item'>
+      <view wx:for='{{agentData}}' wx:if="{{agentData}}" wx:key='{{index}}' class='agent-item' bindtap='handleAgent' data-id='{{item.brokerId}}'>
         <image src='{{item.image}}'></image>
         <view class='between'>
           <view class='org-wrap'>
@@ -73,7 +73,7 @@
 
     <view wx-if='{{tab === "2"}}'>
 
-      <view wx:for='{{organData}}' wx:key='{{index}}' wx:if="{{organData}}"class='agent-item'>
+      <view wx:for='{{organData}}' wx:key='{{index}}' wx:if="{{organData}}"class='agent-item' bindtap='handleOrgan' data-id='{{item.agencyId}}'>
         <view style='display: flex; width: 100%'>
           <image src='{{item.agencyLogo}}'></image>
           <view style='width: 100%'>
@@ -94,7 +94,7 @@
     </view>
     <view wx-if='{{tab === "3"}}'>
 
-      <view wx:for='{{proData}}' wx:key='{{index}}' wx:if='{{proData}}' class='agent-item'>
+      <view wx:for='{{proData}}' wx:key='{{index}}' wx:if='{{proData}}' class='agent-item' bindtap='handlePro' data-id='{{item.productId}}'>
         <image src='{{item.productLogo}}'></image>
         <view>
           <view class='name'>{{item.productName}}</view>

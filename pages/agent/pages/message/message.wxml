@@ -1,7 +1,7 @@
 <!--pages/agent/message/message.wxml-->
 <import src="/components/tabBar/index.wxml" />
 <view class='mess'>
-
+  <!-- 
     <view>
       <view wx:for='{{arr}}' wx:key='{{index}}'>
       <view 
@@ -19,6 +19,48 @@
           </view>
       </view>
      </view>
+  </view> -->
+
+  <view wx:if="{{arr.length==0}}" class="noData">
+    <image src='/static/icon/kong/2.png' style='width: 194rpx; height: 180rpx;'></image>
+    <view class='noDataText'>暂时没有新消息</view>
+  </view>
+
+  
+  <view wx:else>
+    <view wx:for="{{ arr }}" wx:key="time" class="chat_list ">
+      <view class="list_left lw_dflex" bindtap="into_chatRoom" data-username="{{ item.username }}">
+        <view class="list_pic">
+          <view class="em-msgNum" wx:if="{{ item.unReadCount > 0 || item.unReadCount == '...' }}">{{ item.unReadCount }}</view>
+          <image src="https://lodis.oss-cn-beijing.aliyuncs.com/Static/images/qulaowu/applet/avatar_{{item.username}}.png"></image>
+        </view>
+        <view class="list_text lw_flex">
+          <view class=' lw_dflex line'>
+            <view class='line_item'>
+              <!-- <text class="list_user">{{item.nickname ? item.nickname : '用户未设置名称'}}</text> -->
+              <view class="list_user">{{item.nickname}}</view>
+              <rich-text class="list_word" wx:if="{{ item.msg.data[0].data }}" nodes="{{item.msg.data[0].data}}">
+                <text class='state' wx:if="{{ item.unReadCount > 0 || item.unReadCount == '...' }}">未读</text>
+                <text class='state read' wx:elif="{{ item.unReadCount == 0 || item.unReadCount != '...' }}">已读</text>
+              </rich-text>
+              <text class="list_word" wx:if="{{ item.msg.type == 'img' }}">
+             <text class='state' wx:if="{{ item.unReadCount > 0 || item.unReadCount == '...' }}" >未读</text>
+              <text class='state read' wx:elif="{{ item.unReadCount == 0 || item.unReadCount != '...' }}">已读</text> [图片]
+              </text>
+              <!-- <text class="list_word" wx:if="{{ item.msg.type == 'audio' }}"> 
+              <text class='state' wx:if="{{ item.unReadCount > 0 || item.unReadCount == '...' }}" >未读</text>
+              <text class='state read' wx:elif="{{ item.unReadCount == 0 || item.unReadCount != '...' }}" >已读</text>
+              [语音]</text> -->
+            </view>
+            <view class="list_right">
+              <text bindtap="into_chatRoom" data-username="{{ item.username }}">{{item.time}}</text>
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </view>
+
   </view>
 
 
