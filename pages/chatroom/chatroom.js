@@ -12,7 +12,7 @@ Page({
     let username = JSON.parse(options.username);
     this.setData({ username: username });
     wx.setNavigationBarTitle({
-      title: username.your
+      title: '消息'
     });
   },
 

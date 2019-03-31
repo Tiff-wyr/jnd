@@ -1,73 +1,13 @@
-/* .mess {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  padding: 42rpx 36rpx 0;
-  box-sizing: border-box;
-}
-
-
- .agent-item{
-  width: 100%;
-  height: 154rpx;
-  padding: 28rpx 0 28rpx 0;
-  box-sizing: border-box;
-  border-top: 1rpx solid #f0f0f0;
-  display: flex;
-}
- .agent-item image{
-  width: 98rpx;
-  height: 98rpx;
-  border-radius: 50%;
-  margin-right: 30rpx;
-}
- .agent-item .tab-top{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 18rpx;
-}
-.tab-bottom{
-    display: flex;
-  justify-content: space-between;
-}
-.tab-top .name{
-font-size:32rpx;
-font-family:PingFangSC-Regular;
-font-weight:400;
-color:rgba(69,69,69,1);
-line-height:32rpx;
-}
-.tab-top .time{
-font-size:24rpx;
-font-family:PingFangSC-Light;
-font-weight:300;
-color:rgba(192,192,192,1);
-line-height:32rpx;
-}
-.content{
-  width: 400rpx;
-  box-sizing: border-box;
-font-size:28rpx;
-font-family:PingFangSC-Regular;
-font-weight:400;
-color:rgba(69,69,69,1);
-line-height:28rpx;
-overflow: hidden;
-text-overflow:ellipsis;
-white-space:nowrap; 
-} */
-
-
-/* page{
-    background: #fff
-} */
 .list_left{
-  height: 144prx
+  height: 144prx;
+  display: flex
 }
 .list_left .line{
     padding-top: 10rpx;
-    /* padding-bottom: 10rpx; */
-    position: relative;
+    display: flex;
+    justify-content:space-around;
+    font-size: 24rpx;
+    flex: 1
 }
 .no_data{
     text-align: center
@@ -106,7 +46,7 @@ white-space:nowrap;
 	line-height: 26rpx;
 }
 .search text {
-	font-size: 12px;
+	font-size: 24rpx;
 	color: #CFCFCF;
 }
 .search_input view {
@@ -154,12 +94,10 @@ white-space:nowrap;
 }
 
 .list_text {
-	
-	/* margin-top: 16rpx; */
-	font-size: 14rpx;
+	flex: 1;
+	font-size: 4rpx;
     border-bottom: 1px solid #ececec;
     height: 144rpx;
-    /* padding-bottom: 8rpx; */
 }
 .list_pic {
 	position: relative;
@@ -188,67 +126,4 @@ white-space:nowrap;
 	font-size: 14px;
 	text-align: center;
 }
-.list_word {
-	height: 40rpx;
-	display: block;
-	color: #666666;
-	margin-top: 0;
-	overflow:hidden;
-  text-overflow: ellipsis;white-space: nowrap;
-  width: 550rpx;
-  font-size: 24rpx;
-  line-height: 33rpx;
-}
-.list_word .state{
-    border: 1px solid #FF6952;
-    color: #FF6952;
-    display: inline-block;
-    font-size: 12px;
-    margin-right: 10px;
-    padding: 0 5px;
-}
-.list_word .state.read{
-    border: 1px solid #B8B8B8;
-    color: #B8B8B8;
-    
-}
-
-.lw_dflex {display: -webkit-box;/* OLD - iOS 6-, Safari 3.1-6 */
-    display: -moz-box;/* OLD - Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox;/* TWEENER - IE 10 */
-    display: -webkit-flex;/* NEW - Chrome */
-    display: flex;/* NEW, Spec - Opera 12.1, Firefox 20+ */
-}
-.lw_flex {-webkit-box-flex: 1;-moz-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;}
-.ellipsis{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
-.list_right{
-
-    text-align: right;
-    /* padding-right: 30rpx; */
-    font-size: 12px;
-    padding-top: 18rpx;
-    color: #999;
-    position: absolute;
-    right: 30rpx;
-}
-.left_text{
-   height: 70rpx;
-}
-
-
-.adc{
-  display: flex;
-  flex-flow: column nowrap
-}
-
-.line_item{
-  height: 144rpx;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  padding-top: 18rpx;
-  box-sizing: border-box;
-}
-
-
 

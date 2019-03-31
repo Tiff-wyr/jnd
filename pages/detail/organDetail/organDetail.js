@@ -325,10 +325,7 @@ Page({
         me.setData({
           member: member
         });
-        wx.setStorage({
-          key: "member",
-          data: me.data.member
-        });
+
         if (!systemReady) {
           disp.fire("em.main.ready");
           systemReady = true;

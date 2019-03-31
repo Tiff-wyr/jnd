@@ -53,7 +53,7 @@
               <view class='iconfont icon-chakanshouji phone-tu'></view>
                <view class='lphone'>查看手机号</view>
           </view>
-          <button bindtap='chat' data-phone='{{user.borrowerName}}'>立即沟通</button>
+          <button bindtap='chat' data-phone='{{user.phone}}'>立即沟通</button>
       
       </view>
 

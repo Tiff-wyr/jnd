@@ -18,13 +18,11 @@ var tt;
 wx.clientReceiptt = function (data) {
     console.log("已读回执")
     onfire.fire('clientReceiptt');
-
 };
 wx.serverReceiptt = function (data) {
     //onfire.un('serverReceiptt');
     console.log("服务器已发送")
     onfire.fire('serverReceiptt');
-
 };
 let chatIm = {
     grant_type: "password",

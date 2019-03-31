@@ -1,31 +1,18 @@
-// pages/agent/message/message.js
+// // pages/agent/message/message.js
 const app = getApp()
 var template = require('../../../../components/tabBar/index.js');
 let disp = require("../../../../utils/broadcast");
+let { getNowFormatDate } = require("../../../../utils/common.js")
+let WebIM = require("../../../../utils/WebIM.js")["default"];
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    tab: '1',
-
     yourname: "",
     unReadSpot: false,
     arr: []
   },
-  handlerTabClick(e) {
-    let tab = e.currentTarget.dataset.id
-    this.setData({
-      tab
-    })
-  },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    template.tabbar("tabBar", 2, this, app.globalData.userType)//0表示第一个tabbar
+  onLoad() {
+    template.tabbar("tabBar", 2, this, app.globalData.userType)
     let me = this;
     disp.on("em.xmpp.unreadspot", function (count) {
       me.setData({
@@ -34,8 +21,6 @@ Page({
       });
     });
   },
-
-
   getChatList() {
     var array = [];
     var member = wx.getStorageSync("member");
@@ -56,79 +41,20 @@ Page({
     console.log(array)
     return array;
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     this.setData({
       arr: this.getChatList(),
       unReadSpot: getApp().globalData.unReadSpot,
     });
   },
-
-
-
-
-
-
-
-
-
-
   into_chatRoom: function (event) {
-    console.log(event)
     var my = wx.getStorageSync("myUsername");
     var nameList = {
       myName: my,
-      your: event.currentTarget.dataset.phone
+      your: event.currentTarget.dataset.username
     };
     wx.navigateTo({
       url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
     });
   },
-
-
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+});

@@ -60,7 +60,7 @@ Page({
 
             wx.setStorage({
               key: 'myUsername',
-              data: res.data.data.name
+              data: res.data.data.phone
             });
             getApp().conn.open({
               apiUrl: WebIM.config.apiURL,
@@ -83,7 +83,7 @@ Page({
 
             wx.setStorage({
               key: 'myUsername',
-              data: res.data.data.name
+              data: res.data.data.phone
             });
             getApp().conn.open({
               apiUrl: WebIM.config.apiURL,
@@ -106,7 +106,7 @@ Page({
 
             wx.setStorage({
               key: 'myUsername',
-              data: res.data.data.name
+              data: res.data.data.phone
             });
             getApp().conn.open({
               apiUrl: WebIM.config.apiURL,

@@ -217,12 +217,10 @@ wx.navigateTo({
        optionId:options.id
      })
 
- 
     if (app.globalData.userInfo){
       this.setData({
         userId: app.globalData.userInfo.id,
       })
-
       this.collectPan(options.id)
     }
 
@@ -238,9 +236,6 @@ wx.navigateTo({
         unReadSpot: count > 0
       });
     });
-
-
-
   },
 
   /**
@@ -272,10 +267,6 @@ wx.navigateTo({
         }
         me.setData({
           member: member
-        });
-        wx.setStorage({
-          key: "member",
-          data: me.data.member
         });
         if (!systemReady) {
           disp.fire("em.main.ready");
