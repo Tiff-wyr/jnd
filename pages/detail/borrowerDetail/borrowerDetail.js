@@ -14,15 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user: {
-      borLogo: '',
-      borrowerName: '',
-      phone: '',
-      address: '',
-      borrowerAge: '',
-      borrowerJob: '',
-      income: '',
-    },
+    user: {},
     loanData: {},
     member: [],
     isShow: false,
@@ -31,18 +23,18 @@ Page({
 
     myName: "",
     unReadSpot: false,
-    phone: ''
+    phone: '******'
   },
 
 
   getDetail(id) {
     fetch.get(`/userBorrower/selectUserBorrowerById/${id}`).then(res => {
-
       this.setData({
-        user: res.data
+        user: res.data,
+        phone:res.data.phone
+      }, () => {
+        this.check()
       })
-
-      console.log('借款人详情', res.data)
     })
   },
 
@@ -52,7 +44,7 @@ Page({
         isMask: true
       })
     } else {
-
+        console.log('usr',app.globalData.userInfo.roleId)
         if(app.globalData.userInfo.roleId === 2){
       //经纪人
           fetch.get(`/userBroker/checkIsVipOrCount/${app.globalData.userInfo.phone}`).then(res=>{
@@ -79,20 +71,26 @@ Page({
           })
         }else{
         //机构
-
-
-        }
-
-
-  
-        if (app.globalData.userType == 'organ') {
-          wx.navigateTo({
-            url: '/pages/organ/pages/member/member',
+          fetch.get(`vipClick/getClickByAgencyPhone/${app.globalData.userInfo.phone}`).then(res=>{
+            if(res.data.status === 200){
+              this.setData({
+                phone: this.data.user.phone
+              })
+              fetch.get(`vipClick/reduceCount/${app.globalData.userInfo.phone}`).then(res=>{
+                console.log('减少次数', res)
+              })
+            }else{
+              wx.showToast({
+                title: '您不是会员',
+                duration: 2000
+              })
+              wx.navigateTo({
+                url: '/pages/organ/pages/member/member',
+              })
+            }
           })
 
         }
-
-
     }
   },
 
@@ -100,7 +98,7 @@ Page({
     this.setData({
       isMask: false
     })
-    this.getDetail(this.data.id)
+
   },
 
   //立即沟通
@@ -154,11 +152,6 @@ Page({
       id: options.id
     })
     this.getLoan()
-    this.getDetail(options.id)
-
-
-
-
 
     let that = this
     disp.on("em.xmpp.unreadspot", function(count) {
@@ -181,6 +174,9 @@ Page({
         }
       }
     })
+    // this.getDetail(options.id)
+    // this.check()
+
 
   },
 
@@ -191,22 +187,16 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    this.setData({
-      unReadSpot: getApp().globalData.unReadSpot
-    });
-    //  this.getRoster();
+  check(){
     if (app.globalData.userInfo.name) {
-      let that = this
+      const that = this
       if (app.globalData.userInfo.roleId === 2) {
         //经纪人
         fetch.get(`/brokerResource/getBrokerResource/${app.globalData.userInfo.id}/${that.data.id}`).then(res => {
-
+            console.log('ddddddddddddd',res)
           if (res.data === 1) {
             //看过，该手机号展现
+            console.log('kan', res)
             that.setData({
               phone: that.data.user.phone
             })
@@ -225,7 +215,7 @@ Page({
         }).then(res => {
           console.log('ss', res)
           if (res.data.status === 200) {
-
+            console.log('kan', res)
             //看过，该手机号展现
             that.setData({
               phone: that.data.user.phone
@@ -254,6 +244,17 @@ Page({
         }
       })
     }
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.setData({
+      unReadSpot: getApp().globalData.unReadSpot
+    });
+    //  this.getRoster();
+    this.getDetail(this.data.id)
   },
 
   getRoster() {
