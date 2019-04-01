@@ -17,12 +17,12 @@
 
      <rich-text class="msg-text" nodes="{{ item.data }}" style="float:left; margin-top:2px;"></rich-text>
 </template>
-<template name="emoji">
+<!-- <template name="emoji">
 	<image
 		class="avatar"
 		src="{{ '../../../images/faces/' + item.data }}"
 		style="width:25px; height:25px; margin:0 0 2px 0; float:left;" />
-</template>
+</template> -->
 <template name="img">
 	<image
 		class="avatar"
