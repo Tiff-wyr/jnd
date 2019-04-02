@@ -314,7 +314,7 @@ Page({
       this.setData({
         ages: res.data
       })
-      console.log(this.data.ages)
+  
     })
   },
   getJob() {
@@ -322,7 +322,7 @@ Page({
       this.setData({
         jobs: res.data
       })
-      console.log(this.data.jobs)
+   
     })
   },
 
@@ -331,7 +331,7 @@ Page({
       this.setData({
         incomes: res.data
       })
-      console.log(this.data.incomes)
+  
     })
   },
 
@@ -374,7 +374,7 @@ Page({
 
   agentApply(){
 
-    fetch.post(`/order/saveLoginOrder`,{
+    fetch.post(`/orderAll/saveLoginOrder`,{
 
       brokerId:this.data.agentId,
       borrowerName:this.data.name,
@@ -411,7 +411,7 @@ Page({
   },
 
   organApply(){
-    fetch.post(`/orderAgency/createOrderAgency`, {
+    fetch.post(`/orderAll/saveLoginOrder`, {
 
       agencyId: this.data.organId,
       borrowerName: this.data.name,
@@ -425,7 +425,7 @@ Page({
       age: this.data.ageid,
       job: this.data.jobId,
       income: this.data.incomeId,
-      borId: this.data.userId,
+      borrowerId: this.data.userId,
       phone: this.data.phone,
       password: this.data.code
 

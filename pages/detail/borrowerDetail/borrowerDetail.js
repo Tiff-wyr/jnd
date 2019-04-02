@@ -23,7 +23,7 @@ Page({
 
     myName: "",
     unReadSpot: false,
-    phone: '******'
+    phone: ''
   },
 
 
@@ -130,10 +130,10 @@ Page({
     }
   },
   getLoan() {
-    fetch.get(`/orderPublic/getByBorId/${this.data.id}`).then(res => {
+    fetch.get(`/orderAll/getOrderByBor/${this.data.id}`).then(res => {
       console.log('ssss', res.data)
       this.setData({
-        loanData: res.data.data
+        loanData: res.data
       })
     })
   },

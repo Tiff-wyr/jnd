@@ -65,13 +65,13 @@ Page({
     })
   },
   getVictory(id){
-    fetch.get(`/orderAgency/getAgencySuccessOrder/${id}`).then(res=>{
+    fetch.get(`/orderAll/getAgencySuccessOrder/${id}`).then(res=>{
       console.log('v',res)
       this.setData({
         victory : res.data
       })
 
-      console.log('机构成功案例', res.data)
+      console.log('机构成功案例', res)
     })
   },
 

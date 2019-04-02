@@ -40,11 +40,13 @@
 
 
 
-  <view wx:if="{{tableData.length === 0}}" class='kong'>
-    暂无数据~
+
+  <view class='kong' wx:if="{{tableData.length === 0}}">
+    <image src='/static/icon/kong/3.png'></image>
+    <view class='accord'>无搜索结果</view>
   </view>
 
-  <view wx:else>
+  <view>
   <view class='mb100'>
             <view wx:for="{{tableData}}" wx:key="{{index}}" bindtap='handlerClickDetail' class='borr-bottom' data-id='{{item.borrowerId}}'>
       <view class='wrap'>

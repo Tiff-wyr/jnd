@@ -39,10 +39,10 @@
             </view>
 
             <view class='age-wrap'>
-                <view class='age'>贷款金额：{{loanData.loanAmount}}万元</view>
-                <view class='job'>贷款类型：</view>
+                <view class='age'>贷款金额：{{loanData.loanAmount}}</view>
+                <view class='job'>贷款类型：{{loanData.loanType}}</view>
             </view> 
-            <view class='money'>发布时间：{{loanData.createTime}}</view>
+            <view class='money'>发布时间：{{loanData.orderTime}}</view>
 
          </view> 
 

@@ -1,6 +1,10 @@
 // pages/organ/productDetail/productDetail.js
 const app = getApp()
 import { fetch } from "../../../utils/axios.js"
+
+let WebIM = require("../../../utils/WebIM")["default"];
+let disp = require("../../../utils/broadcast");
+let systemReady = false;
 Page({
 
   /**
@@ -8,12 +12,15 @@ Page({
    */
   data: {
     product:{},
-    isMask:false,
+
      id:'',
     productBelong:'',
     organMess:{},
     userId:'',
     isCollect: false,
+    myName: '',
+    unReadSpot: false,
+    member: [],
   },
   //立即沟通
   chat(event) {
@@ -90,17 +97,7 @@ Page({
      
     })
   },
-  look(){
-    this.setData({
-      isMask : true
-    })
-  },
-  cancel() {
-    this.setData({
-      isMask: false
-    })
-    this.getDetail(this.data.id)
-  },
+
 
   //收藏
   restoreClick() {
@@ -246,13 +243,20 @@ Page({
       id:options.id
     })
     
-    if (app.globalData.userInfo) {
+    if (app.globalData.userInfo.name) {
       this.setData({
         userId: app.globalData.userInfo.id,
+        myName: app.globalData.userInfo.phone
       })
     }
     this.getDetail(options.id)
     this.collectPan()
+    let that = this
+    disp.on("em.xmpp.unreadspot", function (count) {
+      that.setData({
+        unReadSpot: count > 0
+      });
+    });
   },
 
   /**
@@ -266,8 +270,38 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      unReadSpot: getApp().globalData.unReadSpot
+    });
+    this.getRoster();
   },
+  getRoster() {
+    let me = this;
+    let rosters = {
+      success(roster) {
+        var member = [];
+        for (let i = 0; i < roster.length; i++) {
+          if (roster[i].subscription == "both") {
+            member.push(roster[i]);
+          }
+        }
+        me.setData({
+          member: member
+        });
+
+        if (!systemReady) {
+          disp.fire("em.main.ready");
+          systemReady = true;
+        }
+      },
+      error(err) {
+        console.log("[main:getRoster]", err);
+      }
+    };
+    // WebIM.conn.setPresence()
+    WebIM.conn.getRoster(rosters);
+  },
+
 
   /**
    * 生命周期函数--监听页面隐藏

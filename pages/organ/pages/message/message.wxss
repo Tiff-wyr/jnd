@@ -124,9 +124,6 @@ margin-top: 100rpx
 	/* border: 1px solid rgb(0,186,110); */
 }
 .em-msgNum {
-	position: absolute;
-	right: -10px;
-	top: -10px;
 	width: 20px;
 	height: 20px;
 	border-radius: 10px;
@@ -135,5 +132,7 @@ margin-top: 100rpx
 	line-height: 20px;
 	font-size: 14px;
 	text-align: center;
+  margin-left:80rpx;
+   margin-top:20rpx;
 }
 

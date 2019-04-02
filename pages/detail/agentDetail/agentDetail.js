@@ -32,7 +32,7 @@ Page({
   },
 
   getVictory(id){
-    fetch.get(`/order/getTopSixOrderByBrokerId/${id}`).then(res => {
+    fetch.get(`/orderAll/getTopSixOrderByBrokerId/${id}`).then(res => {
       this.setData({
         victory: res.data
       })

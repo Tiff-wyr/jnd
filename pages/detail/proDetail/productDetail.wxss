@@ -180,6 +180,7 @@ font-family:PingFangSC-Regular;
 font-weight:400;
 color:rgba(255,255,255,1);
 line-height:96rpx;
+border-radius: 0rpx;
 }
 
 .belong{
