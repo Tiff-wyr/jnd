@@ -269,6 +269,10 @@ Page({
     this.setData({
       optionId: options.id
     })
+    //获得 机构详情信息
+    this.getDetail(this.data.optionId)
+    this.getVictory(this.data.optionId)
+    this.getPro(this.data.optionId)
 
     if (app.globalData.userInfo) {
       this.setData({
@@ -308,10 +312,7 @@ Page({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
-    //获得 机构详情信息
-    this.getDetail(this.data.optionId)
-    this.getVictory(this.data.optionId)
-    this.getPro(this.data.optionId)
+
 
     this.getRoster();
   },

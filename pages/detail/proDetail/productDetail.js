@@ -28,12 +28,7 @@ Page({
       let my = this.data.myName
       let your = event.target.dataset.phone
       let yourName = event.target.dataset.name
-      // var nameList = {
-      //   myName: this.data.myName,
-      //   my:app.globalData.userInfo.name,
-      //   your: event.target.dataset.phone,
-      //   yourName: event.target.dataset.name
-      // };
+
       wx.navigateTo({
         url: `/pages/chatroom/chatroom?myName=${my}&your=${your}&yourName=${yourName}`
       });
@@ -247,6 +242,8 @@ Page({
     this.setData({
       id:options.id
     })
+
+    this.getDetail(this.data.id)
     
     if (app.globalData.userInfo.name) {
       this.setData({
@@ -278,7 +275,7 @@ Page({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
-    this.getDetail(this.data.id)
+
     this.getRoster();
   },
   getRoster() {

@@ -53,7 +53,7 @@
 		</view>
 		<view class="main" class="{{ item.style }}" >
 			<image wx:if="{{item.style === 'self'}}" class="avatar"src="{{image === '' ? '/static/images/number.png' : image}}"/>
-      <image wx:else class="avatar"src="http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.jpg"/>
+      <image wx:else class="avatar"src="http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.png"/>
 			<view class="msg">
 				<view wx:if="{{ item.msg.type == 'img' || item.msg.type == 'video' }}">
 					<template is="{{ item.msg.type }}" data="{{ item }}"/>

@@ -12,9 +12,8 @@
         <view class="list_left lw_dflex" bindtap="into_chatRoom" data-phone="{{ item.username }}" data-name="{{item.nickname}}">
           <view class="list_pic">
 
-<image class='header-image' wx:if="http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.jpg" src='http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.jpg'></image>
-<image class='header-image' wx:elif="http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.png" src='http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.png'></image>
-<image class='header-image' wx:else src='http://jnd-image.oss-cn-beijing.aliyuncs.com/image/pic.png'></image>
+<image class='header-image'  src='http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.png'></image>
+
           </view>
           <view class="list_text lw_flex">
             <view class=' lw_dflex line'>

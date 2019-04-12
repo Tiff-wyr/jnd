@@ -218,6 +218,10 @@ wx.navigateTo({
      this.setData({
        optionId:options.id
      })
+    //经纪人详情页
+    this.getDetail(this.data.optionId)
+    //经纪人成功案例
+    this.getVictory(this.data.optionId)
 
     if (app.globalData.userInfo){
       this.setData({
@@ -254,10 +258,7 @@ wx.navigateTo({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
-    //经纪人详情页
-    this.getDetail(this.data.optionId)
-    //经纪人成功案例
-    this.getVictory(this.data.optionId)
+
     
     this.getRoster();
   },
