@@ -26,6 +26,8 @@ Page({
         fee: 3,
       }
     ],
+    isKai: false,
+
     src1:'/static/icon/1.png',
     src2: '/static/icon/2.png',
     src3: '/static/icon/3.png',
@@ -39,7 +41,9 @@ Page({
 
   pay_money(event) {
 
-    console.log('钱', event.currentTarget.dataset.id)
+  this.setData({
+    isKai:true
+  })
     this.setData({
       money: event.currentTarget.dataset.id
     })
@@ -47,10 +51,14 @@ Page({
     var that = this;
     wx.login({
       success: function (res) {
-        console.log("获得登录code\t\t" + res.code)
+   
         that.getOpenId(res.code);
       }
     });
+
+    setTimeout(() => {
+      isKai: false
+    }, 2000)
   },
 
   //获取openid
@@ -66,11 +74,11 @@ Page({
       data: { "code": code },
       success: function (res) {
         var openId = res.data.openid;
-        console.log("获得openId\t\t" + openId);
+       
 
         if (that.data.money === 1) {
           that.xiaDan(openId);
-        }else if(that.data.money === 20){
+        }else if(that.data.money === 2){
           that.xiaDanS(openId);
         }else{
           that.xiaDanT(openId);
@@ -96,9 +104,9 @@ Page({
          "total_fee": 1,
       },
       success: function (res) {
-        console.log('成功',res)
+     
         var prepay_id = res.data.prepay_id
-        console.log("统一下单返回 prepay_id-->\t\t" + prepay_id);
+    
 
         that.sign(prepay_id);
       }
@@ -122,9 +130,9 @@ Page({
         "total_fee": 2,
       },
       success: function (res) {
-        console.log('成功', res)
+      
         var prepay_id = res.data.prepay_id
-        console.log("统一下单返回 prepay_id-->\t\t" + prepay_id);
+      
 
         that.sign(prepay_id);
       }
@@ -148,9 +156,9 @@ Page({
         "total_fee": 3,
       },
       success: function (res) {
-        console.log('成功', res)
+       
         var prepay_id = res.data.prepay_id
-        console.log("统一下单返回 prepay_id-->\t\t" + prepay_id);
+     
 
         that.sign(prepay_id);
       }
@@ -170,7 +178,7 @@ Page({
       },
       data: { "repay_id": prepay_id },
       success: function (res) {
-        console.log("签名方法中repay_id\t\t" + res.data);
+   
         that.requestPayment(res.data);
       }
     })
@@ -184,9 +192,15 @@ Page({
       package: obj.package,
       signType: obj.signType,
       paySign: obj.paySign,
-      success: function (res) { console.log("success") },
-      fail: function (res) { console.log("fail") },
-      complete: function (res) { console.log("complete") },
+      success: function (res) { 
+        this.panMem()
+        },
+      // fail: function (res) {
+       
+      //     },
+      // complete: function (res) { 
+   
+      //    },
     })
   },
 
@@ -195,6 +209,19 @@ Page({
     wx.navigateTo({
       url: '/pages/login/passLogin/passLogin',
     })
+  },
+
+  panMem() {
+    let that =this
+    if (app.globalData.userInfo.vip === 1) {
+      that.setData({
+        isMem: true,
+      })
+    } else {
+      that.setData({
+        isMem: false
+      })
+    }
   },
 
   /**
@@ -206,20 +233,9 @@ Page({
     that.setData({
       personData: app.globalData.userInfo
     })
-
-    if (app.globalData.userInfo.vip === 1) {
-      that.setData({
-        isMem: true
-      })
-    } else {
-      that.setData({
-        isMem: false
-      })
-    }
-
     wx.getSystemInfo({
       success(res) {
-        console.log('手机类型',res.platform)
+      
         if(res.platform === 'android'){
           that.setData({
             isShow: true
@@ -231,6 +247,7 @@ Page({
         }
       }
     })
+    that.panMem()
   },
 
   /**
@@ -244,7 +261,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.panMem()
   },
 
   /**

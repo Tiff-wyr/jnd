@@ -22,67 +22,11 @@ color:rgba(74,74,74,1);
 line-height:32rpx;
 margin-top: 100rpx
 }
-.search {
-	justify-content:space-around;
-}
-.search_input {
-	justify-content:space-around;	
-}
-.search view, .search_input view {
-	height: 28px;
-	line-height: 40rpx;
-	background-color: #ffffff;
-	border-radius: 5rpx;
-	text-align: center;
-	display: flex;
-	align-items: center;
-}
-.search view {
-	width: 96%;
-	justify-content:center;
-}
-.search image {
-	display: block;
-	width: 5%;
-	height: 50%;
-}
-.search_input view {
-	padding-left: 10rpx;
-}
-.search icon,.search_input icon {
-	display: inline-block;
-	margin: 13px 4px 0 0;
-	height: 26rpx;
-	line-height: 26rpx;
-}
-.search text {
-	font-size: 24rpx;
-	color: #CFCFCF;
-}
-.search_input view {
-	width: 79%;
-	text-align: left;
-}
-.search_input text {
-	display: inline-block;
-	width: 40px;
-	height: 30px;
-	line-height: 30px;
-	font-size: 16px;
-	color:#7B68EE;
-}
-.search_input input {
-	font-size: 14px;
-	width: 90%;
-}
-.mask {
-	background-color: black;
-	opacity: 0.4;
-	position: absolute;
-	top: 40px;
-	left: 0;
-	right: 0;
-	bottom: 0;
+.content{
+  width: 200rpx;
+  height: 30rpx;
+    line-height: 30rpx;
+  overflow: hidden
 }
 .chat_list {
 	width: 100%;
@@ -96,7 +40,6 @@ margin-top: 100rpx
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    width: 100%;
     display: inline-block;
     margin-bottom: 6rpx;
     color: #333333;
@@ -107,7 +50,7 @@ margin-top: 100rpx
 	flex: 1;
 	font-size: 4rpx;
     border-bottom: 1px solid #ececec;
-    height: 144rpx;
+    height: 130rpx;
 }
 .list_pic {
 	position: relative;

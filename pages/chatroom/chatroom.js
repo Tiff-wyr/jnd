@@ -9,10 +9,20 @@ Page({
 
   // options = 系统传入的 url 参数
   onLoad(options) {
-    let username = JSON.parse(options.username);
+    console.log('aaaa', options)
+    let username = {
+      myName: options.myName,
+      your: options.your
+    }
+
+    // let username = JSON.parse(options.username);
+   
+    let userType = options.usertype
+    wx.setStorageSync("userType", userType);
+    wx.setStorageSync("toUserID", options.yourName);
     this.setData({ username: username });
     wx.setNavigationBarTitle({
-      title: '消息'
+      title: "消息"
     });
   },
 

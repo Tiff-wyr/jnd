@@ -27,7 +27,7 @@
   <view class='person' bindtap='handlerClickPer'>
     <view class='per-wrap'>
       <view class='iconfont icon-fenzucopy size'></view>
-      <view class='text1'>个人消息</view>
+      <view class='text1'>个人信息</view>
     </view>
     <view class='arrow-right'></view>
   </view>

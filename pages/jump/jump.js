@@ -1,54 +1,27 @@
-// pages/organ/productCenter/productCenter.js
-const app = getApp()
-import { fetch } from "../../../../utils/axios.js"
+// pages/jump/jump.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tableData:[],
-    id: '',
-    page:1,
-    size:10,
-    isMask:false
+    phone:''
   },
-  getData(){
-    fetch.get(`/product/selectProductByAgency/${this.data.id}/${this.data.page}/${this.data.size}`).then(res=>{
-      this.setData({
-        tableData:res.data.list
-      })
-  
-    })
-  },
-  look() {
-    this.setData({
-      isMask: true
-    })
-  },
-  cancel() {
-    this.setData({
-      isMask: false
-    })
-    this.getData()
-  },
-
-  jumpPro(event){
-    
-    wx.navigateTo({
-      url: `/pages/detail/productDetail/productDetail?id=${event.currentTarget.dataset.id}`,
-    })
-
+  login(){
+   wx.redirectTo({
+     url: '/pages/login/passLogin/passLogin',
+   })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     this.setData({
-      id: app.globalData.userInfo.id
+      phone:options.phone
     })
-    this.getData()
+
   },
 
   /**

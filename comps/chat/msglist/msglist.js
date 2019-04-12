@@ -38,9 +38,7 @@ Component({
         followJobId:"",
         followJobName:"",
         sparePushCount:"",
-        
-
-
+        image:''
     },
     methods: {
         normalScroll() {
@@ -51,27 +49,33 @@ Component({
         sendMessage: function () {
             var len = wx.getStorageSync(wx.getStorageSync("currentChat")).length //遍历的数组的长度
             this.setData({
-                scrollTop: 1000 * len  // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
+                scrollTop: 1000*len  // 这里我们的单对话区域最高1000，取了最大值，应该有方法取到精确的
             });
         },
         //获取用户信息
         getChatBC() {
-            let _this=this
-            invoke.settingChatBC({ chatUrserId: wx.getStorageSync("toUserID") , chatType: wx.getStorageSync("userType") })
-                .then((res) => {
-                    _this.setData(
-                       {
-                           otherNickName: res.data.otherNickName.length > 10 ? res.data.otherNickName.substring(0,10) + '...' : res.data.otherNickName,
-                           otherAvatar: res.data.otherAvatar,
-                           followJobId: res.data.followJobId,
-                           followJobName: res.data.followJobName,
-                            sparePushCount: res.data.sparePushCount,
-                            userRole: wx.getStorageSync("myUsername") == res.data.bUser?1:0,
-                            chatClass: wx.getStorageSync("myUsername") == res.data.bUser?"":" .nomoll"
-                       }
-                   )
-                    wx.setStorageSync("nickName", res.data.otherNickName)
-                })
+          console.log('获取用户信息')
+
+        let nickname =  wx.getStorageSync("toUserID") 
+          wx.setStorageSync("nickName", nickname)
+   
+            // let _this=this
+            // invoke.settingChatBC({ chatUrserId: wx.getStorageSync("toUserID") , chatType: wx.getStorageSync("userType") })
+            //     .then((res) => {
+            //       console.log('获取用户信息', res)
+            //         _this.setData(
+            //            {
+            //                otherNickName: res.data.otherNickName.length > 10 ? res.data.otherNickName.substring(0,10) + '...' : res.data.otherNickName,
+            //                otherAvatar: res.data.otherAvatar,
+            //                followJobId: res.data.followJobId,
+            //                followJobName: res.data.followJobName,
+            //                 sparePushCount: res.data.sparePushCount,
+            //                     userRole: wx.getStorageSync("myUsername") == res.data.bUser?1:0,
+            //                 chatClass: wx.getStorageSync("myUsername") == res.data.bUser?"":" .nomoll"
+            //            }
+            //        )
+            //         wx.setStorageSync("nickName", res.data.otherNickName)
+            //     })
 
         },
         //立即推送
@@ -147,12 +151,12 @@ Component({
             this.triggerEvent("msglistTap", null, { bubbles: true });
         },
 
-        previewImage(event) {
-            var url = event.target.dataset.url;
-            wx.previewImage({
-                urls: [url]		// 需要预览的图片 http 链接列表
-            });
-        },
+        // previewImage(event) {
+        //     var url = event.target.dataset.url;
+        //     wx.previewImage({
+        //         urls: [url]		// 需要预览的图片 http 链接列表
+        //     });
+        // },
         enter: function (event) {
             // wx.navigateTo({
             //     url: "/pages/chat/chat"
@@ -176,19 +180,29 @@ Component({
             //if(!historyChatMsgs.length) return;
             wx.setStorageSync("rendered_" + sessionKey, historyChatMsgs);
 
-            wx.setStorage({
-                key: "rendered_" + sessionKey,
-                data: historyChatMsgs,
-                success:function(){
-                    _this.setData({
-                        chatMsg: historyChatMsgs
-                    });
-                }
-            })
+          wx.setStorage({
+            key: "rendered_" + sessionKey,
+            data: historyChatMsgs,
+            success: function () {
+              _this.setData({
+                chatMsg: historyChatMsgs
+              });
+              console.log(_this.data.chatMsg)
+            }
+          })
+     
             //超过服务器回执时间
             clearTimeout(failTimer)
             failTimer=setTimeout(function(){
                 console.log("发送失败")
+              //   wx.showToast({
+              //     title: '发送失败',
+              //     icon:'none'
+              //   })
+              // wx.redirectTo({
+              //   url: "/pages/login/passLogin/passLogin"
+              // });
+
                 var historyChatMsgs = wx.getStorageSync(wx.getStorageSync("currentChat")) || [];
                 let index = parseInt(historyChatMsgs.length) - 1
                 if (historyChatMsgs.length == 0) {
@@ -197,10 +211,11 @@ Component({
                 else {
                     if (historyChatMsgs[parseInt(historyChatMsgs.length) - 1].msgState == 0) {
                        historyChatMsgs[parseInt(historyChatMsgs.length) - 1].msgState = 4
-                       //发消息失败退出登录
-                        // wx.redirectTo({
-                        //     url: "../login/login"
-                        // });
+                   //    发消息失败退出登录
+
+                      // wx.redirectTo({
+                      //   url: "/pages/login/passLogin/passLogin"
+                      // });
                     }
                 }
                 _this.setData({
@@ -292,9 +307,10 @@ Component({
             wx.setStorageSync(sessionKey, null);
         },
     },
-
     // lifetimes
-    created() { },
+    created() { 
+   
+    },
     attached() {
         this.__visibility__ = true;
     },
@@ -303,15 +319,22 @@ Component({
         this.__visibility__ = false;
     },
     ready() {
+
+      if (app.globalData.userInfo) {
+        this.setData({
+          image: app.globalData.userInfo.image
+        })
+      }
         app.globalData.chat = this
         let me = this;
         let username = this.data.username;
         let myUsername = wx.getStorageSync("myUsername");
-        let sessionKey = username.your + myUsername;
+        let sessionKey = username.your+myUsername;
+      console.log('ssss',sessionKey)
         let chatMsg = wx.getStorageSync(sessionKey) || [];
         let currentChat = "rendered_" + sessionKey
-        this.renderMsg(null, null, chatMsg, sessionKey);
-        this.getChatBC()
+      me.renderMsg(null, null, chatMsg, sessionKey);
+      me.getChatBC()
         wx.setStorageSync("currentChat", currentChat);
         msgStorage.on("newChatMsg", function (renderableMsg, type, curChatMsg) {
             if (!me.__visibility__) return;

@@ -9,9 +9,9 @@
     <input class='input' placeholder-class='input_placeholder' bindblur='handlePassword' password='true' placeholder='输入密码'></input>
   </view>
 
-  <button bindtap='login'>登   陆</button>
+  <button bindtap='login'>登   录</button>
   <view class='bottom-pass'>
        <view class='register' bindtap='freeRe'>免费注册</view>
-          <view class='register' bindtap='msgLogin'>短信登陆</view>
+          <view class='register' bindtap='msgLogin'>短信登录</view>
   </view>
 </view>

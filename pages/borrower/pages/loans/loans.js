@@ -65,7 +65,7 @@ Page({
       this.setData({
         array: res.data
       })
-      console.log('city', res.data)
+    
     })
   },
 
@@ -111,9 +111,10 @@ Page({
    this.setData({
      searchContent : con
    })
+    this.getSorl(this.data.idSearch)
 
-   
   },
+  
 //搜索内容
   bindPickerSearch(e){
     let indexSearch = e.detail.value
@@ -130,7 +131,7 @@ Page({
     if (this.data.searchContent){
       if (id === 1) {
         //经纪人
-        fetch.get(`/solr/getPageUserBroker?q=${this.data.searchContent}&page=1&size=1000`).then(res => {
+        fetch.get(`/solr/getPageUserBrokerNoHighLight?q=${this.data.searchContent}&page=1&size=10000`).then(res => {
           console.log('经纪人search', res.data.data)
 
           this.setData({
@@ -142,7 +143,7 @@ Page({
         })
       } else if (id === 2) {
         //机构
-        fetch.get(`/solr/getPageUserAgency?q=${this.data.searchContent}&page=1&size=1000`).then(res => {
+        fetch.get(`/solr/getPageUserAgencyNoHighLight?q=${this.data.searchContent}&page=1&size=10000`).then(res => {
           console.log('机构人search', res.data.data)
           this.setData({
             tab : "2"
@@ -153,7 +154,7 @@ Page({
         })
       } else {
         //产品
-        fetch.get(`/solr/getPageProduct?q=${this.data.searchContent}&page=1&size=1000`).then(res => {
+        fetch.get(`/solr/getPageProductNoHighLight?q=${this.data.searchContent}&page=1&size=1000`).then(res => {
           console.log('产品search', res.data.data)
 
           this.setData({
@@ -292,7 +293,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(options) {
+     return {
+       imageUrl:'/static/icon/tu.png',
+       title:'为您的贷款之路保驾护航'
+     }
   }
 })

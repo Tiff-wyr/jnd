@@ -26,8 +26,8 @@ function tabbarinit(type) {
         "current": 0,
         "pagePath": "/pages/agent/pages/mine/mine",
         "text": "我的",
-        "iconPath": "/static/icon/pic/44.png",
-        "selectedIconPath": "/static/icon/pic/4.png"
+        "iconPath": "/static/icon/pic/99.png",
+        "selectedIconPath": "/static/icon/pic/9.png"
       }
     ]
   }
@@ -58,8 +58,8 @@ function tabbarinit(type) {
         "current": 0,
         "pagePath": "/pages/organ/pages/mine/mine",
         "text": "我的",
-        "iconPath": "/static/icon/pic/44.png",
-        "selectedIconPath": "/static/icon/pic/4.png"
+        "iconPath": "/static/icon/pic/99.png",
+        "selectedIconPath": "/static/icon/pic/9.png"
       }
     ]
   }
@@ -91,8 +91,8 @@ function tabbarinit(type) {
         "current": 0,
         "pagePath": "/pages/borrower/pages/borrowerMine/borrowerMine",
         "text": "我的",
-        "iconPath": "/static/icon/pic/44.png",
-        "selectedIconPath": "/static/icon/pic/4.png"
+        "iconPath": "/static/icon/pic/99.png",
+        "selectedIconPath": "/static/icon/pic/9.png"
       }
     ]
   }

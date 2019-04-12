@@ -22,12 +22,12 @@
           <view class='item-text'>{{item.time}}</view>
           <view class='item-line'></view>
           <view class='item-money'>￥{{item.money}}</view>
-          <button class='vip-btn' bindtap="pay_money" data-id='{{item.fee}}'>开通</button>
+          <button class='vip-btn' bindtap="pay_money" disabled='{{isKai}}' data-id='{{item.fee}}'>开通</button>
         </view>
         <view class='empty'></view>
       </view>
 
-      <!-- <view class='add'></view> -->
+
     </view>
 
 

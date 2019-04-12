@@ -1,4 +1,3 @@
-// borrower/pages/agentDetail/agentDetail.js
 const app = getApp()
 import {
   fetch
@@ -23,16 +22,21 @@ Page({
 
     myName: "",
     unReadSpot: false,
-    phone: ''
+    phone: '******',
+    chatShow: false,
+    isKan: false
   },
 
 
   getDetail(id) {
+    let that = this
     fetch.get(`/userBorrower/selectUserBorrowerById/${id}`).then(res => {
-      this.setData({
+
+      that.setData({
         user: res.data,
-        phone:res.data.phone
+
       }, () => {
+
         this.check()
       })
     })
@@ -44,53 +48,74 @@ Page({
         isMask: true
       })
     } else {
-        console.log('usr',app.globalData.userInfo.roleId)
-        if(app.globalData.userInfo.roleId === 2){
-      //经纪人
-          fetch.get(`/userBroker/checkIsVipOrCount/${app.globalData.userInfo.phone}`).then(res=>{
-        console.log(res)
-        if(res.data === 1){
-          console.log("查看手机号")
-          this.setData({
-            phone: this.data.user.phone
-          })
-          //经纪人  减少次数
-          fetch.get(`/vipClick/deleteVipClickCount/${app.globalData.userInfo.phone}`).then(res => {
-            console.log('减少次数', res)
-          })
-        }else{
-          wx.showToast({
-            title: '您不是会员',
-            duration: 2000
-          })
-          wx.navigateTo({
-            url: '/pages/agent/pages/member/member',
-          })
 
-        }
-          })
-        }else{
+      if (app.globalData.userInfo.roleId === 2) {
+        //经纪人
+        fetch.get(`/userBroker/checkIsVipOrCount/${app.globalData.userInfo.phone}`).then(res => {
+
+          if (res.data === 1) {
+
+            this.setData({
+              phone: this.data.user.phone,
+              chatShow: true
+            })
+            fetch.post(`/brokerResource/saveBrokerResource`, {
+              borrowerId: this.data.id,
+              brokerId: app.globalData.userInfo.id
+            }).then(res => {
+              console.log("加入资源", res.data)
+            })
+
+            //经纪人  减少次数
+            fetch.get(`/vipClick/deleteVipClickCount/${app.globalData.userInfo.phone}`).then(res => {
+
+            })
+          } else {
+            this.setData({
+              chatShow: false
+            })
+            wx.showToast({
+              title: '您不是会员',
+              duration: 2000
+            })
+            wx.navigateTo({
+              url: '/pages/agent/pages/member/member',
+            })
+
+          }
+        })
+      } else {
         //机构
-          fetch.get(`vipClick/getClickByAgencyPhone/${app.globalData.userInfo.phone}`).then(res=>{
-            if(res.data.status === 200){
-              this.setData({
-                phone: this.data.user.phone
-              })
-              fetch.get(`vipClick/reduceCount/${app.globalData.userInfo.phone}`).then(res=>{
-                console.log('减少次数', res)
-              })
-            }else{
-              wx.showToast({
-                title: '您不是会员',
-                duration: 2000
-              })
-              wx.navigateTo({
-                url: '/pages/organ/pages/member/member',
-              })
-            }
-          })
+        fetch.get(`/vipClick/getClickByAgencyPhone/${app.globalData.userInfo.phone}`).then(res => {
+          if (res.data.status === 200) {
+            this.setData({
+              phone: this.data.user.phone,
+              chatShow: true
+            })
+            fetch.post(`/agencyResource/addAgencyResource`, {
+              borId: this.data.id,
+              agencyId: app.globalData.userInfo.id
+            }).then(res => {
+              console.log("加入资源", res.data)
+            })
+            fetch.get(`/vipClick/reduceCount/${app.globalData.userInfo.phone}`).then(res => {
 
-        }
+            })
+          } else {
+            this.setData({
+              chatShow: false
+            })
+            wx.showToast({
+              title: '您不是会员',
+              duration: 2000
+            })
+            wx.navigateTo({
+              url: '/pages/organ/pages/member/member',
+            })
+          }
+        })
+
+      }
     }
   },
 
@@ -104,12 +129,17 @@ Page({
   //立即沟通
   chat(event) {
     if (app.globalData.userInfo.name) {
-      var nameList = {
-        myName: this.data.myName,
-        your: event.target.dataset.phone
-      };
+      let my = this.data.myName
+      let your = event.target.dataset.phone
+      let yourName = event.target.dataset.name
+      // var nameList = {
+      //   myName: this.data.myName,
+      //   my:app.globalData.userInfo.name,
+      //   your: event.target.dataset.phone,
+      //   yourName: event.target.dataset.name
+      // };
       wx.navigateTo({
-        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+        url: `/pages/chatroom/chatroom?myName=${my}&your=${your}&yourName=${yourName}`
       });
 
 
@@ -131,7 +161,7 @@ Page({
   },
   getLoan() {
     fetch.get(`/orderAll/getOrderByBor/${this.data.id}`).then(res => {
-      console.log('ssss', res.data)
+
       this.setData({
         loanData: res.data
       })
@@ -141,7 +171,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    if (options.accord == '1') {
+      this.setData({
+        isKan: true
+      })
+    }
+    this.getDetail(options.id)
+
+
 
     if (app.globalData.userInfo.name) {
       this.setData({
@@ -154,7 +192,7 @@ Page({
     this.getLoan()
 
     let that = this
-    disp.on("em.xmpp.unreadspot", function(count) {
+    disp.on("em.xmpp.unreadspot", function (count) {
       that.setData({
         unReadSpot: count > 0
       });
@@ -174,8 +212,7 @@ Page({
         }
       }
     })
-    // this.getDetail(options.id)
-    // this.check()
+
 
 
   },
@@ -183,29 +220,39 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
-  check(){
+  check() {
     if (app.globalData.userInfo.name) {
       const that = this
       if (app.globalData.userInfo.roleId === 2) {
         //经纪人
         fetch.get(`/brokerResource/getBrokerResource/${app.globalData.userInfo.id}/${that.data.id}`).then(res => {
-            console.log('ddddddddddddd',res)
+          console.log('ddddddddddddd', res)
           if (res.data === 1) {
             //看过，该手机号展现
             console.log('kan', res)
             that.setData({
-              phone: that.data.user.phone
+              phone: that.data.user.phone,
+              chatShow: true
             })
           } else {
             //没看过  手机号隐藏
             that.setData({
-              phone: '******'
+              phone: '******',
+              chatShow: false
             })
+            if (that.data.isKan) {
+              console.log('sssssddff')
+              that.setData({
+                phone: that.data.user.phone,
+                chatShow: true
+              })
+            }
           }
+
         })
       } else {
         //机构
@@ -218,13 +265,22 @@ Page({
             console.log('kan', res)
             //看过，该手机号展现
             that.setData({
-              phone: that.data.user.phone
+              phone: that.data.user.phone,
+              chatShow: true
             })
           } else {
             //没看过  手机号隐藏
             that.setData({
-              phone: '******'
+              phone: '******',
+              chatShow: false
             })
+            if (that.data.isKan) {
+              console.log('sssssddff')
+              that.setData({
+                phone: that.data.user.phone,
+                chatShow: true
+              })
+            }
           }
         })
 
@@ -249,12 +305,12 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
     //  this.getRoster();
-    this.getDetail(this.data.id)
+    // this.getDetail(this.data.id)
   },
 
   getRoster() {
@@ -270,7 +326,7 @@ Page({
         me.setData({
           member: member
         });
-   
+
         if (!systemReady) {
           disp.fire("em.main.ready");
           systemReady = true;
@@ -291,35 +347,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     wx.showShareMenu({
       withShareTicket: true
     })

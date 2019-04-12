@@ -92,14 +92,18 @@ Page({
   //立即沟通
   chat(event) {
     if (this.data.userId) {
-      var nameList = {
-        myName: this.data.myName,
-        your: event.target.dataset.phone
-      };
+      let my = this.data.myName
+      let your = event.target.dataset.phone
+      let yourName = event.target.dataset.name
+      // var nameList = {
+      //   myName: this.data.myName,
+      //   my:app.globalData.userInfo.name,
+      //   your: event.target.dataset.phone,
+      //   yourName: event.target.dataset.name
+      // };
       wx.navigateTo({
-        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+        url: `/pages/chatroom/chatroom?myName=${my}&your=${your}&yourName=${yourName}`
       });
-
 
     } else {
       wx.showModal({
@@ -261,12 +265,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //获得 机构详情信息
-    this.getDetail(options.id)
-    console.log(options.id)
-    //获得 机构成功案例
-    this.getVictory(options.id)
-    this.getPro(options.id)
+
     this.setData({
       optionId: options.id
     })
@@ -309,6 +308,11 @@ Page({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
+    //获得 机构详情信息
+    this.getDetail(this.data.optionId)
+    this.getVictory(this.data.optionId)
+    this.getPro(this.data.optionId)
+
     this.getRoster();
   },
 

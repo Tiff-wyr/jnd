@@ -5,16 +5,17 @@
 }
 .tabBar{
   width:100%;
-  height: 95rpx;
+  height: 98rpx;
   position: fixed;
   bottom:0;
   left: 0;
   padding:10rpx;
+  box-sizing: border-box;
   margin-left:-4rpx;
   background: #fff;
   font-size:20rpx;
   color:#8A8A8A;
-  box-shadow: 6rpx 6rpx 6rpx 6rpx #aaa;
+  border-top: 2rpx solid #E5E5E5
 }
 
  .tabBar-item{
@@ -24,10 +25,16 @@
   overflow: hidden;
 }
 .text{
-  margin-top: 12rpx;
+  position: relative;
+  margin-top: -6rpx;
     color:#8A8A8A;
 }
 /*当前字体颜色*/
 .tabBartext{
   color:red;
+}
+.count{
+  position: absolute;
+  top: 0;
+  
 }

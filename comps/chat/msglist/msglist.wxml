@@ -1,18 +1,20 @@
 
-<view class='show_details' bind:tap='enter' wx:if="{{userRole==1}}" >
-     <view class='info lw_dflex'>
-        <image src="{{otherAvatar}}" class='img'  ></image>
+ <view class='show_details' bind:tap='enter' wx:if="{{userRole==1}}" >
+  <view class='info lw_dflex'>
+         <image src="{{otherAvatar}}" class='img'  ></image>
          <view class='content lw_flex'>
             <view class='name'>{{otherNickName}}</view>
             <view class='jobs ellipsis'>
                关注岗位：{{followJobName}}
             </view>
-         </view>
-         <view>
-            <image src='../../../images/arrow.png' class='arrow'  ></image>
+         </view> 
+          <view>
+   <image src='../../../images/arrow.png' class='arrow'  ></image> 
          </view>
      </view>
-</view>
+</view>  
+
+
 <template name="txt">
 
      <rich-text class="msg-text" nodes="{{ item.data }}" style="float:left; margin-top:2px;"></rich-text>
@@ -32,12 +34,12 @@
 		bind:tap="previewImage"
 		data-url="{{ item.msg.data }}" />
 </template>
-<template name="video">
+<!-- <template name="video">
 	<video src="{{ item.msg.data }}" controls autoplay />
 </template>
 <template name="audio">
 	<audio src="{{ item.msg.url }}" controls autoplay />
-</template>
+</template> -->
 <scroll-view
 	scroll-y="true"
     style='height:{{scrollHeight}}px'
@@ -46,12 +48,12 @@
 	bind:tap="onTap"
 	scroll-into-view="{{ toView }}">
 	<view class="message" wx:for="{{ chatMsg }}" wx:key="" id="{{ item.mid }}" >
-		<view class="time" wx:if="{{item.showTime}}" >
+		<view class="time">
 			<text class="time-text">{{ item.time }}</text>
 		</view>
 		<view class="main" class="{{ item.style }}" >
-			<image class="avatar" wx:if="{{app.globalData.userInfo.image}}" src="app.globalData.userInfo.image"/>
-      			<image class="avatar" wx:else src="/static/images/number.png"/>
+			<image wx:if="{{item.style === 'self'}}" class="avatar"src="{{image === '' ? '/static/images/number.png' : image}}"/>
+      <image wx:else class="avatar"src="http://jnd-image.oss-cn-beijing.aliyuncs.com/image/{{item.username}}.jpg"/>
 			<view class="msg">
 				<view wx:if="{{ item.msg.type == 'img' || item.msg.type == 'video' }}">
 					<template is="{{ item.msg.type }}" data="{{ item }}"/>
@@ -66,13 +68,13 @@
 				</view>
 			</view>
 
-        <view  wx:if="{{item.yourname != item.username && userRole==1}}" class='text_state' >
-        <view wx:if="{{item.msgState ==1 && item.notice==0}}" bindtap="pushImmediately" id="{{index}}" class="push_btn">立即推送</view>
-             <view wx:elif="{{item.msgState==2 && item.notice==0}}">已查看</view>
-             <view wx:elif="{{item.msgState< 2 && item.notice==1}}">已推送，未查看</view>
-             <view wx:elif="{{item.msgState== 2 && item.notice==1}}">已查看</view>
-             <view wx:elif="{{item.msgState== 0 && item.notice==0}}"></view>
-              <view wx:elif="{{item.msgState== 4 && item.notice==0}}">发送失败</view>
+        <view  wx:if="{{item.yourname != item.username && userRole==1}} " class='text_state' >
+        <view wx:if="{{item.msgState ==1 && item.notice==0}}" bindtap="pushImmediately" id="{{index}}" class="push_btn"></view>
+             <view wx:elif="{{item.msgState==2 && item.notice==0}}"></view>
+              <view wx:elif="{{item.msgState< 2 && item.notice==1}}"></view> 
+             <view wx:elif="{{item.msgState== 2 && item.notice==1}}"></view>
+             <view wx:elif="{{item.msgState== 0 && item.notice==0}}"></view> 
+              <view wx:elif="{{item.msgState== 4 && item.notice==0 && item.style === 'self'}}">掉线请登录</view>
         </view>
 		</view>
 

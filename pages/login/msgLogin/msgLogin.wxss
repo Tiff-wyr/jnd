@@ -66,19 +66,7 @@ display: flex;
 }
 
 
-.wrapper .sendCode{
-  text-align: center;
-  width:244rpx;
-height:96rpx;
-background:rgba(255,255,255,1);
-border-radius:4rpx;
-border:1rpx solid rgba(199,199,199,1);
-font-size:28rpx;
-font-family:PingFangSC-Regular;
-font-weight:400;
-color:rgba(205,69,69,1);
-line-height:96rpx;
-}
+
 .input_placeholder {
 font-size:28rpx;
 font-family:PingFangSC-Regular;

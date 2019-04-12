@@ -6,6 +6,9 @@
       <navigator open-type="redirect" url="{{item.pagePath}}">
         <view><image class="icon" src='{{item.iconPath}}'></image></view>
         <view class="{{item.current== 1 ? 'tabBartext text' :'text'}}">{{item.text}}</view>
+        <view class='count'>
+            
+        </view>
       </navigator>  
     </view>
   </block>

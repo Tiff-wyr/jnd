@@ -6,7 +6,7 @@
   <view class='top-re'>
     <view class='name-left'>
          <view class='iconfont icon-tianxiexingming duanPic'></view>
-      <input class='name-input' placeholder-class='input_placeholder' placeholder='姓名' bindblur='handleName'></input>
+      <input class='input' placeholder-class='input_placeholder' placeholder='姓名' bindblur='handleName'></input>
     </view>
 
     <view class='sex-radio'>
@@ -55,10 +55,11 @@
 
   <view class='wrapper'>
     <view class='code'>
-         <view class='iconfont icon-duanxin-copy duanPic'></view>
+         <view class='iconfont icon-duanxin-copy-copy-copy duanPic'></view>
       <input class='input' placeholder-class='input_placeholder' type='number' password='true' placeholder='短信验证码' bindblur='handleCode'></input>
     </view>
-    <view class='sendCode' bindtap='sendCode'>{{textCode}}</view>
+    <view class='sendCode' bindtap='sendCode' wx:if="{{isFa}}">{{textCode}}</view>
+     <view class='sendCode' wx:else>{{text}}<span>s</span></view>
   </view>
 
 

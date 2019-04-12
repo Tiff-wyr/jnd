@@ -1,69 +1,72 @@
 <!--pages/agent/borrowerDetail/borrowerDetail.wxml-->
 
 <view class='detail-main'>
-      <view class='detail'>
-          <view class='top'>
-              <view style='display:flex'>
-      <view wx:if='{{user.borLogo}}'>
-         <image src='{{user.borLogo}}' style='width:120rpx;height:120rpx;margin-right:20rpx;'></image>
+  <view class='detail'>
+    <view class='top'>
+      <view style='display:flex'>
+        <view wx:if='{{user.borLogo}}'>
+          <image src='{{user.borLogo}}' style='width:120rpx;height:120rpx;margin-right:20rpx;'></image>
+        </view>
+        <image wx:else src='/static/icon/pic.png' style='width:120rpx;height:120rpx;margin-right:20rpx;'></image>
+        <view>
+          <view class='name'>{{user.borrowerName}}</view>
+          <view class='address'>{{user.address}}</view>
+        </view>
       </view>
-                 <image wx:else src='/static/icon/pic.png' style='width:120rpx;height:120rpx;margin-right:20rpx;'></image>
-                  <view>
-                      <view class='name'>{{user.borrowerName}}</view>
-                        <view class='address'>{{user.address}}</view>
-                  </view>
-              </view> 
-              <view class='phone'>{{phone}}</view>
-          </view>
+      <view class='phone'>{{phone}}</view>
+    </view>
 
-         <view class='middle'>
-            <view style='display:flex'>
-                <view class='line'></view>
-                <view class='msg'>基本信息</view>
-            </view>
-
-            <view class='age-wrap'>
-                <view class='age'>年龄：{{user.borrowerAge}}</view>
-                <view class='job'>职业：{{user.borrowerJob}}</view>
-            </view> 
-            <view class='money'>月收入：{{user.income}}</view>
-
-         </view> 
-
-        <view class='line-wrap'></view>
-
-          <view class='middle'>
-            <view style='display:flex'>
-                <view class='line'></view>
-                <view class='msg'>贷款信息</view>
-            </view>
-
-            <view class='age-wrap'>
-                <view class='age'>贷款金额：{{loanData.loanAmount}}</view>
-                <view class='job'>贷款类型：{{loanData.loanType}}</view>
-            </view> 
-            <view class='money'>发布时间：{{loanData.orderTime}}</view>
-
-         </view> 
-
+    <view class='middle'>
+      <view style='display:flex'>
+        <view class='line'></view>
+        <view class='msg'>基本信息</view>
       </view>
 
-      <view class='bottom-detail'>
-          <view class='look' bindtap='lookPhone'>
-              <view class='iconfont icon-chakanshouji phone-tu'></view>
-               <view class='lphone'>查看手机号</view>
-          </view>
-          <button bindtap='chat' data-phone='{{user.phone}}'>立即沟通</button>
-      
+      <view class='age-wrap'>
+        <view class='age'>年龄：{{user.borrowerAge}}</view>
+        <view class='job'>职业：{{user.borrowerJob}}</view>
+      </view>
+      <view class='money'>月收入：{{user.income}}</view>
+
+    </view>
+
+    <view class='line-wrap'></view>
+
+    <view class='middle'>
+      <view style='display:flex'>
+        <view class='line'></view>
+        <view class='msg'>贷款信息</view>
       </view>
 
-      <view class='mask' wx:if='{{isMask}}'>
+      <view class='age-wrap'>
+        <view class='age'>贷款金额：{{loanData.loanAmount}}</view>
+        <view class='job'>贷款类型：{{loanData.loanType}}</view>
       </view>
-      <view class='com-bro' wx:if='{{isMask}}'>
-          <view class='text1'>在电脑浏览器中打开</view>
-          <view class='text2'>www.9nengdai.com</view>
-          <button bindtap='cancel'>确  定</button>
-      </view>
+      <view class='money'>发布时间：{{loanData.orderTime}}</view>
+
+    </view>
+
+  </view>
+
+  <view wx:if="{{chatShow}}">
+      <button bindtap='chat' data-phone='{{user.phone}}' class='btnn'>立即沟通</button>
+  </view>
+
+  <view class='bottom-detail' wx:else>
+    <view class='look' bindtap='lookPhone'>
+      <view class='iconfont icon-chakanshouji phone-tu'></view>
+      <view class='lphone'>查看手机号</view>
+    </view>
+    <button bindtap='chat' data-phone='{{user.phone}}' data-name='{{user.borrowerName}}'>立即沟通</button>
+  </view>
+
+  <view class='mask' wx:if='{{isMask}}'>
+  </view>
+  <view class='com-bro' wx:if='{{isMask}}'>
+    <view class='text1'>在电脑浏览器中打开</view>
+    <view class='text2'>www.9nengdai.com</view>
+    <button bindtap='cancel'>确 定</button>
+  </view>
 
 
-</view> 
+</view>

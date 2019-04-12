@@ -23,8 +23,7 @@ Page({
     this.getData()
   },
 
-  //申请记录
-  //orderAll/getOrderByAgency/37/1/5
+
   
 
   getData() {
@@ -39,9 +38,9 @@ Page({
 
 
   userDetai(event){
-    console.log('sss', event.currentTarget.dataset.id)
+
     wx.navigateTo({
-      url: `/pages/detail/borrowerDetail/borrowerDetail?id=${event.currentTarget.dataset.id}`,
+      url: `/pages/detail/borrowerDetail/borrowerDetail?id=${event.currentTarget.dataset.id}&accord=1`,
     })
   },
 

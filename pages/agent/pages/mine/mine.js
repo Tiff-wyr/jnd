@@ -20,9 +20,18 @@ Page({
           that.setData({
             personData: app.globalData.userInfo
           })
+          wx.setStorage({
+            key: 'loginPhone',
+            data: '',
+          })
+          wx.setStorage({
+            key: 'loginPassword',
+            data: '',
+          })
 
+          app.globalData.userType = 'user'
           wx.redirectTo({
-            url: '/pages/login/passLogin/passLogin',
+            url: '/pages/borrower/pages/loanApply/loanApply',
           })
         } else if (res.cancel) {
        

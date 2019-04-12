@@ -1,0 +1,12 @@
+<!--pages/jump/jump.wxml-->
+
+<view class='quan'>
+  <view class='jump'>
+    <image src='/static/icon/appVic.png'></image>
+  </view>
+  <view class='text'>恭喜您成为9能贷平台会员，您可以通过 </view>
+  <view class='text'>账号：{{phone}}</view>
+  <view class='text'>密码：（您手机收到的验证码）</view>
+  <view class='text'>登录平台，享受平台专业的金融服务</view>
+  <button class='btn' bindtap='login'>登 录</button>
+</view>

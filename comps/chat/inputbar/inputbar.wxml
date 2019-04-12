@@ -1,7 +1,7 @@
-<view class="room_bar {{isIpx ? 'bIpx' : ''}}">
+<view style='bottom: {{bottom}}px' class="room_bar {{isIpx ? 'bIpx' : ''}}">
 
 	<chat-suit-emoji id="chat-suit-emoji" bind:newEmojiStr="emojiAction"></chat-suit-emoji>
-	<chat-suit-main id="chat-suit-main" username="{{ username }}" chatType="{{ chatType }}" bind:inputFocused="cancelEmoji"></chat-suit-main>
+	<chat-suit-main id="chat-suit-main" username="{{ username }}" chatType="{{ chatType }}" bind:inputBlured="inputBlured" bind:inputFocused="cancelEmoji"></chat-suit-main>
 	
 
 </view>

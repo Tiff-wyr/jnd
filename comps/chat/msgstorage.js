@@ -104,7 +104,7 @@ msgStorage.saveMsg = function(sendableMsg, type, receiveMsg){
         {
             targetName = sendableMsg.body.from
         }
-        console.log(receiveMsg)
+        console.log('receive',receiveMsg)
         if (receiveMsg){
             if (receiveMsg.nickname !="undefined"){
                 nickName = receiveMsg.nickname
@@ -120,10 +120,6 @@ msgStorage.saveMsg = function(sendableMsg, type, receiveMsg){
         {
             nickName = wx.getStorageSync("nickName") || ""
         }
-        
-        
-        
-
 	}
 	let curChatMsg = wx.getStorageSync(sessionKey) || [];
 	let renderableMsg = msgPackager(sendableMsg, type, myName);

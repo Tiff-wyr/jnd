@@ -2,8 +2,8 @@
 .scroll_view_change {
 	width: 100%;
 	position: absolute;
+  top: 0;
 	left: 0;
-	top: 75px;
 	right: 0;
 	bottom: 75px;
 }
@@ -122,7 +122,7 @@
     margin-right: 110rpx;
     margin-top: 14rpx;
 }
-.push_btn{
+/* .push_btn{
    background:rgba(247,247,248,1);
     font-size: 12px;
     border: 1px solid #FF6952;
@@ -130,7 +130,7 @@
     display: inline-block;
     color: #FF6952;
     border-radius: 3px;
-}
+   } */
 .show_details{
    padding: 10px 20px;
    width: 100%;

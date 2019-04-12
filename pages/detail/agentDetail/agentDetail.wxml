@@ -78,7 +78,7 @@
       <view class='iconfont icon-chakanshouji phone-tu'></view>
       <view class='lphone'>申请</view>
     </view>
-    <button bindtap='chat' data-phone='{{agent.phone}}'>立即沟通</button>
+    <button bindtap='chat' data-phone='{{agent.phone}}' data-name='{{agent.brokerName}}'>立即沟通</button>
 
   </view>
 

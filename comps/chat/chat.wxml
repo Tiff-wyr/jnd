@@ -8,15 +8,17 @@
 		bind:newAudioMsg="saveSendMsg"></chat-suit-audio>
 
 	<chat-msglist
+    class="msglist"
 		id="chat-msglist"
 		username="{{ username }}"
-        userType="wwww"
+    userType="wwww"
 		bind:msglistTap="normalScroll"></chat-msglist>
 
 	<chat-inputbar
+  class="input"
 		id="chat-inputbar"
 		username="{{ username }}"
-        userType="{{ userType }}"
+    userType="{{ userType }}"
 		chatType="{{ chatType }}"
 
 		bind:newTextMsg="saveSendMsg"

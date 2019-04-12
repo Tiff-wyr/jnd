@@ -1,87 +1,120 @@
 // borrower/pages/loanApply/loanApply.js
 const app = getApp()
 
-import { fetch } from "../../utils/axios.js"
+import {
+  fetch
+} from "../../utils/axios.js"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    pindex: '0',    // 省索引
-    rindex: '0',    // 市索引
+    pindex: '0', // 省索引
+    rindex: '0', // 市索引
     ageIndex: '0', // 年龄索引
-    jobIndex: '0',  //职业索引
-    incomeIndex: '0',//月收入索引
-    roleId:'',//向经纪人或机构申请
+    jobIndex: '0', //职业索引
+    incomeIndex: '0', //月收入索引
+    roleId: '', //向经纪人或机构申请
 
- 
+    isFa: true,
+    text: 60,
     textCode: '发送验证码',
 
-    sex: [
-      { value: 1, name: '男', checked: true },
-      { value: 0, name: '女' }
-   
+    sex: [{
+        value: 1,
+        name: '男',
+        checked: true
+      },
+      {
+        value: 0,
+        name: '女'
+      }
+
     ],
     provinceData: [],
-    cityData:
-      [
-        { cid: '', city: '' }
-      ],
-    types: [
-      { name: '个人贷', value: 0, checked: true, icon: 'iconfont icon-geren' },
-      { name: '企业贷', value: 1, icon: 'iconfont icon-qiyecopy' }
+    cityData: [{
+      cid: '',
+      city: ''
+    }],
+    types: [{
+        name: '个人贷',
+        value: 0,
+        checked: true,
+        icon: 'iconfont icon-geren'
+      },
+      {
+        name: '企业贷',
+        value: 1,
+        icon: 'iconfont icon-qiyecopy'
+      }
     ],
-    hasPawn: false,       // 有无抵押状态
-    pawns: [
-      { name: '无抵押', value: 0, checked: true, icon: 'iconfont icon-wudiya' },
-      { name: '有抵押', value: 1, icon: 'iconfont icon-diyadaikuan' }
+    hasPawn: false, // 有无抵押状态
+    pawns: [{
+        name: '无抵押',
+        value: 0,
+        checked: true,
+        icon: 'iconfont icon-wudiya'
+      },
+      {
+        name: '有抵押',
+        value: 1,
+        icon: 'iconfont icon-diyadaikuan'
+      }
     ],
-    checkboxs: [
-      { value: 2, name: '车子' },
-      { value: 3, name: '有价证券' },
-      { value: 4, name: '古董珠宝' },
-      { value: 5, name: '房子' },
-      { value: 6, name: '其他' }
+    checkboxs: [{
+        value: 2,
+        name: '车子'
+      },
+      {
+        value: 3,
+        name: '有价证券'
+      },
+      {
+        value: 4,
+        name: '古董珠宝'
+      },
+      {
+        value: 5,
+        name: '房子'
+      },
+      {
+        value: 6,
+        name: '其他'
+      }
     ],
     //年龄
-    ages: [
-      {
-        id: '',
-        ageArea: '',
-      }
-    ],
-    incomes: [
-      {
-        id: '',
-        incomeName: ''
-      }
-    ],
-    jobs: [
-      {
-        jobId: '',
-        jobName: '',
-      }
-    ],
+    ages: [{
+      id: '',
+      ageArea: '',
+    }],
+    incomes: [{
+      id: '',
+      incomeName: ''
+    }],
+    jobs: [{
+      jobId: '',
+      jobName: '',
+    }],
 
     //提交的参数
-    pid:1,   //省的id
-    rcid:1,  //市 id
-    ageid:1,  //年龄id
-    jobId:0,   //职业id
-    incomeId:1,   //月收入 id
-    phone:'',   //手机号
-    code:''   ,//验证码
-    value:1,  //性别
-    name:'',   //名字
-    money:'',  //贷款金额
-    pawn:0, //是否抵押
-    loanType:1,  //贷款类型
-    pawnKey:'',  //抵押物
+    pid: 1, //省的id
+    rcid: 1, //市 id
+    ageid: 1, //年龄id
+    jobId: 0, //职业id
+    incomeId: 1, //月收入 id
+    phone: '', //手机号
+    code: '', //验证码
+    value: 1, //性别
+    name: '', //名字
+    money: '', //贷款金额
+    pawn: 0, //是否抵押
+    loanType: 1, //贷款类型
+    pawnKey: '', //抵押物
 
-    userId:'',   //借款人id
-    agentId:'',  //经纪人id
-    organId:'',  //机构id
+    userId: '', //借款人id
+    agentId: '', //经纪人id
+    organId: '', //机构id
 
 
 
@@ -94,7 +127,7 @@ Page({
       pindex,
       pid
     })
-    console.log(this.data.pindex)
+
     this.getCity(pid)
   },
   // 市选择框 选择事件
@@ -141,19 +174,19 @@ Page({
     this.setData({
       phone: e.detail.value
     })
-    console.log('phoe', this.data.phone)
+
   },
   handleCode(e) {
     this.setData({
       code: e.detail.value
     })
   },
-  handleName(e){
+  handleName(e) {
     this.setData({
       name: e.detail.value
     })
   },
-  handleMoney(e){
+  handleMoney(e) {
     this.setData({
       money: e.detail.value
     })
@@ -162,7 +195,7 @@ Page({
   // 性别按钮改变事件
   sexRadioChange(e) {
     let value = e.detail.value
-    console.log(value)
+
     let sex = this.data.sex.map((item) => {
       if (item.value == value) {
         item.checked = true
@@ -189,7 +222,7 @@ Page({
     })
     this.setData({
       types,
-      loanType:value
+      loanType: value
     })
   },
   //抵押改变事件
@@ -198,23 +231,37 @@ Page({
     let hasPawn = value == 0 ? false : true
     if (hasPawn) {
       this.setData({
-        ageid: '',  //年龄id
-        jobId: '',   //职业id
+        ageid: '', //年龄id
+        jobId: '', //职业id
         incomeId: ''
       })
     } else {
       this.setData({
         pawnKey: '',
-        checkboxs: [
-          { value: 2, name: '车子' },
-          { value: 3, name: '有价证券' },
-          { value: 4, name: '古董珠宝' },
-          { value: 5, name: '房子' },
-          { value: 6, name: '其他' }
+        checkboxs: [{
+            value: 2,
+            name: '车子'
+          },
+          {
+            value: 3,
+            name: '有价证券'
+          },
+          {
+            value: 4,
+            name: '古董珠宝'
+          },
+          {
+            value: 5,
+            name: '房子'
+          },
+          {
+            value: 6,
+            name: '其他'
+          }
         ]
       })
     }
-    console.log(hasPawn)
+
     let pawns = this.data.pawns.map((item) => {
       if (item.value == value) {
         item.checked = true
@@ -226,7 +273,7 @@ Page({
     this.setData({
       pawns,
       hasPawn,
-      pawn:value
+      pawn: value
     })
   },
   // checkbox 改变事件
@@ -235,8 +282,8 @@ Page({
     value = value.map(item => {
       return parseInt(item)
     })
-    console.log('多选框',value)
-    
+
+
     let checkboxs = this.data.checkboxs.map((item) => {
       let val = item.value
       if (value.indexOf(val) > -1) {
@@ -246,37 +293,94 @@ Page({
       }
       return item
     })
- 
+
     this.setData({
       checkboxs,
       pawnKey: value
     })
   },
+
+  sendPass() {
+    let that = this
+    fetch.get(`/user/selectIsRegister/${that.data.phone}`).then(res => {
+
+      if (res.data.status === 200) {
+        //发送验证码
+        fetch.get(`/base/getUpdatePhoneCode/${that.data.phone}`).then(res => {
+
+          if (res.data.status === 200) {
+            that.setData({
+              isFa: false,
+              text: '60'
+            })
+            let timer = setInterval(() => {
+              that.setData({
+                text: that.data.text - 1
+              })
+
+              if (that.data.text < 0) {
+                clearInterval(timer)
+
+                that.setData({
+                  isFa: true,
+                  textCode: "发送验证码",
+                  text: 60
+                })
+
+              }
+            }, 1000)
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+            that.setData({
+              isFa: true,
+              textCode: '重新发送'
+            })
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '该号已被他人注册',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
   //发送验证码
   sendCode() {
-    if (this.data.phone) {
-      fetch.get(`/user/selectIsRegister/${this.data.phone}`).then(res => {
-        if (res.data.status === 200) {
-          //发送验证码
-          fetch.get(`/base/getUpdatePhoneCode/${this.data.phone}`).then(res => {
-            console.log('mmmm', res.data)
-            if (res.data.status === 200) {
-              this.setData({
-                textCode: '已发送'
-              })
-            } else {
-              this.setData({
-                textCode: '重新发送'
-              })
-            }
-          })
-        } else {
-          wx.showToast({
-            title: '该号已被他人注册',
-            icon: 'none'
-          })
-        }
-      })
+    let that = this
+    if (that.data.phone) {
+      if (that.data.roleId === 2) {
+        fetch.get(`/orderAll/getOrderByBTBid/${that.data.phone}/${that.data.agentId}`).then(res => {
+          console.log('agent', res)
+          if (res.data.status === 200) {
+            that.sendPass()
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+            that.qingKong()
+          }
+        })
+      } else {
+        fetch.get(`/orderAll/getOrderByBTAid/${that.data.phone}/${that.data.organId}`).then(res => {
+
+          if (res.data.status === 200) {
+            that.sendPass()
+          } else {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+            that.qingKong()
+          }
+        })
+      }
+
 
 
     } else {
@@ -291,7 +395,7 @@ Page({
   //获取 省
   getProvince() {
     fetch.get(`/city/getAllProvincial`).then(res => {
-      console.log('省', res.data)
+
       this.setData({
         provinceData: res.data
       })
@@ -301,7 +405,7 @@ Page({
   //获取 市
   getCity(id) {
     fetch.get(`/city/getAllCity/${id}`).then(res => {
-      console.log('市', res.data)
+
       this.setData({
         cityData: res.data
       })
@@ -314,7 +418,7 @@ Page({
       this.setData({
         ages: res.data
       })
-  
+
     })
   },
   getJob() {
@@ -322,7 +426,7 @@ Page({
       this.setData({
         jobs: res.data
       })
-   
+
     })
   },
 
@@ -331,14 +435,14 @@ Page({
       this.setData({
         incomes: res.data
       })
-  
+
     })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
     if (app.globalData.userInfo) {
       this.setData({
@@ -347,18 +451,18 @@ Page({
     }
 
 
-    console.log('ddd',options)
-    if (options.roleId == 2){
+
+    if (options.roleId == 2) {
       //借款人向经纪人申请
-       this.setData({
-         roleId:2,
-         agentId:options.id
-       })
-    }else{
+      this.setData({
+        roleId: 2,
+        agentId: options.id
+      })
+    } else {
       //借款人向机构申请
       this.setData({
         roleId: 3,
-        organId:options.id
+        organId: options.id
       })
     }
 
@@ -372,45 +476,123 @@ Page({
 
   },
 
-  agentApply(){
+  qingKong() {
+    this.setData({
+      pindex: '0', // 省索引
+      rindex: '0', // 市索引
+      ageIndex: '0', // 年龄索引
+      jobIndex: '0', //职业索引
+      incomeIndex: '0', //月收入索引
+      phone: '', //手机号
+      code: '', //验证码
+      name: '', //名字
+      money: '', //贷款金额
+      text: 60,
+      isFa: true,
+      textCode: '发送验证码',
+      sex: [{
+          value: 1,
+          name: '男',
+          checked: true
+        },
+        {
+          value: 0,
+          name: '女'
+        }
+      ],
+      types: [{
+          name: '个人贷',
+          value: 0,
+          checked: true,
+          icon: 'iconfont icon-geren'
+        },
+        {
+          name: '企业贷',
+          value: 1,
+          icon: 'iconfont icon-qiyecopy'
+        }
+      ],
+      pawns: [{
+          name: '无抵押',
+          value: 0,
+          checked: true,
+          icon: 'iconfont icon-wudiya'
+        },
+        {
+          name: '有抵押',
+          value: 1,
+          icon: 'iconfont icon-diyadaikuan'
+        }
+      ],
+      checkboxs: [{
+          value: 2,
+          name: '车子'
+        },
+        {
+          value: 3,
+          name: '有价证券'
+        },
+        {
+          value: 4,
+          name: '古董珠宝'
+        },
+        {
+          value: 5,
+          name: '房子'
+        },
+        {
+          value: 6,
+          name: '其他'
+        }
+      ],
+    })
+  },
 
-    fetch.post(`/orderAll/saveLoginOrder`,{
+  agentApply() {
+    let that = this
 
-      brokerId:this.data.agentId,
-      borrowerName:this.data.name,
-      sex:this.data.value,
+    fetch.post(`/orderAll/saveLoginOrder`, {
+
+      brokerId: this.data.agentId,
+      borrowerName: this.data.name,
+      sex: this.data.value,
       loanAmount: this.data.money,
       address1: this.data.pid,
       address2: this.data.rcid,
       loanType: this.data.loanType,
       isPawn: this.data.pawn,
-      pawnKey:this.data.pawnKey.toString(),
+      pawnKey: this.data.pawnKey.toString(),
       age: this.data.ageid,
       borrowerJob: this.data.jobId,
       borrowerMonthlyIncome: this.data.incomeId,
-      borrowerId:this.data.userId,
-      phone:this.data.phone,
-      code:this.data.code
+      borrowerId: this.data.userId,
+      phone: this.data.phone,
+      code: this.data.code
 
-    }).then(res=>{
-      console.log('经纪人申请',res.data)
-      if(res.data.status === 200){
+    }).then(res => {
+
+      if (res.data.status === 200) {
         wx.showToast({
-          title: res.data.msg,
+          title: "恭喜您申请成功",
           icon: 'success',
-          duration: 2000
+          duration: 2000,
         })
-      }else{
+        that.qingKong()
+
+      } else {
         wx.showToast({
           title: res.data.msg,
           icon: 'none',
           duration: 2000
         })
+        that.qingKong()
+
       }
     })
   },
 
-  organApply(){
+  organApply() {
+    let that = this
     fetch.post(`/orderAll/saveLoginOrder`, {
 
       agencyId: this.data.organId,
@@ -430,55 +612,70 @@ Page({
       password: this.data.code
 
     }).then(res => {
-      console.log('机构申请', res.data)
+
 
       if (res.data.status === 200) {
         wx.showToast({
-          title: res.data.msg,
+          title: "恭喜您申请成功",
           icon: 'success',
           duration: 2000
         })
-      }else{
+        that.qingKong()
+      } else {
         wx.showToast({
           title: res.data.msg,
           icon: 'none',
           duration: 2000
         })
+        that.qingKong()
       }
     })
   },
 
-  applySubmit(){
-  if(this.data.name){
-    if(this.data.money){
-      if(this.data.phone){
-       if(this.data.code){
+  applySubmit() {
+    if (this.data.name) {
+      if (this.data.money) {
+        if (this.data.phone) {
+          if (this.data.code) {
 
 
-         if (this.data.roleId == 2) {
-           this.agentApply()
-         } else {
-           this.organApply()
-         }
+            if (this.data.roleId == 2) {
+              this.agentApply()
+            } else {
+              this.organApply()
+            }
 
 
-       }else{
-         wx.showModal({
-           title: '提示',
-           content: '请输入验证码',
-           success(res) {
-             if (res.confirm) {
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '请输入验证码',
+              success(res) {
+                if (res.confirm) {
 
-             } else if (res.cancel) {
+                } else if (res.cancel) {
 
-             }
-           }
-         })
-       }
-      }else{
+                }
+              }
+            })
+          }
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '请输入手机号',
+            success(res) {
+              if (res.confirm) {
+
+              } else if (res.cancel) {
+
+              }
+            }
+          })
+        }
+      } else {
         wx.showModal({
           title: '提示',
-          content: '请输入手机号',
+          content: '请输入金额',
           success(res) {
             if (res.confirm) {
 
@@ -488,83 +685,67 @@ Page({
           }
         })
       }
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
-        content: '请输入金额',
+        content: '请输入姓名',
         success(res) {
           if (res.confirm) {
-          
+
           } else if (res.cancel) {
-           
+
           }
         }
       })
     }
-  }else{
-    wx.showModal({
-      title: '提示',
-      content: '请输入姓名',
-      success(res) {
-        if (res.confirm) {
-     
-        } else if (res.cancel) {
-         
-        }
-      }
-    })
-  }
-
-
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

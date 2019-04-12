@@ -3,6 +3,7 @@
 		<input
 			class="f news"
 			type="text"
+      adjust-position="{{false}}" 
 			value="{{ inputMessage }}"
 			placeholder="输入新消息"
 			placeholder-style="color:#CFCFCF; padding-left:5px;"

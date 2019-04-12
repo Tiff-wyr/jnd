@@ -49,7 +49,7 @@ Page({
       this.setData({
         array: res.data
       })
-      console.log('city', res.data)
+
     })
   },
   getMoney() {
@@ -59,13 +59,13 @@ Page({
         arrM: res.data
       })
 
-      console.log('money', res.data)
+
     })
   },
 
   //进入贷款人详情页
   handlerClickDetail(event){
-    console.log('贷款人详情页id', event.currentTarget.dataset.id)
+ 
     wx.navigateTo({
       url: `/pages/detail/borrowerDetail/borrowerDetail?id=${event.currentTarget.dataset.id}`,
     })

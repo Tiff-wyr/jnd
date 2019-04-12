@@ -16,7 +16,7 @@ Page({
       this.setData({
         personData: res.data
       })
-      console.log(res)
+
     })
 
   },

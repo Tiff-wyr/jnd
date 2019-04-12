@@ -25,12 +25,17 @@ Page({
   //立即沟通
   chat(event) {
     if (this.data.userId) {
-      var nameList = {
-        myName: this.data.myName,
-        your: event.target.dataset.phone
-      };
+      let my = this.data.myName
+      let your = event.target.dataset.phone
+      let yourName = event.target.dataset.name
+      // var nameList = {
+      //   myName: this.data.myName,
+      //   my:app.globalData.userInfo.name,
+      //   your: event.target.dataset.phone,
+      //   yourName: event.target.dataset.name
+      // };
       wx.navigateTo({
-        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+        url: `/pages/chatroom/chatroom?myName=${my}&your=${your}&yourName=${yourName}`
       });
 
 
@@ -249,7 +254,7 @@ Page({
         myName: app.globalData.userInfo.phone
       })
     }
-    this.getDetail(options.id)
+
     this.collectPan()
     let that = this
     disp.on("em.xmpp.unreadspot", function (count) {
@@ -273,6 +278,7 @@ Page({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
+    this.getDetail(this.data.id)
     this.getRoster();
   },
   getRoster() {

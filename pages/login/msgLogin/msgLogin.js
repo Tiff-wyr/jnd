@@ -13,7 +13,7 @@ Page({
     textCode:'发送验证码',
     grant_type: "jnd",
     isFa:true,
-    text:'已发送'
+    text:'60'
   },
 
   /**
@@ -37,13 +37,13 @@ Page({
     this.setData({
       phone: e.detail.value
     })
-    console.log('phoe',this.data.phone)
+ 
   },
   handleCode(e) {
     this.setData({
       code: e.detail.value
     })
-    console.log('code', this.data.code)
+ 
   },
   //发送验证码
   sendCode(){
@@ -56,7 +56,7 @@ Page({
         })
       }else{
         fetch.get(`/user/selectPhone/${that.data.phone}`).then(res => {
-          console.log('checkphone', res)
+        
           if (res.data.status === 500) {
             wx.showToast({
               title: '手机号未注册',
@@ -71,19 +71,33 @@ Page({
           } else {
             //发送验证码
             fetch.get(`/base/getLoginCode/${that.data.phone}`).then(res => {
-              console.log('fs', res.data)
+
               if (res.data.status === 200) {
                 that.setData({
                   isFa:false,
-                  text: '已发送'
+                  text: '60'
                 })
-                setTimeout(()=>{
-                  that.setData({
-                    isFa:true,
-                    textCode: '发送验证码'
-                  })
-                },60000)
+                let timer = setInterval(() => {
+                 that.setData({
+                   text:that.data.text-1
+                 })
+      
+                  if (that.data.text < 0) {
+                    clearInterval(timer)
+
+                    that.setData({
+                    isFa: true,
+                    textCode:"发送验证码",
+                    text:60
+                    })
+              
+                  }
+                }, 1000)
+
               } else {
+                wx.showToast({
+                  title: res.data.msg,
+                })
                 that.setData({
                   isFa:true,
                   textCode: '重新发送'
@@ -109,7 +123,7 @@ Page({
     
     if (this.data.phone && this.data.code) {
       fetch.get(`/user/loginByPhoneAndCode/${this.data.phone}/${this.data.code}`).then(res=>{
-        console.log('短信登录', res.data)
+   
 
         if(res.data.status === 200){
           wx.showToast({
@@ -123,7 +137,7 @@ Page({
 
             app.globalData.userInfo = res.data.data
             app.globalData.userType = 'user'
-            console.log(app.globalData.userInfo)
+         
 
             wx.setStorage({
               key: 'myUsername',
@@ -148,7 +162,7 @@ Page({
 
             app.globalData.userInfo = res.data.data
             app.globalData.userType = 'agent'
-            console.log('aaa', res.data.data)
+         
 
             wx.setStorage({
               key: 'myUsername',
@@ -171,7 +185,7 @@ Page({
             
             app.globalData.userInfo = res.data.data
             app.globalData.userType = 'organ'
-            console.log(res.data.data)
+         
 
             wx.setStorage({
               key: 'myUsername',

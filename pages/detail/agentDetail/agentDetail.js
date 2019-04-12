@@ -27,7 +27,7 @@ Page({
       this.setData({
         agent :res.data
       })
-      console.log('经纪人详情',res.data)
+
     })
   },
 
@@ -36,7 +36,7 @@ Page({
       this.setData({
         victory: res.data
       })
-      console.log('经纪成功案例', res.data)
+  
     })
   },
 //收藏
@@ -54,7 +54,7 @@ Page({
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
         success(res) {
-          console.log('收藏', res.data)
+        
           if (res.data.status === 200) {
             wx.showToast({
               title: '收藏成功',
@@ -90,7 +90,7 @@ Page({
     let that=this
     if (this.data.userId){
       fetch.get(`/borrowerKeep/removeBorrowerKeepById/${this.data.userId}/${this.data.optionId}`).then(res => {
-        console.log('cancel', res.data)
+       
         if (res.data.status === 200) {
           wx.showToast({
             title: '取消成功',
@@ -125,7 +125,7 @@ Page({
     let that = this
     if (this.data.userId){
       fetch.get(`/borrowerKeep/checkBorrowerKeepBroker/${this.data.userId}/${id}`).then(res => {
-        console.log('collect', res.data)
+    
         if (res.data === 0) {
           that.setData({
             isCollect: false
@@ -156,12 +156,17 @@ Page({
   //立即沟通
   chat(event) {
     if (this.data.userId) {
-      var nameList = {
-        myName: this.data.myName,
-        your: event.target.dataset.phone
-      };
+      let my = this.data.myName
+      let your = event.target.dataset.phone
+      let yourName = event.target.dataset.name
+      // var nameList = {
+      //   myName: this.data.myName,
+      //   my:app.globalData.userInfo.name,
+      //   your: event.target.dataset.phone,
+      //   yourName: event.target.dataset.name
+      // };
       wx.navigateTo({
-        url: "/pages/chatroom/chatroom?username=" + JSON.stringify(nameList)
+        url: `/pages/chatroom/chatroom?myName=${my}&your=${your}&yourName=${yourName}`
       });
 
 
@@ -209,10 +214,7 @@ wx.navigateTo({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     //经纪人详情页
-     this.getDetail(options.id)
-     //经纪人成功案例
-     this.getVictory(options.id)
+
      this.setData({
        optionId:options.id
      })
@@ -252,6 +254,11 @@ wx.navigateTo({
     this.setData({
       unReadSpot: getApp().globalData.unReadSpot
     });
+    //经纪人详情页
+    this.getDetail(this.data.optionId)
+    //经纪人成功案例
+    this.getVictory(this.data.optionId)
+    
     this.getRoster();
   },
 
@@ -274,7 +281,7 @@ wx.navigateTo({
         }
       },
       error(err) {
-        console.log("[main:getRoster]", err);
+    
       }
     };
     // WebIM.conn.setPresence()

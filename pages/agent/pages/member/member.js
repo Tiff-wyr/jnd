@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isKai:false,
     vip:[
       {
         money:'1元',
@@ -44,19 +45,29 @@ Page({
   },
 
   pay_money(event) {
+    console.log(event.currentTarget.dataset.id)
+   this.setData({
+     isKai:true
+   })
 
-    console.log('钱', event.currentTarget.dataset.id)
+
+
     this.setData({
+
       money: event.currentTarget.dataset.id
     })
 
     var that = this;
     wx.login({
       success: function (res) {
-        console.log("获得登录code\t\t" + res.code)
-        that.getOpenId(res.code);
+          that.getOpenId(res.code);       
       }
     });
+
+    setTimeout(() => {
+      isKai: false
+    }, 2000)
+
   },
 
   //获取openid
@@ -76,7 +87,7 @@ Page({
 
         if (that.data.money === 1) {
           that.xiaDan(openId);
-        } else if (that.data.money === 20) {
+        } else if (that.data.money === 2) {
           that.xiaDanS(openId);
         } else {
           that.xiaDanT(openId);
@@ -190,10 +201,32 @@ Page({
       package: obj.package,
       signType: obj.signType,
       paySign: obj.paySign,
-      success: function (res) { console.log("success") },
-      fail: function (res) { console.log("fail") },
-      complete: function (res) { console.log("complete") },
+      success: function (res) { 
+        this.panMem()
+     
+        },
+      // fail: function (res) { 
+       
+      
+      //   },
+      // complete: function (res) { 
+    
+     
+      //   },
     })
+  },
+
+  panMem(){
+    let that =this
+    if (app.globalData.userInfo.vip === 1) {
+      that.setData({
+        isMem: true
+      })
+    } else {
+      that.setData({
+        isMem: false
+      })
+    }
   },
 
   /**
@@ -206,15 +239,7 @@ Page({
       personData: app.globalData.userInfo
     })
     
-    if(app.globalData.userInfo.vip === 1){
-     that.setData({
-       isMem:true
-     })
-    }else{
-      that.setData({
-        isMem: false
-      })
-    }
+
 
     wx.getSystemInfo({
       success(res) {
@@ -231,6 +256,8 @@ Page({
       }
     })
 
+    this.panMem()
+
 
   },
 
@@ -245,7 +272,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.panMem()
   },
 
   /**

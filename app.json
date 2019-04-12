@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/borrower/pages/borrowerMine/borrowerMine",
+    "pages/login/passLogin/passLogin",
     "pages/borrower/pages/borrowerPerson/borrowerPerson",
     "pages/organ/pages/mine/mine",
     "pages/detail/borrowerDetail/borrowerDetail",
@@ -9,7 +10,6 @@
     "pages/organ/pages/applyAcca/applyAcca",
     "pages/organ/pages/borrower/borrower",
     "pages/borrower/pages/loanApply/loanApply",
-    "pages/login/passLogin/passLogin",
     "pages/agent/pages/mine/mine",
     "pages/login/msgLogin/msgLogin",
     "pages/borrower/pages/borrowerMessage/borrowerMessage",
@@ -29,7 +29,9 @@
     "pages/detail/productDetail/productDetail",
     "pages/detail/proDetail/productDetail",
     "pages/loanApply/loanApply",
-    "pages/chatroom/chatroom"
+    "pages/chatroom/chatroom",
+        "pages/jump/jump"
+  
   ],
   "window": {
     "backgroundTextStyle": "light",

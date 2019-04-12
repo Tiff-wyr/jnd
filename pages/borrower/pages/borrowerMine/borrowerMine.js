@@ -16,13 +16,21 @@ Page({
       content: '确认退出登录',
       success(res) {
         if (res.confirm) {
+          wx.setStorage({
+            key: 'loginPhone',
+            data: '',
+          })
+          wx.setStorage({
+            key: 'loginPassword',
+            data: '',
+          })
           app.globalData.userInfo = {}
           that.setData({
             personData: app.globalData.userInfo
           })
 
           wx.redirectTo({
-            url: '/pages/login/passLogin/passLogin',
+            url: '/pages/borrower/pages/loanApply/loanApply',
           })
         } else if (res.cancel) {
 

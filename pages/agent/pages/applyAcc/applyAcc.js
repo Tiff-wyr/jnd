@@ -37,7 +37,7 @@ Page({
   },
   enter(event){  
     wx.navigateTo({
-      url: `/pages/detail/borrowerDetail/borrowerDetail?id=${event.currentTarget.dataset.id}`,
+      url: `/pages/detail/borrowerDetail/borrowerDetail?id=${event.currentTarget.dataset.id}&accord=1`,
     })
   },
 

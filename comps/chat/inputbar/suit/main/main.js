@@ -17,8 +17,9 @@ Component({
 		userMessage: "",		// input 的实时值
 	},
 	methods: {
-		focus(){
-			this.triggerEvent("inputFocused", null, { bubbles: true });
+		focus(e){
+      let bottom= e.detail.height
+			this.triggerEvent("inputFocused", bottom, { bubbles: true });
 		},
 
 		blur(){

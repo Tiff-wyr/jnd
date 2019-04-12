@@ -9,7 +9,7 @@
 
       <view class='name-wrap'>
   <view class='iconfont icon-tianxiexingming duanPic'></view>
-          <input class='input' placeholder-class='input_placeholder' bindblur='handleName' placeholder='填写姓名'></input>
+          <input class='input' placeholder-class='input_placeholder' bindblur='handleName' placeholder='填写姓名' value="{{name}}"></input>
         </view>
         
         <view class='sex-radio'>
@@ -27,7 +27,7 @@
       
       <view class='wrap'>
        <view class='iconfont icon-daikuanjine duanPic'></view>
-        <input class='input' placeholder-class='input_placeholder' type='number' bindblur='handleMoney' placeholder='贷款金额（单位：万元）'></input>
+        <input class='input' placeholder-class='input_placeholder' type='number' bindblur='handleMoney' placeholder='贷款金额（单位：万元' value="{{money}}"></input>
       </view>
 
         <view class='city'>
@@ -110,15 +110,16 @@
   
     <view class='wrap' style='margin-top:20rpx'>
       <view class='iconfont icon-shoujihao-copy duanPic'></view>
-      <input class='input' placeholder-class='input_placeholder' type='number' bindblur='handlePhone' placeholder='手机号'></input>
+      <input class='input' placeholder-class='input_placeholder' type='number' bindblur='handlePhone' value='{{phone}}' placeholder='手机号'></input>
     </view>
 
     <view class='wrapper'>
       <view class='code'>
-         <view class='iconfont icon-duanxin-copy duanPic'></view>
-        <input class='input' placeholder-class='input_placeholder' type='number' password='true' placeholder='短信验证码' bindblur='handleCode'></input>
+         <view class='iconfont icon-duanxin-copy-copy-copy duanPic'></view>
+        <input class='input' placeholder-class='input_placeholder' type='number' password='true' placeholder='短信验证码' bindblur='handleCode' value='{{code}}'></input>
       </view>
-      <view class='sendCode' bindtap='sendCode'>{{textCode}}</view>
+        <view class='sendCode' bindtap='sendCode' wx:if="{{isFa}}">{{textCode}}</view>
+     <view class='sendCode' wx:else>{{text}}<span>s</span></view>
     </view>
     <button bindtap='applySubmit'>申请提交</button>
 

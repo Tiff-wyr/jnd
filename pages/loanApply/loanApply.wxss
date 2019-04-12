@@ -14,7 +14,7 @@ line-height:28rpx;
 }
 .apply image{
     width:100%;
-  height:340rpx;
+  height:430rpx;
 }
 .loan{
   padding: 0 36rpx;
@@ -40,7 +40,8 @@ height: 40rpx;
   margin-top:7rpx;
 }
 
-.wrap .input, .name-wrap .input{
+.input, .name-wrap .input{
+    margin-top: 5rpx;
   margin-left: 15rpx;
   flex: 1;
   font-size: 28rpx;

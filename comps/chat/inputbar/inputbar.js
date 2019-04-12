@@ -17,6 +17,7 @@ Component({
 		isIpx: app.globalData.isIpx,
 		recordStatus: RecordStatus.HIDE,
 		RecordStatus,
+    bottom: 0,
 		__comps__: {
 			main: null,
 			emoji: null,
@@ -46,10 +47,17 @@ Component({
 			this.data.__comps__.emoji.openEmoji();
 		},
 
-		cancelEmoji(){
+		cancelEmoji(val){
+      this.setData({
+        bottom: val.detail
+      })
 			this.data.__comps__.emoji.cancelEmoji();
 		},
-
+    inputBlured() {
+      this.setData({
+        bottom: 0
+      })
+    },
 		sendImage(){
 			this.data.__comps__.image.sendImage();
 		},

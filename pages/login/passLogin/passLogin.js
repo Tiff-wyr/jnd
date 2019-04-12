@@ -19,6 +19,17 @@ Page({
    */
   onLoad: function (options) {
 
+    let phone = wx.getStorageSync("loginPhone")
+    let password = wx.getStorageSync("loginPassword")
+
+
+    if (phone && password){
+      this.setData({
+        phone: phone,
+        password: password,
+      })
+      this.login()
+    }
   },
   msgLogin(){
      wx.navigateTo({
@@ -39,24 +50,32 @@ Page({
     this.setData({
       password: e.detail.value
     })
-    console.log(this.data.password)
+
   },
   login(){
     if(this.data.phone && this.data.password){
       fetch.get(`/user/loginByPhoneAndPassword/${this.data.phone}/${this.data.password}/0`).then(res=>{
 
-        console.log('login',res.data.data)
+      
         if(res.data.status === 200){
           wx.showToast({
             title: '登录成功',
             icon: 'success',
             duration: 2000
           })
+          wx.setStorage({
+            key: 'loginPhone',
+            data: this.data.phone
+          })
+          wx.setStorage({
+            key: 'loginPassword',
+            data: this.data.password
+          })
           if(res.data.data.roleId === 1){
       
             app.globalData.userInfo = res.data.data
             app.globalData.userType='user'
-            console.log(app.globalData.userInfo)
+          
 
             wx.setStorage({
               key: 'myUsername',
@@ -79,7 +98,7 @@ Page({
 
             app.globalData.userInfo = res.data.data
             app.globalData.userType = 'agent'
-            console.log('aaa', res.data.data)
+          
 
             wx.setStorage({
               key: 'myUsername',
@@ -102,7 +121,7 @@ Page({
          
             app.globalData.userInfo = res.data.data
             app.globalData.userType = 'organ'
-            console.log(res.data.data)
+            
 
             wx.setStorage({
               key: 'myUsername',

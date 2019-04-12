@@ -17,8 +17,10 @@ Page({
       password: '',
       money:'',
 
-
+    isFa:true,
+    text:60,
     textCode: '发送验证码',
+
     sex:[
       { name: '男', value: '1', checked: 'true' },
       { name: '女', value: '0'},
@@ -38,7 +40,7 @@ Page({
   },
 
   radioChange(e){
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+  
   },
   //获取 省
   getProvince(){
@@ -73,7 +75,7 @@ Page({
       this.setData({
         cityData: res.data
       })
-      console.log(res.data)
+    
     })
   },
   bindPickerChange(e){
@@ -138,9 +140,10 @@ Page({
   },
   //发送验证码
   sendCode() {
-    if (this.data.phone) {
-      fetch.get(`/user/selectPhone/${this.data.phone}`).then(res => {
-        console.log('checkphone', res)
+    let that =this
+    if (that.data.phone) {
+      fetch.get(`/user/selectPhone/${that.data.phone}`).then(res => {
+     
         if (res.data.status === 200) {
           wx.showToast({
             title: '手机号已注册',
@@ -149,7 +152,7 @@ Page({
 
 
         } else {
-          if (this.data.phone && (!(/^[1][345789]\d{9}$/).test(this.data.phone) || !(/^[1-9]\d*$/).test(this.data.phone) || this.data.phone.length !== 11)){
+          if (that.data.phone && (!(/^[1][345789]\d{9}$/).test(that.data.phone) || !(/^[1-9]\d*$/).test(that.data.phone) || that.data.phone.length !== 11)){
             wx.showToast({
               title: '手机号不规范',
               icon: 'none',
@@ -159,14 +162,37 @@ Page({
 
 
             //发送验证码
-            fetch.get(`/base/getRegisterCode/${this.data.phone}`).then(res => {
-              console.log('fs', res.data)
+            fetch.get(`/base/getRegisterCode/${that.data.phone}`).then(res => {
+           
               if (res.data.status === 200) {
-                this.setData({
-                  textCode: '已发送'
+                that.setData({
+                  isFa: false,
+                  text: '60'
                 })
+                let timer = setInterval(() => {
+                  that.setData({
+                    text: that.data.text - 1
+                  })
+
+                  if (that.data.text < 0) {
+                    clearInterval(timer)
+
+                    that.setData({
+                      isFa: true,
+                      textCode: "发送验证码",
+                      text: 60
+                    })
+
+                  }
+                }, 1000)
+
               } else {
-                this.setData({
+                wx.showToast({
+                  title: res.data.msg,
+                })
+                that.setData({
+                  isFa:true,
+                  text:60,
                   textCode: '重新发送'
                 })
               }
@@ -199,7 +225,7 @@ Page({
       borrower2: this.data.borrower2,
       loanAmount:this.data.money
     }).then(res=>{
-       console.log('注册',res.data)
+      
    
 
        if (res.data.status === 200) {
@@ -208,7 +234,7 @@ Page({
            icon: 'success',
            duration: 2000
          })
-         wx.navigateTo({
+         wx.redirectTo({
            url: '/pages/login/passLogin/passLogin',
          })
        }
