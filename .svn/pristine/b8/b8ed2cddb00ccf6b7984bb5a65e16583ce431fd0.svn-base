@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "申请记录",
-  "enablePullDownRefresh": true,
-  "onReachBottomDistance": 100,
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTextStyle": "black",
-  "backgroundColor": "#fff",
-  "backgroundTextStyle": "light"
-}

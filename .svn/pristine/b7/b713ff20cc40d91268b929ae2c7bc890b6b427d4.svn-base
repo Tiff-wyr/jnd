@@ -1,7 +1,0 @@
-<!--pages/agent/message/message.wxml-->
-<import src="/components/tabBar/index.wxml"/>
-<view>
-<text>pages/agent/message/message.wxml</text>
-  <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
-</view>
-

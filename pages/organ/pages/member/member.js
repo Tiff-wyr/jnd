@@ -56,9 +56,7 @@ Page({
       }
     });
 
-    setTimeout(() => {
-      isKai: false
-    }, 2000)
+
   },
 
   //获取openid
@@ -186,6 +184,9 @@ Page({
 
   //付款
   requestPayment: function (obj) {
+    this.setData({
+      isKai: false
+    })
     wx.requestPayment({
       timeStamp: obj.timeStamp,
       nonceStr: obj.nonceStr,
@@ -195,12 +196,7 @@ Page({
       success: function (res) { 
         this.panMem()
         },
-      // fail: function (res) {
-       
-      //     },
-      // complete: function (res) { 
-   
-      //    },
+    
     })
   },
 
@@ -212,16 +208,22 @@ Page({
   },
 
   panMem() {
-    let that =this
-    if (app.globalData.userInfo.vip === 1) {
-      that.setData({
-        isMem: true,
-      })
-    } else {
-      that.setData({
-        isMem: false
-      })
-    }
+    let that = this
+    fetch.get(`/userAgency/checkIsVip/${app.globalData.userInfo.phone}`).then(res => {
+      if (res.data.status === 200) {
+        that.setData({
+          isMem: true
+        })
+      } else {
+        that.setData({
+          isMem: false
+        })
+      }
+    })
+
+
+
+
   },
 
   /**

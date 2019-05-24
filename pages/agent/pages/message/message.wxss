@@ -2,6 +2,10 @@
   height: 144prx;
   display: flex
 }
+.mess{
+  width: 100%;
+  margin-bottom: 100rpx
+}
 .list_left .line{
     padding-top: 10rpx;
     display: flex;

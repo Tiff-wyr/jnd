@@ -1,4 +1,0 @@
-<import src="/components/tabBar/index.wxml"/>
-<view>
-  <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
-</view>

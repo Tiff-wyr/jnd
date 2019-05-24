@@ -1,6 +1,7 @@
 // pages/agent/member/member.js
 const app = getApp()
 var template = require('../../../../components/tabBar/index.js');
+import { fetch } from "../../../../utils/axios.js"
 
 Page({
 
@@ -53,7 +54,6 @@ Page({
 
 
     this.setData({
-
       money: event.currentTarget.dataset.id
     })
 
@@ -64,9 +64,9 @@ Page({
       }
     });
 
-    setTimeout(() => {
-      isKai: false
-    }, 2000)
+    // setTimeout(() => {
+    //   isKai: false
+    // }, 300)
 
   },
 
@@ -195,6 +195,9 @@ Page({
 
   //付款
   requestPayment: function (obj) {
+    this.setData({
+      isKai: false
+    })
     wx.requestPayment({
       timeStamp: obj.timeStamp,
       nonceStr: obj.nonceStr,
@@ -203,6 +206,7 @@ Page({
       paySign: obj.paySign,
       success: function (res) { 
         this.panMem()
+ 
      
         },
       // fail: function (res) { 
@@ -218,15 +222,21 @@ Page({
 
   panMem(){
     let that =this
-    if (app.globalData.userInfo.vip === 1) {
+    fetch.get(`/userBroker/checkIsVip/${app.globalData.userInfo.phone}`).then(res=>{
+    if(res.data.status === 200){
       that.setData({
         isMem: true
       })
-    } else {
+    }else{
       that.setData({
         isMem: false
       })
     }
+    })
+
+
+     
+    
   },
 
   /**

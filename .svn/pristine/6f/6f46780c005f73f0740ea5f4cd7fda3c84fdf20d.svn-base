@@ -1,6 +1,0 @@
-<import src="/components/tabBar/index.wxml"/>
-
-<view>
-<view>贷款申请</view>
-  <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
-</view>

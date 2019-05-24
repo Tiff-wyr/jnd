@@ -22,11 +22,15 @@ Page({
     unReadSpot: false,
   },
 
-  getDetail(id){
+  getDetailAgent(id){
     fetch.get(`/userBroker/getUserBrokerById/${id}`).then(res=>{
       this.setData({
         agent :res.data
       })
+
+      console.log('详情页')
+      //经纪人成功案例
+      this.getVictory(this.data.optionId)
 
     })
   },
@@ -36,6 +40,8 @@ Page({
       this.setData({
         victory: res.data
       })
+
+      console.log('成功案例')
   
     })
   },
@@ -219,9 +225,8 @@ wx.navigateTo({
        optionId:options.id
      })
     //经纪人详情页
-    this.getDetail(this.data.optionId)
-    //经纪人成功案例
-    this.getVictory(this.data.optionId)
+    this.getDetailAgent(this.data.optionId)
+
 
     if (app.globalData.userInfo){
       this.setData({
